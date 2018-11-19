@@ -1,10 +1,12 @@
-package at.htl;
+package at.htl.iea.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Zahlung {
 
     // region Variables
-    private String buchungsdatum; // der einfachheit halber als string und nicht als localdatetime (oder localdate)
+    private Date buchungsdatum; // der einfachheit halber als string und nicht als localdatetime (oder localdate)
     private String partner_name;
     private String partner_iban;
     private String partner_bic;
@@ -15,12 +17,12 @@ public class Zahlung {
     private String buchungstext;
     private String ersterfassungsreferenz;
     private String notiz;
-    private String valutadatum; // der einfachheit halber als string und nicht als localdatetime (oder localdate)
+    private Date valutadatum; // der einfachheit halber als string und nicht als localdatetime (oder localdate)
 
     // endregion
 
     // region Constructor
-    public Zahlung(String buchungsdatum, String partnername, String partner_iban, String partner_bic, String partner_kontonummer, String partner_bankcode, String betrag, String währung, String buchungstext, String ersterfassungsreferenz, String notiz, String valutadatum) {
+    public Zahlung(Date buchungsdatum, String partnername, String partner_iban, String partner_bic, String partner_kontonummer, String partner_bankcode, String betrag, String währung, String buchungstext, String ersterfassungsreferenz, String notiz, Date valutadatum) {
         this.buchungsdatum = buchungsdatum;
         this.partner_name = partnername;
         this.partner_iban = partner_iban;
@@ -38,11 +40,11 @@ public class Zahlung {
     // endregion
 
     // region Getter & Setter
-    public String getBuchungsdatum() {
+    public Date getBuchungsdatum() {
         return buchungsdatum;
     }
 
-    public void setBuchungsdatum(String buchungsdatum) {
+    public void setBuchungsdatum(Date buchungsdatum) {
         this.buchungsdatum = buchungsdatum;
     }
 
@@ -126,11 +128,11 @@ public class Zahlung {
         this.notiz = notiz;
     }
 
-    public String getValutadatum() {
+    public Date getValutadatum() {
         return valutadatum;
     }
 
-    public void setValutadatum(String valutadatum) {
+    public void setValutadatum(Date valutadatum) {
         this.valutadatum = valutadatum;
     }
     // endregion
@@ -139,8 +141,8 @@ public class Zahlung {
     @Override
     public String toString(){ //ausgabe der wichtigsten properties
         return "Datum: " + getBuchungsdatum() + " | " + "Betrag: " + getBetrag() + " | "
-            + "Währung: " + getWährung() + " | " + "Buchungstext: " + getBuchungstext() + " | "
-            + "Valutadatum: " + getValutadatum();
+                + "Währung: " + getWährung() + " | " + "Buchungstext: " + getBuchungstext() + " | "
+                + "Valutadatum: " + getValutadatum();
     }
     // endregion
 }

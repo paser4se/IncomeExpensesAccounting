@@ -1,9 +1,8 @@
-package at.htl;
+package at.htl.iea.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Database {
     public static final String DRIVER_STRING = "org.apache.derby.jdbc.ClientDriver";
@@ -28,20 +27,20 @@ public class Database {
         try {
             Statement stmt = conn.createStatement();
             String sql = "CREATE TABLE zahlung ("
-                    + "id INT CONSTRAINT zahlung_pk PRIMARY KEY"
+                    + "id INT PRIMARY KEY"
                     + " GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "buchungsdatum VARCHAR(255) NOT NULL,"
+                    + "buchungsdatum TIMESTAMP NOT NULL,"
                     + "partner_name VARCHAR(255) NOT NULL,"
                     + "partner_iban VARCHAR(255) NOT NULL,"
                     + "partner_bic VARCHAR(255) NOT NULL,"
                     + "partner_kontonummer VARCHAR(255) NOT NULL,"
                     + "partner_bankcode VARCHAR(255) NOT NULL,"
-                    + "betrag VARCHAR(255) NOT NULL,"
-                    + "währung VARCHAR(255) NOT NULL,"
-                    + "buchungstext VARCHAR(255) NOT NULL,"
+                    + "betrag FLOAT(2) NOT NULL,"
+                    + "waehrung VARCHAR(255) NOT NULL,"
+                    + "buchungstext VARCHAR(500) NOT NULL,"
                     + "ersterfassungsreferenz VARCHAR(255) NOT NULL,"
                     + "notiz VARCHAR(255) NOT NULL,"
-                    + "valutadatum VARCHAR(255) NOT NULL"
+                    + "valutadatum TIMESTAMP NOT NULL"
                     + ")";
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -51,16 +50,29 @@ public class Database {
 
     public static void insertIntoDatabase(Zahlung z){
         try {
-            Statement stat = conn.createStatement();
-            String sql = "INSERT INTO zahlung " +
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO zahlung " +
                     "(buchungsdatum, partner_name, partner_iban, partner_bic, partner_kontonummer, partner_bankcode, " +
-                    "betrag, währung, buchungstext, ersterfassungsreferenz, notiz, valutadatum) " +
-                    "VALUES ("+z.getBuchungsdatum()+z.getPartner_name()+z.getPartner_iban()+z.getPartner_bic()
-                        +z.getPartner_kontonummer()+z.getPartner_bankcode()+z.getBetrag()+z.getWährung()
-                        +z.getBuchungstext()+z.getErsterfassungsreferenz()+z.getNotiz()+z.getValutadatum()+")";
-            stat.executeUpdate(sql);
+                    "betrag, waehrung, buchungstext, ersterfassungsreferenz, notiz, valutadatum) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+
+            pstmt.setTimestamp(1, Timestamp.valueOf(dateFormat.format(z.getBuchungsdatum())));
+            pstmt.setString(2, z.getPartner_name());
+            pstmt.setString(3, z.getPartner_iban());
+            pstmt.setString(4, z.getPartner_bic());
+            pstmt.setString(5, z.getPartner_kontonummer());
+            pstmt.setString(6, z.getPartner_bankcode());
+            System.out.println(z.getBetrag());
+            pstmt.setDouble(7, Double.parseDouble(z.getBetrag()));
+            pstmt.setString(8, z.getWährung());
+            pstmt.setString(9, z.getBuchungstext());
+            pstmt.setString(10, z.getErsterfassungsreferenz());
+            pstmt.setString(11, z.getNotiz());
+            pstmt.setTimestamp(12, Timestamp.valueOf(dateFormat.format(z.getValutadatum())));
+
+            pstmt.execute();
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Tabelle zahlung");
+            System.err.println("Fehler beim Einfügen in die Tabelle zahlung" + e.getMessage());
         }
     }
 

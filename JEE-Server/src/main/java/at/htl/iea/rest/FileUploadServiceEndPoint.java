@@ -1,21 +1,11 @@
 package at.htl.iea.rest;
 
-import at.htl.iea.model.CsvFile;
-import com.opencsv.CSVReader;
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import at.htl.iea.model.Parser;
 
-import javax.imageio.ImageIO;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.text.ParseException;
 
 @Path("files")
 public class FileUploadServiceEndPoint {
@@ -25,7 +15,7 @@ public class FileUploadServiceEndPoint {
         return Response.status(Response.Status.OK).entity("Connected to project IEA ...").build();
     }
 
-    @POST
+    /*@POST
     @Path("uploadcsv")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,13 +48,19 @@ public class FileUploadServiceEndPoint {
         tmpFile.delete();
 
         return Response.status(Response.Status.OK).build();
-    }
+    }*/
 
     @POST
     @Path("uploadtext")
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response uploadText(String content) {
-        System.out.println(content);
+        try {
+            Parser.getInstance().persist(content);
+        } catch (ParseException e) {
+            return Response.serverError().build();
+        }
         return Response.ok("content recveived").build();
     }
+
+
 }
