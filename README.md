@@ -1,8 +1,6 @@
 # IncomeExpensesAccounting
 - Michael Frech
 - Julian Nobis
-- Lukas Stransky
-
 
 ## Inbetriebnahme des Prototypen
 
