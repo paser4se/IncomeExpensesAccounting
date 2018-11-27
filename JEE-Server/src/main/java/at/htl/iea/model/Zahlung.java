@@ -6,150 +6,150 @@ import java.util.Date;
 public class Zahlung {
 
     // region Variables
-    private Date buchungsdatum; // der einfachheit halber als string und nicht als localdatetime (oder localdate)
-    private String partner_name;
-    private String partner_iban;
-    private String partner_bic;
-    private String partner_kontonummer;
-    private String partner_bankcode;
-    private String betrag; // leichter zu parsen (375,00)
-    private String währung;
-    private String buchungstext;
-    private String ersterfassungsreferenz;
-    private String notiz;
-    private Date valutadatum; // der einfachheit halber als string und nicht als localdatetime (oder localdate)
+    private Date bookingDate; // buchungsdatum
+    private String partnerName;
+    private String partnerIban;
+    private String partnerBic;
+    private String partnerAccountNumber;
+    private String partnerBankCode;
+    private String amount; // leichter zu parsen (375,00)
+    private String currency;
+    private String bookingText;
+    private String initialRecognitionReference; // ersterfassungsreferenz (z.B.: 128379247QWEV2345FLHO9)
+    private String note;
+    private Date valueDate; // valutadatum
 
     // endregion
 
     // region Constructor
-    public Zahlung(Date buchungsdatum, String partnername, String partner_iban, String partner_bic, String partner_kontonummer, String partner_bankcode, String betrag, String währung, String buchungstext, String ersterfassungsreferenz, String notiz, Date valutadatum) {
-        this.buchungsdatum = buchungsdatum;
-        this.partner_name = partnername;
-        this.partner_iban = partner_iban;
-        this.partner_bic = partner_bic;
-        this.partner_kontonummer = partner_kontonummer;
-        this.partner_bankcode = partner_bankcode;
-        this.betrag = betrag;
-        this.währung = währung;
-        this.buchungstext = buchungstext;
-        this.ersterfassungsreferenz = ersterfassungsreferenz;
-        this.notiz = notiz;
-        this.valutadatum = valutadatum;
+    public Zahlung(Date bookingDate, String partnername, String partnerIban, String partnerBic, String partnerAccountNumber, String partnerBankCode, String amount, String currency, String bookingText, String initialRecognitionReference, String note, Date valueDate) {
+        this.bookingDate = bookingDate;
+        this.partnerName = partnername;
+        this.partnerIban = partnerIban;
+        this.partnerBic = partnerBic;
+        this.partnerAccountNumber = partnerAccountNumber;
+        this.partnerBankCode = partnerBankCode;
+        this.amount = amount;
+        this.currency = currency;
+        this.bookingText = bookingText;
+        this.initialRecognitionReference = initialRecognitionReference;
+        this.note = note;
+        this.valueDate = valueDate;
     }
-    public Zahlung(Date buchungsdatum, String betrag, String währung, String buchungstext, Date valutadatum){
-        this.buchungsdatum = buchungsdatum;
-        this.betrag = betrag;
-        this.währung = währung;
-        this.buchungstext = buchungstext;
-        this.valutadatum = valutadatum;
+    public Zahlung(Date bookingDate, String amount, String currency, String bookingText, Date valueDate){
+        this.bookingDate = bookingDate;
+        this.amount = amount;
+        this.currency = currency;
+        this.bookingText = bookingText;
+        this.valueDate = valueDate;
     }
     public Zahlung(){} //default konstruktor
     // endregion
 
     // region Getter & Setter
-    public Date getBuchungsdatum() {
-        return buchungsdatum;
+    public Date getBookingDate() {
+        return bookingDate;
     }
 
-    public void setBuchungsdatum(Date buchungsdatum) {
-        this.buchungsdatum = buchungsdatum;
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
-    public String getPartner_name() {
-        return partner_name;
+    public String getPartnerName() {
+        return partnerName;
     }
 
-    public void setPartner_name(String partner_name) {
-        this.partner_name = partner_name;
+    public void setPartnerName(String partnerName) {
+        this.partnerName = partnerName;
     }
 
-    public String getPartner_iban() {
-        return partner_iban;
+    public String getPartnerIban() {
+        return partnerIban;
     }
 
-    public void setPartner_iban(String partner_iban) {
-        this.partner_iban = partner_iban;
+    public void setPartnerIban(String partnerIban) {
+        this.partnerIban = partnerIban;
     }
 
-    public String getPartner_bic() {
-        return partner_bic;
+    public String getPartnerBic() {
+        return partnerBic;
     }
 
-    public void setPartner_bic(String partner_bic) {
-        this.partner_bic = partner_bic;
+    public void setPartnerBic(String partnerBic) {
+        this.partnerBic = partnerBic;
     }
 
-    public String getPartner_kontonummer() {
-        return partner_kontonummer;
+    public String getPartnerAccountNumber() {
+        return partnerAccountNumber;
     }
 
-    public void setPartner_kontonummer(String partner_kontonummer) {
-        this.partner_kontonummer = partner_kontonummer;
+    public void setPartnerAccountNumber(String partnerAccountNumber) {
+        this.partnerAccountNumber = partnerAccountNumber;
     }
 
-    public String getPartner_bankcode() {
-        return partner_bankcode;
+    public String getPartnerBankCode() {
+        return partnerBankCode;
     }
 
-    public void setPartner_bankcode(String partner_bankcode) {
-        this.partner_bankcode = partner_bankcode;
+    public void setPartnerBankCode(String partnerBankCode) {
+        this.partnerBankCode = partnerBankCode;
     }
 
-    public String getBetrag() {
-        return betrag;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setBetrag(String betrag) {
-        this.betrag = betrag;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
-    public String getWährung() {
-        return währung;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setWährung(String währung) {
-        this.währung = währung;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
-    public String getBuchungstext() {
-        return buchungstext;
+    public String getBookingText() {
+        return bookingText;
     }
 
-    public void setBuchungstext(String buchungstext) {
-        this.buchungstext = buchungstext;
+    public void setBookingText(String bookingText) {
+        this.bookingText = bookingText;
     }
 
-    public String getErsterfassungsreferenz() {
-        return ersterfassungsreferenz;
+    public String getInitialRecognitionReference() {
+        return initialRecognitionReference;
     }
 
-    public void setErsterfassungsreferenz(String ersterfassungsreferenz) {
-        this.ersterfassungsreferenz = ersterfassungsreferenz;
+    public void setInitialRecognitionReference(String initialRecognitionReference) {
+        this.initialRecognitionReference = initialRecognitionReference;
     }
 
-    public String getNotiz() {
-        return notiz;
+    public String getNote() {
+        return note;
     }
 
-    public void setNotiz(String notiz) {
-        this.notiz = notiz;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public Date getValutadatum() {
-        return valutadatum;
+    public Date getValueDate() {
+        return valueDate;
     }
 
-    public void setValutadatum(Date valutadatum) {
-        this.valutadatum = valutadatum;
+    public void setValueDate(Date valueDate) {
+        this.valueDate = valueDate;
     }
     // endregion
 
     // region Override toString Methode
     @Override
     public String toString(){ //ausgabe der wichtigsten properties
-        return "Datum: " + getBuchungsdatum() + " | " + "Betrag: " + getBetrag() + " | "
-                + "Währung: " + getWährung() + " | " + "Buchungstext: " + getBuchungstext() + " | "
-                + "Valutadatum: " + getValutadatum();
+        return "Datum: " + getBookingDate() + " | " + "Betrag: " + getAmount() + " | "
+                + "Währung: " + getCurrency() + " | " + "Buchungstext: " + getBookingText() + " | "
+                + "Valutadatum: " + getValueDate();
     }
     // endregion
 }

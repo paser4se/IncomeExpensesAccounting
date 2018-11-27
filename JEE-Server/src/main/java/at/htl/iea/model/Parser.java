@@ -42,7 +42,6 @@ public class Parser {
         //    System.out.println(z.toString()); //ausgabe der vitalen informationen einer zahlung
         //}
 
-        //Database.teardownJdbc();
     }
 
     private static String replaceLast(String string, String toReplace, String replacement) {
@@ -57,18 +56,18 @@ public class Parser {
     }
 
     private static Zahlung entfernenVonHochkommasBeiZahlung(Zahlung z, String regex, String replacement) {
-        //z.setBuchungsdatum(z.getBuchungsdatum().replaceAll(regex, replacement));
-        z.setBetrag(z.getBetrag().replaceAll(regex, replacement));
-        z.setBuchungstext(z.getBuchungstext().replaceAll(regex, replacement));
-        z.setErsterfassungsreferenz(z.getErsterfassungsreferenz().replaceAll(regex, replacement));
-        z.setNotiz(z.getNotiz().replaceAll(regex, replacement));
-        z.setPartner_bankcode(z.getPartner_bankcode().replaceAll(regex, replacement));
-        z.setPartner_bic(z.getPartner_bic().replaceAll(regex, replacement));
-        z.setPartner_iban(z.getPartner_iban().replaceAll(regex, replacement));
-        z.setPartner_kontonummer(z.getPartner_kontonummer().replaceAll(regex, replacement));
-        z.setPartner_name(z.getPartner_name().replaceAll(regex, replacement));
-        //z.setValutadatum(z.getValutadatum().replaceAll(regex, replacement));
-        z.setWährung(z.getWährung().replaceAll(regex, replacement));
+        //booking date wird in persist() bearbeitet (.format(...)) (bookingDate ist Date)
+        z.setAmount(z.getAmount().replaceAll(regex, replacement));
+        z.setBookingText(z.getBookingText().replaceAll(regex, replacement));
+        z.setInitialRecognitionReference(z.getInitialRecognitionReference().replaceAll(regex, replacement));
+        z.setNote(z.getNote().replaceAll(regex, replacement));
+        z.setPartnerBankCode(z.getPartnerBankCode().replaceAll(regex, replacement));
+        z.setPartnerBic(z.getPartnerBic().replaceAll(regex, replacement));
+        z.setPartnerIban(z.getPartnerIban().replaceAll(regex, replacement));
+        z.setPartnerAccountNumber(z.getPartnerAccountNumber().replaceAll(regex, replacement));
+        z.setPartnerName(z.getPartnerName().replaceAll(regex, replacement));
+        // value date wird in persist() bearbeitet (.format(...)) (valueDate ist Date)
+        z.setCurrency(z.getCurrency().replaceAll(regex, replacement));
         return z;
     }
 

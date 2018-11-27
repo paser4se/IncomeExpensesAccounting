@@ -31,18 +31,18 @@ public class Database {
             String sql = "CREATE TABLE zahlung ("
                     + "id INT PRIMARY KEY"
                     + " GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "buchungsdatum TIMESTAMP NOT NULL,"
-                    + "partner_name VARCHAR(255) NOT NULL,"
-                    + "partner_iban VARCHAR(255) NOT NULL,"
-                    + "partner_bic VARCHAR(255) NOT NULL,"
-                    + "partner_kontonummer VARCHAR(255) NOT NULL,"
-                    + "partner_bankcode VARCHAR(255) NOT NULL,"
-                    + "betrag FLOAT(2) NOT NULL,"
-                    + "waehrung VARCHAR(255) NOT NULL,"
-                    + "buchungstext VARCHAR(500) NOT NULL,"
-                    + "ersterfassungsreferenz VARCHAR(255) NOT NULL,"
-                    + "notiz VARCHAR(255) NOT NULL,"
-                    + "valutadatum TIMESTAMP NOT NULL"
+                    + "bookingDate TIMESTAMP NOT NULL,"
+                    + "partnerName VARCHAR(255) NOT NULL,"
+                    + "partnerIban VARCHAR(255) NOT NULL,"
+                    + "partnerBic VARCHAR(255) NOT NULL,"
+                    + "partnerAccountNumber VARCHAR(255) NOT NULL,"
+                    + "partnerBankCode VARCHAR(255) NOT NULL,"
+                    + "amount FLOAT(2) NOT NULL,"
+                    + "currency VARCHAR(255) NOT NULL,"
+                    + "bookingText VARCHAR(500) NOT NULL,"
+                    + "initialRecognitionReference VARCHAR(255) NOT NULL,"
+                    + "note VARCHAR(255) NOT NULL,"
+                    + "valueDate TIMESTAMP NOT NULL"
                     + ")";
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -55,16 +55,16 @@ public class Database {
         List<Zahlung> zahlungen = new ArrayList<>();
         try {
             Statement stat = conn.createStatement();
-            String sql = "select buchungsdatum, betrag, waehrung, buchungstext, valutadatum from zahlung";
+            String sql = "select bookingDate, amount, currency, bookingText, valueDate from zahlung";
             // nur die essenziellen infos werden zurückgeschickt
             allPayments = stat.executeQuery(sql);
             while (allPayments.next()){
-                Date buchungsdatum = allPayments.getDate("buchungsdatum"); //timestamp statt date wenn error kommt
-                Float betrag = allPayments.getFloat("betrag");
-                String waehrung = allPayments.getString("waehrung");
-                String buchungstext = allPayments.getString("buchungstext");
-                Date valutadatum = allPayments.getDate("valutadatum"); //timestamp statt date wenn error kommt
-                zahlungen.add(new Zahlung(buchungsdatum, betrag.toString(), waehrung, buchungstext, valutadatum));
+                Date bookingDate = allPayments.getDate("bookingDate"); //timestamp statt date wenn error kommt
+                Float amount = allPayments.getFloat("amount");
+                String currency = allPayments.getString("currency");
+                String bookingText = allPayments.getString("bookingText");
+                Date valueDate = allPayments.getDate("valueDate"); //timestamp statt date wenn error kommt
+                zahlungen.add(new Zahlung(bookingDate, amount.toString(), currency, bookingText, valueDate));
             }
         } catch (SQLException e) {
             System.err.println("Fehler beim Senden der essenziellen Informationen der Zahlungen (getAllPayments in Database.java):\n" + e.getMessage());
@@ -75,23 +75,23 @@ public class Database {
     public static void insertIntoDatabase(Zahlung z){
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO zahlung " +
-                    "(buchungsdatum, partner_name, partner_iban, partner_bic, partner_kontonummer, partner_bankcode, " +
-                    "betrag, waehrung, buchungstext, ersterfassungsreferenz, notiz, valutadatum) " +
+                    "(bookingDate, partnerName, partnerIban, partnerBic, partnerAccountNumber, partnerBankCode, " +
+                    "amount, currency, bookingText, initialRecognitionReference, note, valueDate) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
-            pstmt.setTimestamp(1, Timestamp.valueOf(dateFormat.format(z.getBuchungsdatum())));
-            pstmt.setString(2, z.getPartner_name());
-            pstmt.setString(3, z.getPartner_iban());
-            pstmt.setString(4, z.getPartner_bic());
-            pstmt.setString(5, z.getPartner_kontonummer());
-            pstmt.setString(6, z.getPartner_bankcode());
-            pstmt.setDouble(7, Double.parseDouble(z.getBetrag()));
-            pstmt.setString(8, z.getWährung());
-            pstmt.setString(9, z.getBuchungstext());
-            pstmt.setString(10, z.getErsterfassungsreferenz());
-            pstmt.setString(11, z.getNotiz());
-            pstmt.setTimestamp(12, Timestamp.valueOf(dateFormat.format(z.getValutadatum())));
+            pstmt.setTimestamp(1, Timestamp.valueOf(dateFormat.format(z.getBookingDate())));
+            pstmt.setString(2, z.getPartnerName());
+            pstmt.setString(3, z.getPartnerIban());
+            pstmt.setString(4, z.getPartnerBic());
+            pstmt.setString(5, z.getPartnerAccountNumber());
+            pstmt.setString(6, z.getPartnerBankCode());
+            pstmt.setDouble(7, Double.parseDouble(z.getAmount()));
+            pstmt.setString(8, z.getCurrency());
+            pstmt.setString(9, z.getBookingText());
+            pstmt.setString(10, z.getInitialRecognitionReference());
+            pstmt.setString(11, z.getNote());
+            pstmt.setTimestamp(12, Timestamp.valueOf(dateFormat.format(z.getValueDate())));
 
             pstmt.execute();
         } catch (SQLException e) {
