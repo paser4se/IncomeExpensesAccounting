@@ -36,6 +36,13 @@ public class Zahlung {
         this.notiz = notiz;
         this.valutadatum = valutadatum;
     }
+    public Zahlung(Date buchungsdatum, String betrag, String währung, String buchungstext, Date valutadatum){
+        this.buchungsdatum = buchungsdatum;
+        this.betrag = betrag;
+        this.währung = währung;
+        this.buchungstext = buchungstext;
+        this.valutadatum = valutadatum;
+    }
     public Zahlung(){} //default konstruktor
     // endregion
 

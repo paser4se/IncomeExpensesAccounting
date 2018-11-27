@@ -1,14 +1,17 @@
 package at.htl.iea.rest;
 
+import at.htl.iea.model.Database;
 import at.htl.iea.model.Parser;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 @Path("files")
-public class FileUploadServiceEndPoint {
+public class  FileUploadServiceEndPoint {
 
     @GET
     public Response hello() {
@@ -55,6 +58,7 @@ public class FileUploadServiceEndPoint {
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response uploadText(String content) {
         try {
+            // in der persist() methode wird zugleich die tabelle "zahlung" erstellt und befüllt!
             Parser.getInstance().persist(content);
         } catch (ParseException e) {
             return Response.serverError().build();
@@ -62,5 +66,10 @@ public class FileUploadServiceEndPoint {
         return Response.ok("content recveived").build();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllPayments() throws SQLException {
+        return Response.ok(Database.getAllPayments(), MediaType.APPLICATION_JSON).build();
+    }
 
 }

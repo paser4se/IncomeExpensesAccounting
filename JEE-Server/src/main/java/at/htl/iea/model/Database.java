@@ -3,6 +3,8 @@ package at.htl.iea.model;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     public static final String DRIVER_STRING = "org.apache.derby.jdbc.ClientDriver";
@@ -48,6 +50,28 @@ public class Database {
         }
     }
 
+    public static List<Zahlung> getAllPayments(){
+        ResultSet allPayments = null;
+        List<Zahlung> zahlungen = new ArrayList<>();
+        try {
+            Statement stat = conn.createStatement();
+            String sql = "select buchungsdatum, betrag, waehrung, buchungstext, valutadatum from zahlung";
+            // nur die essenziellen infos werden zurückgeschickt
+            allPayments = stat.executeQuery(sql);
+            while (allPayments.next()){
+                Date buchungsdatum = allPayments.getDate("buchungsdatum"); //timestamp statt date wenn error kommt
+                Float betrag = allPayments.getFloat("betrag");
+                String waehrung = allPayments.getString("waehrung");
+                String buchungstext = allPayments.getString("buchungstext");
+                Date valutadatum = allPayments.getDate("valutadatum"); //timestamp statt date wenn error kommt
+                zahlungen.add(new Zahlung(buchungsdatum, betrag.toString(), waehrung, buchungstext, valutadatum));
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Senden der essenziellen Informationen der Zahlungen (getAllPayments in Database.java):\n" + e.getMessage());
+        }
+        return zahlungen;
+    }
+
     public static void insertIntoDatabase(Zahlung z){
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO zahlung " +
@@ -62,7 +86,6 @@ public class Database {
             pstmt.setString(4, z.getPartner_bic());
             pstmt.setString(5, z.getPartner_kontonummer());
             pstmt.setString(6, z.getPartner_bankcode());
-            System.out.println(z.getBetrag());
             pstmt.setDouble(7, Double.parseDouble(z.getBetrag()));
             pstmt.setString(8, z.getWährung());
             pstmt.setString(9, z.getBuchungstext());
@@ -76,6 +99,7 @@ public class Database {
         }
     }
 
+    // soll NUR unter gewissen umständen aufgerufen werden
     public static void teardownJdbc() {
         // tabelle zahlung löschen
         try {
