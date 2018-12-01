@@ -1,0 +1,55 @@
+.drop-zone
+{
+    background-color: rgb(200, 218, 223);
+    opacity: 0.9;
+    outline: 2px dashed rgb(15, 60, 75);
+    outline-offset: -6px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 50%;
+    height: 230px;
+    text-align: center;
+    position: relative;
+}
+.drop-content
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.drop-zone.entered
+{
+    background-color: rgb(231, 241, 243);
+    outline: 3px dashed rgb(15, 60, 75);
+}
+label
+{
+    color: #0f3c4b;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+}
+label:hover, button:hover
+{
+    color: #39bfd3;
+}
+span
+{
+    color: #0f3c4b !important;
+}
+button
+{
+    font-weight: 700;
+    color: white !important;
+    background-color: #39bfd3;
+    display: block;
+    padding: 8px 16px;
+    margin: 40px auto 0;
+    border-radius: 5px;
+    border: none;
+}
+button:hover
+{
+    background-color: #0f3c4b;
+}
