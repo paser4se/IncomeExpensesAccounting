@@ -139,3 +139,6 @@ buildNumber.properties
 
 ### DB ###
 db/
+
+### NPM ###
+node_modules/
