@@ -8,14 +8,34 @@
         type="image/png"
         href="./Logo.png">
   <script>window.customElements.forcePolyfill = true;</script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
   <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
   <script src="https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.min.js"></script>
-  <!--<script src="js/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>-->
   <script type="module" src="js/scripts.js"></script>
+  <script src="./js/dateformat.js"></script>
 </head>
 
 <body>
   <drop-zone></drop-zone>
+
+  <button class="btn btn-default" onclick="$('#paymentsTable').bootstrapTable('refresh')">Refresh</button>
+  <table id="paymentsTable" data-toggle="table" data-url="http://localhost:8085/iea/rs/payments" data-sort-name="bookingdate" data-sort-order="desc" class="table table-hover">
+    <thead>
+    <tr>
+      <th data-field="bookingDate" data-sortable="true">BOOKINGDATE</th>
+      <th data-field="amount" data-align="right" data-sortable="true">AMOUNT</th>
+      <th data-field="currency" data-sortable="true">CURRENCY</th>
+      <th data-field="bookingText" data-sortable="true">BOOKINGTEXT</th>
+      <th data-field="valueDate" data-sortable="true">VALUEDATE</th>
+    </tr>
+    </thead>
+    <tbody id="gable">
+    </tbody>
+  </table>
 </body>
 
 </html>

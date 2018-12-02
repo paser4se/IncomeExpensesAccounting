@@ -1,7 +1,9 @@
 package at.htl.iea.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
 public class Payment {

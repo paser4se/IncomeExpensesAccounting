@@ -1,8 +1,11 @@
 package at.htl.iea.database;
 
 import at.htl.iea.model.Payment;
+
+import javax.json.*;
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +55,7 @@ public class Database {
                         + "partnerBic VARCHAR(255) NOT NULL,"
                         + "partnerAccountNumber VARCHAR(255) NOT NULL,"
                         + "partnerBankCode VARCHAR(255) NOT NULL,"
-                        + "amount FLOAT(2) NOT NULL,"
+                        + "amount DECIMAL(12, 2) NOT NULL,"
                         + "currency VARCHAR(255) NOT NULL,"
                         + "bookingText VARCHAR(500) NOT NULL,"
                         + "initialRecognitionReference VARCHAR(255) NOT NULL,"
@@ -67,27 +70,31 @@ public class Database {
     }
     
     // nur die essenziellen infos werden zurückgeschickt
-    public List<Payment> getAllPayments(){
+    public JsonArray getAllPayments(){
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        DecimalFormat doubleFormatter = new DecimalFormat("#0.00");
+        JsonArrayBuilder payments = Json.createArrayBuilder();
         ResultSet allPayments;
-        List<Payment> payments = new ArrayList<>();
+
         try {
             Statement stat = conn.createStatement();
             allPayments = stat.executeQuery("select bookingDate, amount, currency, bookingText, valueDate from Payment");
             
             while (allPayments.next()){
-                Payment tmpPayment = new Payment();
-                tmpPayment.setBookingDate(allPayments.getTimestamp("bookingDate").toLocalDateTime());
-                tmpPayment.setAmount(allPayments.getDouble("amount"));
-                tmpPayment.setCurrency(allPayments.getString("currency"));
-                tmpPayment.setBookingText(allPayments.getString("bookingText"));
-                tmpPayment.setValueDate(allPayments.getTimestamp("valueDate").toLocalDateTime());
+                JsonObjectBuilder tmpPayment = Json.createObjectBuilder();
+                tmpPayment.add("bookingDate", dateFormat.format(allPayments.getTimestamp("bookingDate")));
+                tmpPayment.add("amount", doubleFormatter.format(allPayments.getDouble("amount")));
+                tmpPayment.add("currency", allPayments.getString("currency"));
+                tmpPayment.add("bookingText", allPayments.getString("bookingText"));
+                tmpPayment.add("valueDate", dateFormat.format(allPayments.getTimestamp("valueDate")));
                 
                 payments.add(tmpPayment);
             }
         } catch (SQLException e) {
             System.err.println("Fehler beim Senden der essenziellen Informationen der Zahlungen (getAllPayments in Database.java): " + e.getMessage());
         }
-        return payments;
+
+        return payments.build();
     }
 
     public void insertIntoDatabase(Payment payment){
