@@ -1,44 +1,57 @@
 # IncomeExpensesAccounting
+
 - Michael Frech
 - Julian Nobis
 
-## Inbetriebnahme des Prototypen
+## Inbetriebnahme des JEE-Servers
 
-### JEE-Server starten
+### DB starten
 
-### Docker-Container NGINX starten
+```
+cd db/
+/opt/derbydb/bin/startNetworkServer -noSecurityManager
+```
+
+### Wildfly konfigurieren
+
+- In der Toolbar auf "Add Configuration..." klicken
+- JBoss-server local hinzufügen
+- Darauf achten, dass der wildfly server mit der ip `localhost:8085` konfiguriert ist
+
+### JEE-Server starten bzw. stoppen
+
+- Starten: in der Toolbar auf "Run" klicken
+- Stoppen: in der Toolbar auf "Stop" klicken
+
+
+## Inbetriebnahme des Webservers
+
+- Webserver projekt in der Webstorm IDE öffnen
+
+### Node Module installieren
+
+- Im Ordner wwwroot/ die node module installieren. Dazu folgendes script (darin befinden sich alle erforderlichen packages) ausführen:
+
+```
+./installpackages.sh
+```
+
+### Nginx-server starten
 
 - Docker starten
-- Webstorm starten
-- Im webserver-Ordner befindet sich das Projekt
-- docker-compose starten: Dazu ein Terminal-Fenster öffnen und `docker-compose up` eingeben. Wichtig. Man muss sich im Verzeichnis mit `docker-compse.yml` befinden.
 
-<img src="images/webstorm.png" />
-
-- Im Verzeichnis wwwroot befinden sich die HTML/JS/CSS-Dateien
+```
+docker-compose up
+```
 
 ### Seite im Browser öffnen
 
 - Im Browser `localhost:80` eingeben
 
-<img src="images/formular01.png" />
+### Nginx-server stoppen
 
-- Mit Button Browse ein File auswählen
-- Button "Load Selected File" anklicken
-- Nun wird der Inhalt des Files auf der Website ausgegeben
-
-<img src="images/formular02.png" />
-
-- Gleichzeitig wird der empfangene Content am JEE-Server im Log ausgegeben:
-
-<img src="images/wildfly-log.png" />
-
-## Beenden des Prototype
-
-Der nginx-Webserver wird mit 
+- Docker herunterfahren 
 
 ```
 docker-compose down
 ```
-
-wieder beendet.
