@@ -28,14 +28,6 @@ cd db/
 
 - Webserver projekt in der Webstorm IDE öffnen
 
-### Node Module installieren
-
-- Im Ordner wwwroot/ die node module installieren. Dazu folgendes script (darin befinden sich alle erforderlichen packages) ausführen:
-
-```
-./installpackages.sh
-```
-
 ### Nginx-server starten
 
 - Docker starten
