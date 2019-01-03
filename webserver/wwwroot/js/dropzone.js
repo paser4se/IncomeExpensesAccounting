@@ -1,4 +1,4 @@
-import { LitElement, html } from "./polymer_modules/@polymer/lit-element/lit-element.js";
+import {LitElement, html} from "@polymer/lit-element";
 
 class DropZone extends LitElement {
 
@@ -32,7 +32,7 @@ class DropZone extends LitElement {
                     <button @click="${evt => this.handleSubmit(evt)}" id="upload-button">Upload</button>
                 </div>
             </form>
-        `
+        `;
     }
 
     handleDragenter(evt) {
