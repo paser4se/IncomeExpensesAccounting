@@ -27,9 +27,21 @@ cd db/
 ## Inbetriebnahme des Webservers
 
 - Webserver projekt in der Webstorm IDE öffnen
+- Ins root-verzeichnis wechseln
+```
+cd wwwroot/
+```
+- Polymer installieren
+```
+npm i @polymer/polymer
+```
 
 ### Nginx-server starten
 
+- Polymer build aufrufen
+```
+polymer build
+```
 - Docker starten
 
 ```
