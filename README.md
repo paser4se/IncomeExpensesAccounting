@@ -31,9 +31,20 @@ cd db/
 ```
 cd wwwroot/
 ```
-- Polymer installieren
+- Pakete installieren
 ```
-npm i @polymer/polymer
+npm i
+```
+
+### Webserver testen
+
+- Ins root-verzeichnis wechseln
+```
+cd wwwroot/
+```
+- Polymer starten
+```
+npm start
 ```
 
 ### Nginx-server starten
