@@ -1,4 +1,4 @@
-# IncomeExpensesAccounting - IEA <img src="images/Logo.png" style="height:40px; width:40px"></img>
+# IncomeExpensesAccounting - IEA <img src="images/Logo.png" style="width:40px;height:40px;"></img>
 
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
