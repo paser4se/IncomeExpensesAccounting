@@ -4,6 +4,7 @@
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
+  - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
   - [Inbetriebnahme des JEE-Servers](#computer-inbetriebnahme-des-jee-servers)
   - [Inbetriebnahme des Webservers](#computer-inbetriebnahme-des-webservers)
@@ -100,6 +101,7 @@ docker-compose down
 ## :microscope: Technologien
 - Jakarta EE
 - Docker
+- Nginx 
 - Polymer 3 LitElement
 - HTML5
 - CSS
