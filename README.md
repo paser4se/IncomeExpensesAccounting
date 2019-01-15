@@ -5,7 +5,8 @@
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
 - [Konfiguration](#wrench-konfiguration)
-- [Das Team](#guardsman-das-team)
+- [Technologien](#microscope-technologien)
+- [Das Team](#surfer-das-team)
 - [Lizenz](#closed_lock_with_key-lizenz)
 
 ## :money_with_wings: Was ist IEA?
@@ -94,7 +95,12 @@ docker-compose up
 docker-compose down
 ```
 
-## :guardsman: Das Team
+## :microscope: Technologien
+- JakartaEE
+- Docker
+- Polymer
+
+## :surfer: Das Team
 - Michael Frech
 - Julian Nobis
 
