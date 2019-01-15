@@ -43,7 +43,7 @@ cd db/
 
 - In der Toolbar auf "Add Configuration..." klicken
 - JBoss-server local hinzufügen
-- Darauf achten, dass der wildfly server mit der ip `localhost:8085` konfiguriert ist
+- Darauf achten, dass der wildfly server mit der ip `localhost:8080` konfiguriert ist
 
 #### JEE-Server starten bzw. stoppen
 
