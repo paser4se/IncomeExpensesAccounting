@@ -11,7 +11,7 @@
 ## :money_with_wings: Was ist IEA?
 IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
-## :statue_of_liberty: Systemarchitektur
+## :triangular_ruler: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
 
 ## :chart_with_upwards_trend: Funktionsweise
@@ -94,7 +94,7 @@ docker-compose up
 docker-compose down
 ```
 
-## :two_men_holding_hands: Das Team
+## :guardsman: Das Team
 - Michael Frech
 - Julian Nobis
 
