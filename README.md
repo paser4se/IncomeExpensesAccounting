@@ -98,19 +98,22 @@ docker-compose down
 ```
 
 ## :microscope: Technologien
-- JakartaEE
+- Jakarta EE
 - Docker
-- Polymer
+- Polymer 3 LitElement
+- HTML5
+- CSS
+- JavaScript
 
 ## :surfer: Das Team
-- Michael Frech
-- Julian Nobis
+- [Michael Frech](https://github.com/michifrech)
+- [Julian Nobis](https://github.com/juliannobis)
 
 ## :closed_lock_with_key: Lizenz
 
 [MIT License](LICENSE)
 
-Copyright (c) 2018 IEA
+Copyright (c) 2019 IEA
 
 Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält, die Erlaubnis erteilt, sie uneingeschränkt zu nutzen, inklusive und ohne Ausnahme mit dem Recht, sie zu verwenden, zu kopieren, zu verändern, zusammenzufügen, zu veröffentlichen, zu verbreiten, zu unterlizenzieren und/oder zu verkaufen, und Personen, denen diese Software überlassen wird, diese Rechte zu verschaffen, unter den folgenden Bedingungen:
 
