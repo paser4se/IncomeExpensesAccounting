@@ -4,15 +4,15 @@ import { PageViewElement } from './page-view-element.js';
 // These are the shared styles needed by this element.
 import { SharedStyles } from './shared-styles.js';
 
-class EvaluationView extends PageViewElement {
+class OverviewView extends PageViewElement {
     render() {
         return html`
       ${SharedStyles}
       <section>
-        <div>Evaluation</div>
+        <div>Overview</div>
       </section>
     `;
     }
 }
 
-window.customElements.define('evaluation-view', EvaluationView);
+window.customElements.define('overview-view', OverviewView);

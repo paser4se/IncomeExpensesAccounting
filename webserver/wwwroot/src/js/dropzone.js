@@ -1,6 +1,6 @@
 import {LitElement, html} from "@polymer/lit-element";
 
-import { SharedStyles } from '../components/dropzone-style.js';
+import { DropZoneStyles } from '../components/dropzone-style.js';
 
 class DropZone extends LitElement {
 
@@ -17,7 +17,7 @@ class DropZone extends LitElement {
 
     render() {
         return html`
-            ${SharedStyles}
+            ${DropZoneStyles}
             
             <form class="drop-zone" id="file-form" action="http://localhost:8085/iea/rs/files/uploadcsv" method="POST" enctype="multipart/form-data"
                     @dragenter="${evt => this.handleDragenter(evt)}" @dragstart="${evt => this.handleDragstart(evt)}"
@@ -76,7 +76,7 @@ class DropZone extends LitElement {
         fileReader.onload = async function (fileLoadedEvent) {
             let textFromFileLoaded = fileLoadedEvent.target.result;
 
-            fetch('http://localhost:8085/iea/rs/files/uploadtext', {
+            fetch('http://localhost:8080/iea/rs/files/uploadtext', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "text/plain"

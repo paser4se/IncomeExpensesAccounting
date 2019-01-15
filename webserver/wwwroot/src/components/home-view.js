@@ -8,15 +8,15 @@ import './my-songcollection.js'
 // These are the shared styles needed by this element.
 import { SharedStyles } from './shared-styles.js';
 
-class MyView1 extends PageViewElement {
+class HomeView extends PageViewElement {
   render() {
     return html`
       ${SharedStyles}
       <section>
-        <div>View1</div>
+        <div>Home</div>
       </section>
     `;
   }
 }
 
-window.customElements.define('my-view1', MyView1);
+window.customElements.define('home-view', HomeView);
