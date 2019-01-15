@@ -11,13 +11,13 @@
 ## :money_with_wings: Was ist IEA?
 IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
-## :statue_of_liberty: Systemarchitektur
+## :triangular_ruler: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
 
 ## :chart_with_upwards_trend: Funktionsweise
 ![alt text](images/funktionsweise.png)
 
-### Erklärung
+### :newspaper: Erklärung
 Die Zahlungen werden von der Bank als csv-File zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
 Fall A: Eine Zahlung kann automatisiert (ev. auch manuell) auf ein Konto gebucht werden (sachliche Abgrenzung), sowie dem richtigen Jahr zugeordnet werden.  
 Fall B: Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern werden über mehrere Jahre hinweg abgeschrieben: PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitraum abgeschrieben, d.h. es entsteht ein Aufwand von 10.000 EUR pro Jahr. 
@@ -94,7 +94,7 @@ docker-compose up
 docker-compose down
 ```
 
-## :two_men_holding_hands: Das Team
+## :guardsman: Das Team
 - Michael Frech
 - Julian Nobis
 
