@@ -1,4 +1,4 @@
-# IncomeExpensesAccounting - IEA :bar_chart:
+# IncomeExpensesAccounting - IEA ![alt text](images/Logo_smaller.png)
 
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
