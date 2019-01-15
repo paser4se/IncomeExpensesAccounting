@@ -1,14 +1,23 @@
 package at.htl.iea.model;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Payments.findAll", query = "select p from Payment p"),
+})
 public class Payment {
 
     // region Variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private LocalDateTime bookingDate = null; // buchungsdatum
     private String partnerName = "";
     private String partnerIban = "";
@@ -28,6 +37,11 @@ public class Payment {
     // endregion
 
     // region Getter & Setter
+
+    public Long getId() {
+        return id;
+    }
+
     public LocalDateTime getBookingDate() {
         return bookingDate;
     }
@@ -97,7 +111,10 @@ public class Payment {
     }
 
     public void setBookingText(String bookingText) {
-        this.bookingText = bookingText;
+        if (bookingText.length() > 254)
+            this.bookingText = bookingText.substring(0, 255);
+        else
+            this.bookingText = bookingText;
     }
 
     public String getInitialRecognitionReference() {

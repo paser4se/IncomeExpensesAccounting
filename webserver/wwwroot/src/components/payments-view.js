@@ -3,12 +3,12 @@ import { PageViewElement } from './page-view-element.js';
 import  '../js/dropzone.js';
 
 // These are the shared styles needed by this element.
-import { SharedStyles } from './dropzone-style.js';
+import { DropZoneStyles } from './dropzone-style.js';
 
 class MyView2 extends PageViewElement {
   render() {
     return html`
-      ${SharedStyles}
+      ${DropZoneStyles}
       <section>
             <drop-zone></drop-zone>
 

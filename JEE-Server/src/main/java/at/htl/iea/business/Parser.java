@@ -1,13 +1,20 @@
 package at.htl.iea.business;
 
-import at.htl.iea.database.Database;
 import at.htl.iea.model.Payment;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +33,7 @@ public class Parser {
         return Parser.instance;
     }
 
-    public void persist(String fileContent) throws NoSuchFieldException, ParseException {
+    public List<Payment> persist(String fileContent) throws NoSuchFieldException, ParseException {
         List<Payment> payments = new ArrayList<>();
         String[] lines = fileContent.split("\n");
         List<String> header = Arrays.asList(lines[0].split(";")).stream()
@@ -42,9 +49,7 @@ public class Parser {
             payments.add(getPayment(header, lineElements));
         }
 
-        for (Payment payment : payments){
-            Database.getInstance().insertIntoDatabase(payment);
-        }
+        return payments;
     }
 
     private static Payment getPayment(@NotNull List<String> header, @NotNull String[] lineElements) throws ParseException {
@@ -112,6 +117,25 @@ public class Parser {
         } else {
             return string;
         }
+    }
+
+    public JsonArray getAllPayments(List<Payment> paymentList){
+        DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DecimalFormat doubleFormatter = new DecimalFormat("#0.00");
+        JsonArrayBuilder payments = Json.createArrayBuilder();
+
+        for (int i = 0; i < paymentList.size(); i++) {
+            JsonObjectBuilder tmpPayment = Json.createObjectBuilder();
+            tmpPayment.add("bookingDate", paymentList.get(i).getBookingDate().format(dt));
+            tmpPayment.add("amount", doubleFormatter.format(paymentList.get(i).getAmount()));
+            tmpPayment.add("currency", paymentList.get(i).getCurrency());
+            tmpPayment.add("bookingText", paymentList.get(i).getBookingText());
+            tmpPayment.add("valueDate", paymentList.get(i).getValueDate().format(dt));
+
+            payments.add(tmpPayment);
+        }
+
+        return payments.build();
     }
 
 }
