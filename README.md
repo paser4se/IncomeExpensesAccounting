@@ -5,13 +5,13 @@
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
 - [Konfiguration](#wrench-konfiguration)
-- [Das Team](#two_men_holding_hands-das-team)
+- [Das Team](#guardsman-das-team)
 - [Lizenz](#closed_lock_with_key-lizenz)
 
 ## :money_with_wings: Was ist IEA?
 IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
-## :triangular_ruler: Systemarchitektur
+## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
 
 ## :chart_with_upwards_trend: Funktionsweise
