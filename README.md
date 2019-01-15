@@ -100,6 +100,7 @@ docker-compose down
 ## :microscope: Technologien
 - Jakarta EE
 - Docker
+- Nginx 
 - Polymer 3 LitElement
 - HTML5
 - CSS
