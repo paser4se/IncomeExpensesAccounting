@@ -1,11 +1,15 @@
-# IncomeExpensesAccounting - IEA ![alt text](images/Logo_smaller.png)
+# IncomeExpensesAccounting - IEA <img src="images/Logo.png" width="40" height="40">
 
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
+  - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
-- [Das Team](#guardsman-das-team)
+  - [Inbetriebnahme des JEE-Servers](#computer-inbetriebnahme-des-jee-servers)
+  - [Inbetriebnahme des Webservers](#computer-inbetriebnahme-des-webservers)
+- [Technologien](#microscope-technologien)
+- [Das Team](#surfer-das-team)
 - [Lizenz](#closed_lock_with_key-lizenz)
 
 ## :money_with_wings: Was ist IEA?
@@ -39,7 +43,7 @@ cd db/
 
 - In der Toolbar auf "Add Configuration..." klicken
 - JBoss-server local hinzufügen
-- Darauf achten, dass der wildfly server mit der ip `localhost:8085` konfiguriert ist
+- Darauf achten, dass der wildfly server mit der ip `localhost:8080` konfiguriert ist
 
 #### JEE-Server starten bzw. stoppen
 
@@ -94,12 +98,27 @@ docker-compose up
 docker-compose down
 ```
 
-## :guardsman: Das Team
-- Michael Frech
-- Julian Nobis
+## :microscope: Technologien
+- Jakarta EE
+- Docker
+- Nginx 
+- Polymer 3 LitElement
+- HTML5
+- CSS
+- JavaScript
+
+## :surfer: Das Team
+- [Michael Frech](https://github.com/michifrech)
+- [Julian Nobis](https://github.com/juliannobis)
 
 ## :closed_lock_with_key: Lizenz
 
 [MIT License](LICENSE)
 
+Copyright (c) 2019 IEA
 
+Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält, die Erlaubnis erteilt, sie uneingeschränkt zu nutzen, inklusive und ohne Ausnahme mit dem Recht, sie zu verwenden, zu kopieren, zu verändern, zusammenzufügen, zu veröffentlichen, zu verbreiten, zu unterlizenzieren und/oder zu verkaufen, und Personen, denen diese Software überlassen wird, diese Rechte zu verschaffen, unter den folgenden Bedingungen:
+
+Der obige Urheberrechtsvermerk und dieser Erlaubnisvermerk sind in allen Kopien oder Teilkopien der Software beizulegen.
+
+DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER IMPLIZIERTE GARANTIE BEREITGESTELLT, EINSCHLIEẞLICH DER GARANTIE ZUR BENUTZUNG FÜR DEN VORGESEHENEN ODER EINEM BESTIMMTEN ZWECK SOWIE JEGLICHER RECHTSVERLETZUNG, JEDOCH NICHT DARAUF BESCHRÄNKT. IN KEINEM FALL SIND DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE ANSPRÜCHE HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG EINES VERTRAGES, EINES DELIKTES ODER ANDERS IM ZUSAMMENHANG MIT DER SOFTWARE ODER SONSTIGER VERWENDUNG DER SOFTWARE ENTSTANDEN.

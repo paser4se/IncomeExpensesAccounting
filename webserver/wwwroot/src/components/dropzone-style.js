@@ -1,8 +1,8 @@
 import { html } from '@polymer/lit-element';
 
-export const SharedStyles = html`
+export const DropZoneStyles = html`
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.css"></script>
+  
   <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
   <script src="https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>

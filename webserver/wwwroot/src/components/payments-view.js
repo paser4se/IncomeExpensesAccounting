@@ -3,17 +3,18 @@ import { PageViewElement } from './page-view-element.js';
 import  '../js/dropzone.js';
 
 // These are the shared styles needed by this element.
-import { SharedStyles } from './dropzone-style.js';
+import { DropZoneStyles } from './dropzone-style.js';
+import 'bootstrap-table';
 
-class MyView2 extends PageViewElement {
+class PaymentsView extends PageViewElement {
   render() {
     return html`
-      ${SharedStyles}
+      
       <section>
             <drop-zone></drop-zone>
 
-            <button class="btn btn-default" onclick="$('#paymentsTable').bootstrapTable('refresh')">Refresh</button>
-            <table id="paymentsTable" data-toggle="table" data-url="http://localhost:8085/iea/rs/payments"  class="table table-hover">
+            <button class="btn btn-default" onclick="this.parentElement.querySelector('#paymentsTable').bootstrapTable('refresh')">Refresh</button>
+            <table id="paymentsTable" data-toggle="table" data-url="http://localhost:8080/iea/rs/payments" class="table table-hover">
                 <thead>
                 <tr>
                     <th data-field="bookingDate" data-sortable="true">BOOKINGDATE</th>
@@ -31,4 +32,4 @@ class MyView2 extends PageViewElement {
   }
 }
 
-window.customElements.define('my-view2', MyView2);
+window.customElements.define('payments-view', PaymentsView);
