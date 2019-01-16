@@ -20,7 +20,7 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 ![alt text](images/systemarchitektur.png)
 
 ## :scroll: Projektstrukturplan
-![alt text](images/projektstrukturplan_iea.png)
+![alt text](images/Projektstrukturplan_IEA.png)
 
 ## :chart_with_upwards_trend: Funktionsweise
 ![alt text](images/funktionsweise.png)
