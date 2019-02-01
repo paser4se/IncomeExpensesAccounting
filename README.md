@@ -3,6 +3,7 @@
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
+- [Projektstrukturplan](#scroll-projektstrukturplan)
 - [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
   - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
@@ -17,6 +18,9 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
+
+## :scroll: Projektstrukturplan
+![alt text](images/Projektstrukturplan_IEA.png)
 
 ## :chart_with_upwards_trend: Funktionsweise
 ![alt text](images/funktionsweise.png)
@@ -43,7 +47,7 @@ cd db/
 
 - In der Toolbar auf "Add Configuration..." klicken
 - JBoss-server local hinzufügen
-- Darauf achten, dass der wildfly server mit der ip `localhost:8085` konfiguriert ist
+- Darauf achten, dass der wildfly server mit der ip `localhost:8080` konfiguriert ist
 
 #### JEE-Server starten bzw. stoppen
 
