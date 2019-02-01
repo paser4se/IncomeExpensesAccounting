@@ -1,14 +1,15 @@
 import { html } from '@polymer/lit-element';
-import { PageViewElement } from './page-view-element.js';
-import  '../js/dropzone.js';
+import { PageViewElement } from '../page-view-element.js';
+import '../../js/dropzone.js';
 
 // These are the shared styles needed by this element.
-import { DropZoneStyles } from './dropzone-style.js';
+import { DropZoneStyles } from '../dropzone-style';
 import 'bootstrap-table';
 
 class PaymentsView extends PageViewElement {
   render() {
     return html`
+      ${DropZoneStyles}
       
       <section>
             <drop-zone></drop-zone>

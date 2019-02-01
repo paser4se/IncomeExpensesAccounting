@@ -8,26 +8,24 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { LitElement, html } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { PageViewElement } from '../page-view-element.js';
 
-// This element is *not* connected to the Redux store.
-class ShopItem extends LitElement {
+// These are the shared styles needed by this element.
+import { SharedStyles } from '../shared-styles.js';
+
+class MyView404 extends PageViewElement {
   render() {
     return html`
-      ${this.name}:
-      <span ?hidden="${this.amount === 0}">${this.amount} * </span>
-      $${this.price}
-      </span>
-    `;
-  }
-
-  static get properties() {
-    return {
-      name: { type: String },
-      amount: { type: String },
-      price: { type: String }
-    }
+      ${SharedStyles}
+      <section>
+        <h2>Oops! You hit a 404</h2>
+        <p>The page you're looking for doesn't seem to exist. Head back
+           <a href="/">home</a> and try again?
+        </p>
+      </section>
+    `
   }
 }
 
-window.customElements.define('shop-item', ShopItem);
+window.customElements.define('my-view404', MyView404);

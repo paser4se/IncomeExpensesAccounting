@@ -16,6 +16,9 @@ import { installOfflineWatcher } from 'pwa-helpers/network.js';
 import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
+import '@polymer/iron-icon/iron-icon.js';
+import '@polymer/iron-icons/iron-icons.js';
+
 // This element is connected to the Redux store.
 import { store } from '../store.js';
 
@@ -32,7 +35,6 @@ import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { menuIcon } from './my-icons.js';
-import './snack-bar.js';
 
 class IEA extends connect(store)(LitElement) {
   render() {
@@ -270,7 +272,7 @@ class IEA extends connect(store)(LitElement) {
 
       <!-- This gets hidden on a small screen-->
       <nav class="toolbar-list container pullUp">
-        <a ?selected="${this._page === 'Home'}" href="/Home" left-item>Home</a>
+        <a ?selected="${this._page === 'Home'}" href="/Home" left-item><iron-icon icon="home"></iron-icon>Home</a>
         <a ?selected="${this._page === 'Payments'}" href="/Payments" left-item>Payments</a>
         <a ?selected="${this._page === 'Overview'}" href="/Overview" left-item>Overview</a>
         <a ?selected="${this._page === 'Evaluation'}" href="/Evaluation" left-item>Evaluation</a>
@@ -287,7 +289,7 @@ class IEA extends connect(store)(LitElement) {
     <app-drawer .opened="${this._drawerOpened}"
         @opened-changed="${this._drawerOpenedChanged}">
       <nav class="drawer-list container pullUp">
-        <a ?selected="${this._page === 'Home'}" href="/Home" left-item>Home</a>
+        <a ?selected="${this._page === 'Home'}" href="/Home" left-item><iron-icon icon="home"></iron-icon>Home</a>
         <a ?selected="${this._page === 'Payments'}" href="/Payments" left-item>Payments</a>
         <a ?selected="${this._page === 'Overview'}" href="/Overview" left-item>Overview</a>
         <a ?selected="${this._page === 'Evaluation'}" href="/Evaluation" left-item>Evaluation</a>
