@@ -6,12 +6,12 @@ import { SharedStyles } from '../shared-styles.js';
 
 class LoginView extends PageViewElement {
     render() {
-        return html`
-      ${SharedStyles}
-      <section>
-        <div>Login</div>
-      </section>
-    `;
+      return html`
+        ${SharedStyles}
+        <section>
+          <div>Login</div>
+        </section>
+      `;
     }
 }
 

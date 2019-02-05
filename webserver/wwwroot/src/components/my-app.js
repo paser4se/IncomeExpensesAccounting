@@ -18,6 +18,8 @@ import { updateMetadata } from 'pwa-helpers/metadata.js';
 
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-icons/editor-icons.js';
+import '@polymer/iron-icons/social-icons.js';
 
 // This element is connected to the Redux store.
 import { store } from '../store.js';
@@ -138,10 +140,13 @@ class IEA extends connect(store)(LitElement) {
       .drawer-list > a {
         display: block;
         text-decoration: none;
-        color: var(--app-drawer-text-color);
+        color: white !important;
         line-height: 40px;
         padding: 0 24px;
         outline: 0;
+      }
+      .drawer-list > div {
+        color: white !important;
       }
 
       .drawer-list > a[selected] {
@@ -168,6 +173,7 @@ class IEA extends connect(store)(LitElement) {
       }
 
       footer {
+        margin-bottom: -2px;
         padding: 24px;
         background: var(--app-drawer-background-color);
         color: var(--app-drawer-text-color);
@@ -273,11 +279,11 @@ class IEA extends connect(store)(LitElement) {
       <!-- This gets hidden on a small screen-->
       <nav class="toolbar-list container pullUp">
         <a ?selected="${this._page === 'Home'}" href="/Home" left-item><iron-icon icon="home"></iron-icon>Home</a>
-        <a ?selected="${this._page === 'Payments'}" href="/Payments" left-item>Payments</a>
-        <a ?selected="${this._page === 'Overview'}" href="/Overview" left-item>Overview</a>
-        <a ?selected="${this._page === 'Evaluation'}" href="/Evaluation" left-item>Evaluation</a>
+        <a ?selected="${this._page === 'Payments'}" href="/Payments" left-item><iron-icon icon="credit-card"></iron-icon>Payments</a>
+        <a ?selected="${this._page === 'Overview'}" href="/Overview" left-item><iron-icon icon="inbox"></iron-icon>Overview</a>
+        <a ?selected="${this._page === 'Evaluation'}" href="/Evaluation" left-item><iron-icon icon="editor:insert-chart"></iron-icon>Evaluation</a>
         <a ?selected="${this._page === 'Login'}" href="/Login" right-item>Sign In/Sign Up</a>
-        <div class="profile" right-item>Profile<div class="dropdown-content">
+        <div class="profile" right-item><iron-icon icon="social:person"></iron-icon>Profile<div class="dropdown-content">
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
@@ -290,11 +296,11 @@ class IEA extends connect(store)(LitElement) {
         @opened-changed="${this._drawerOpenedChanged}">
       <nav class="drawer-list container pullUp">
         <a ?selected="${this._page === 'Home'}" href="/Home" left-item><iron-icon icon="home"></iron-icon>Home</a>
-        <a ?selected="${this._page === 'Payments'}" href="/Payments" left-item>Payments</a>
-        <a ?selected="${this._page === 'Overview'}" href="/Overview" left-item>Overview</a>
-        <a ?selected="${this._page === 'Evaluation'}" href="/Evaluation" left-item>Evaluation</a>
-        <a ?selected="${this._page === 'Login'}" href="/Login" right-item>Sign In/Sign Up</a>
-        <div class="profile" right-item>Profile<div class="dropdown-content">
+        <a ?selected="${this._page === 'Payments'}" href="/Payments" left-item><iron-icon icon="credit-card"></iron-icon>Payments</a>
+        <a ?selected="${this._page === 'Overview'}" href="/Overview" left-item><iron-icon icon="inbox"></iron-icon>Overview</a>
+        <a ?selected="${this._page === 'Evaluation'}" href="/Evaluation" left-item><iron-icon icon="editor:insert-chart"></iron-icon>Evaluation</a>
+        <a ?selected="${this._page === 'Login'}" href="/Login" left-item>Sign In/Sign Up</a>
+        <div class="profile" left-item><iron-icon icon="social:person"></iron-icon>Profile<div class="dropdown-content">
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
           <a href="#">Link 3</a>
@@ -315,9 +321,6 @@ class IEA extends connect(store)(LitElement) {
     <footer>
       <p>Footer</p>
     </footer>
-
-    <snack-bar ?active="${this._snackbarOpened}">
-        You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
     `;
   }
 

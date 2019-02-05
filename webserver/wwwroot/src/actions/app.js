@@ -38,7 +38,9 @@ const loadPage = (page) => (dispatch) => {
       import('../components/views/payments-view.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view2 after payments-view.js is loaded.
-        $('#paymentsTable').bootstrapTable('refresh');
+
+        const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view');
+        payview.updateItems();
       });
       break;
     case 'Overview':
