@@ -9,32 +9,29 @@ import 'bootstrap-table';
 
 class PaymentsView extends PageViewElement {
 
-  updateItems() {
-    console.log('updating');
-    console.log(this.shadowRoot.children);
-    console.log(this.shadowRoot.children.length);
-    console.log('=============');
+  setPayments(pays){
+    this.payments = pays;
+  }
 
-    for (var i = 0; i < this.shadowRoot.children.length; i++){
-      var grid = this.shadowRoot.children[i].querySelector('vaadin-grid');
-      console.log(this.shadowRoot.children[i]);
-      if (grid != null){
-        grid.dataProvider = function(params, callback) {
-          var url = 'http://localhost:8080/iea/api/payments';
-          var xhr = new XMLHttpRequest();
-          xhr.onload = function() {
-            var response = JSON.parse(xhr.responseText);
-            console.log(response);
-            callback(
-                response,
-                response.length
-            );
-          };
-          xhr.open('GET', url, true);
-          xhr.send();
-        }
-      }
+  static get properties() {
+    return {
+      payments:String
     }
+  }
+
+  updatePayments() {
+    fetch('http://localhost:8080/iea/api/payments')
+    .then(async function(response) {
+      let tmp = await response.json();
+      const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view');
+      payview.setPayments(JSON.stringify(tmp));
+    });
+  }
+
+  constructor() {
+    super();
+    this.setPayments("[]");
+    this.updatePayments();
   }
 
   render() {
@@ -44,9 +41,9 @@ class PaymentsView extends PageViewElement {
       <section>
             <drop-zone></drop-zone>
             
-            <button class="btn btn-default" @click="${evt => this.updateItems()}">Refresh</button>
+            <button class="btn btn-default" @click="${this.updatePayments()}">Refresh</button>
 
-            <vaadin-grid theme="row-dividers" style="min-height: 500px;" column-reordering-allowed multi-sort>
+            <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 500px;" column-reordering-allowed multi-sort>
               <vaadin-grid-column width="8%" path="bookingDate"></vaadin-grid-column>
               <vaadin-grid-column width="8%" path="amount"></vaadin-grid-column>
               <vaadin-grid-column width="8%" path="currency"></vaadin-grid-column>
