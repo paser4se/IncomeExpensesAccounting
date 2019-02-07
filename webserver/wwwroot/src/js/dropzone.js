@@ -76,7 +76,7 @@ class DropZone extends LitElement {
         fileReader.onload = async function (fileLoadedEvent) {
             let textFromFileLoaded = fileLoadedEvent.target.result;
 
-            fetch('http://localhost:8080/iea/rs/files/uploadtext', {
+            fetch('http://localhost:8080/iea/api/files/uploadtext', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "text/plain"
