@@ -87,6 +87,7 @@ export const AppStyle = html`
   }
 
   .drawer-list {
+    z-index: 10;
     box-sizing: border-box;
     width: 100%;
     height: 100%;

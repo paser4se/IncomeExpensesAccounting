@@ -52,23 +52,22 @@ class LoginView extends PageViewElement {
             <div class="form-row mb-4">
                 <div class="col">
                     <!-- First name -->
-                    <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+                    <input type="text" id="reg_firstname" class="form-control" placeholder="First name">
                 </div>
                 <div class="col">
                     <!-- Last name -->
-                    <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+                    <input type="text" id="reg_lastname" class="form-control" placeholder="Last name">
                 </div>
             </div>
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
-            <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-            <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-                At least 8 characters and 1 digit
-            </small>
+            <input type="text" id="reg_username" class="form-control mb-4" placeholder="Username">
+            <input type="email" id="reg_email" class="form-control mb-4" placeholder="E-mail">
+            <input type="password" id="reg_password" class="form-control mb-4" placeholder="Password">
+            <input type="password" id="reg_confpassword" class="form-control mb-4" placeholder="Confirm Password">
         
             <!-- Newsletter -->
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
-                <label class="custom-control-label" for="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
+                <input type="checkbox" class="custom-control-input" id="reg_newsletter">
+                <label class="custom-control-label" for="reg_newsletter">Subscribe to our newsletter</label>
             </div>
         
             <button class="btn btn-info my-4 btn-block" type="submit">Sign up</button>
@@ -84,8 +83,8 @@ class LoginView extends PageViewElement {
           <form class="text-center p-5" action="http://localhost:8080/iea/rs/auth/login"
             @submit="${event => this.handleSubmit(event)}">
             <p class="h4 mb-4">Sign in</p>
-            <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
-            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+            <input type="email" id="login_email" class="form-control mb-4" placeholder="E-mail or Username">
+            <input type="password" id="login_password" class="form-control mb-4" placeholder="Password">
             <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
           </form>
         </div>

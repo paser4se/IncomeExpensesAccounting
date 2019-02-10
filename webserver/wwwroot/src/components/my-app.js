@@ -92,7 +92,7 @@ class IEA extends connect(store)(LitElement) {
       <payments-view class="page" ?active="${this._page === 'Payments'}"></payments-view>
       <overview-view class="page" ?active="${this._page === 'Overview'}"></overview-view>
       <evaluation-view class="page" ?active="${this._page === 'Evaluation'}"></evaluation-view>
-      <login-view class="page" ?active="${this._page === 'Login'}"></login-view>
+      <login-view class="page" style="min-height: 630px;" ?active="${this._page === 'Login'}"></login-view>
       <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
     </main>
 
