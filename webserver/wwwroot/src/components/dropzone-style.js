@@ -71,6 +71,7 @@ export const DropZoneStyles = html`
     button:hover
     {
         background-color: #0f3c4b;
+        cursor: pointer;
     }
 </style>
 `;

@@ -7,11 +7,11 @@ import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-icons/av-icons.js';
 import '@polymer/iron-icons/image-icons.js';
+import '@vaadin/vaadin-button/vaadin-button.js';
 
 // These are the shared styles needed by this element.
 import { DropZoneStyles } from '../dropzone-style';
 import { SharedStyles } from "../shared-styles";
-import 'bootstrap-table';
 
 class PaymentsView extends PageViewElement {
 
@@ -145,10 +145,11 @@ class PaymentsView extends PageViewElement {
             <div id="secondPage" style="display: none;">
               <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 500px;" column-reordering-allowed multi-sort>
                 <vaadin-grid-column width="8%" path="bookingDate"></vaadin-grid-column>
-                <vaadin-grid-column width="8%" path="amount"></vaadin-grid-column>
-                <vaadin-grid-column width="8%" path="currency"></vaadin-grid-column>
+                <vaadin-grid-column width="6%" path="amount"></vaadin-grid-column>
+                <vaadin-grid-column width="6%" path="currency"></vaadin-grid-column>
                 <vaadin-grid-column width="68%" path="bookingText"></vaadin-grid-column>
-                <vaadin-grid-column width="8%" path="valueDate"></vaadin-grid-column>
+                <vaadin-grid-column width="12%">
+                </vaadin-grid-column>
               </vaadin-grid>
             </div>
           </div>
@@ -163,33 +164,27 @@ class PaymentsView extends PageViewElement {
 
   handleNext(evt) {
     this.position++;
-    var nextBtn = this.shadowRoot.querySelector('#btnnext');
-    var backBtn = this.shadowRoot.querySelector('#btnback');
     var children = this.shadowRoot.querySelector('#cssmenu').children[0].children;
 
     if (this.position == 2) {
       this.updatePayments();
+
+      const columns = this.shadowRoot.querySelectorAll('vaadin-grid-column');
+      columns[4].renderer = function(root, column, rowData) {
+        root.innerHTML = '';
+        const btn = window.document.createElement('button');
+        btn.textContent = 'Category ' + rowData.item.id;
+        btn.style.marginLeft = "auto";
+        btn.style.marginRight = "auto";
+        btn.addEventListener('click', function(event) {
+          console.log(event.target.textContent);
+        });
+
+        root.appendChild(btn);
+      };
     }
 
-    var pages = this.shadowRoot.querySelector('#pages').children;
-    for(var i = 0; i < pages.length; i++){
-      if (i == this.position-1){
-        pages[i].style.display = 'block';
-      } else {
-        pages[i].style.display = 'none';
-      }
-    }
-
-    if (this.position >= 3) {
-      nextBtn.disabled = true;
-    } else {
-      nextBtn.disabled = false;
-    }
-    if (this.position >= 2) {
-      backBtn.disabled = false;
-    } else {
-      backBtn.disabled = true;
-    }
+    this.changePage();
 
     var lastactive = false;
     for (var i = children.length-1; i >= 0; i--) {
@@ -207,15 +202,34 @@ class PaymentsView extends PageViewElement {
 
   handleBack(evt) {
     this.position--;
-    var nextBtn = this.shadowRoot.querySelector('#btnnext');
-    var backBtn = this.shadowRoot.querySelector('#btnback');
+
     var children = this.shadowRoot.querySelector('#cssmenu').children[0].children;
 
     if (this.position == 2) {
       this.updatePayments();
     }
 
+    this.changePage();
+
+    var lastactive = false;
+    for (var i = 0; i < children.length; i++) {
+      if (lastactive){
+        children[i].classList.add('active');
+        lastactive = false;
+      } else {
+        if (children[i].classList.contains('active')){
+          children[i].classList.remove('active');
+          lastactive = true;
+        }
+      }
+    }
+  }
+
+  changePage(){
+    var nextBtn = this.shadowRoot.querySelector('#btnnext');
+    var backBtn = this.shadowRoot.querySelector('#btnback');
     var pages = this.shadowRoot.querySelector('#pages').children;
+
     for(var i = 0; i < pages.length; i++){
       if (i == this.position-1){
         pages[i].style.display = 'block';
@@ -233,19 +247,6 @@ class PaymentsView extends PageViewElement {
       backBtn.disabled = false;
     } else {
       backBtn.disabled = true;
-    }
-
-    var lastactive = false;
-    for (var i = 0; i < children.length; i++) {
-      if (lastactive){
-        children[i].classList.add('active');
-        lastactive = false;
-      } else {
-        if (children[i].classList.contains('active')){
-          children[i].classList.remove('active');
-          lastactive = true;
-        }
-      }
     }
   }
 }
