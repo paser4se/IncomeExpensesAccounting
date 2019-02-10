@@ -26,10 +26,11 @@ class PaymentsView extends PageViewElement {
   }
 
   updatePayments() {
+    var payview = this;
     fetch('http://localhost:8080/iea/api/payments')
     .then(async function(response) {
       let tmp = await response.json();
-      const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view');
+      //const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view');
       payview.setPayments(JSON.stringify(tmp));
     });
   }
@@ -154,7 +155,7 @@ class PaymentsView extends PageViewElement {
             </div>
           </div>
           
-          <div style="display: block; width: 50%; margin: auto; margin-top: 10px; position: fixed; bottom: 120px; left: 0; right: 0;">
+          <div style="display: block; width: 50%; margin: auto; margin-top: 10px; position: absolute; bottom: 1px; left: 0; right: 0;">
             <button id="btnback" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px;" disabled @click="${(evt) => this.handleBack(evt)}">Back</button>
             <button id="btnnext" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px;" @click="${(evt) => this.handleNext(evt)}">Next</button>
           </div>
