@@ -3,6 +3,6 @@ package at.htl.iea.rest;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("rs")
+@ApplicationPath("api")
 public class RestConfig extends Application {
 }

@@ -20,7 +20,7 @@ public class PaymentServiceEndpoint {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPayments() {
-        List<Payment> payments = em.createNamedQuery("Payments.findAll", Payment.class).getResultList();
+        List<Payment> payments = em.createNamedQuery("Payments.findAllUnevaluated", Payment.class).getResultList();
         return Response.ok(Parser.getInstance().getAllPayments(payments), MediaType.APPLICATION_JSON).build();
     }
 
