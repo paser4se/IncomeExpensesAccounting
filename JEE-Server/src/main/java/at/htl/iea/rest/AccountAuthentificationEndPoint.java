@@ -1,12 +1,17 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.business.Parser;
+import at.htl.iea.dao.AccountDao;
+import at.htl.iea.model.Account;
 import at.htl.iea.model.Payment;
 import org.jboss.resteasy.annotations.Body;
 
+import javax.ejb.EJBException;
+import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -24,8 +29,8 @@ import javax.ws.rs.core.Cookie;
 @Path("auth")
 public class AccountAuthentificationEndPoint {
 
-    @PersistenceContext
-    EntityManager em;
+    @Inject
+    AccountDao accountDao;
 
     private NewCookie buildCookie(String token){
         long maxAge = LocalDate
@@ -49,17 +54,18 @@ public class AccountAuthentificationEndPoint {
     }
 
     private boolean doesUserExist(String username, String password){
-        // Dao.getUserByUsername() --> if null --> return false --> else return true (login succeeded --> redirect)
-
-        // user = Dao.getUserByUsername
-        // if user == null
-            // return false
-        // else 
-            // return user.password == password
-
-        return username.equals("user") &&
-            // password given is 'u' [for testing purposes]
-            password.equals("0bfe935e70c321c7ca3afc75ce0d0ca2f98b5422e008bb31c00c6d7f1f1c0ad6");
+        try{
+            Account account = accountDao.getAccountByUsername(username);
+            return account.getPassword() == password;
+        } catch(EJBException  ex){
+            if (ex.getCausedByException() instanceof NoResultException){
+                System.out.println("Account does not exist");
+            }
+            else {
+                ex.printStackTrace();
+            }
+            return false;
+        }
     }
 
     /*TODO: evtl. oauth2 george and elba
@@ -68,8 +74,6 @@ public class AccountAuthentificationEndPoint {
             scopes: transaction.history.read
         elba R.I.P
     */
-
-    //TODO: Create User entity
 
     /* Paste into console to test authenticate
         fetch("http://localhost:8080/iea/rs/auth/authenticate", {
@@ -94,13 +98,14 @@ public class AccountAuthentificationEndPoint {
 
         // check for valid user
         if(!doesUserExist(username, password)){
+            System.out.println("USERNAME/PASSWORD is not correct!");
             // delete cookie
             return Response
                 .status(404)
                 .header("Set-Cookie", "auth-token=deleted;Path=/;max-age=0;HttpOnly")
                 .build();
         }
-
+        System.out.println("TESTTESTTESTTESTTESTTEST");
         // return new cookie to extend the lifespan of the cookie
         return Response
             .ok()
@@ -161,6 +166,5 @@ public class AccountAuthentificationEndPoint {
             return Response.status(500).build();
         }
     }
-
 
 }
