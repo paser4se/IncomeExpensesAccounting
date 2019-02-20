@@ -34,7 +34,7 @@ class LoginView extends PageViewElement {
         >
           <input type="text" name="username" />
           <input type="password" name="password" />
-          <input type="submit" value="Send" />
+          <input type="submit" value="Sign In" />
         </form>
       </section>
     `;
