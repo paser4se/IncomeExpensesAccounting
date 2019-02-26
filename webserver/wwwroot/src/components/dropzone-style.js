@@ -65,7 +65,6 @@ export const DropZoneStyles = html`
         display: block;
         padding: 8px 16px;
         margin: 40px auto 0;
-        border-radius: 5px;
         border: none;
     }
     button:hover
