@@ -1,14 +1,20 @@
 package at.htl.iea.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
 
 @Entity
 @XmlRootElement
-@NamedQueries(
-        @NamedQuery(name = "Category.getSortedCategories", query = "select c from Category c order by c.name asc")
-)
+@NamedQueries({
+        @NamedQuery(name = "Category.getSortedCategories", query = "select c from Category c where c.parentCategory is null order by c.name asc"),
+        @NamedQuery(name = "Category.getByName", query = "select c from Category c where c.name = ?1")
+})
 public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,21 +22,33 @@ public class Category {
     private String name;
 
     @OneToOne
+    @JsonIgnore
     private Category parentCategory;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Category> subcategories = new LinkedHashSet<>();
 
     // region Constructor
     public Category(){}
+
+    public Category(String name) {
+        this.name = name;
+    }
     // endregion
 
     // region Getter & setter
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
 
     public String getName() {
+        if (this.parentCategory != null){
+            return "==> " + name;
+        }
         return name;
     }
 
@@ -50,8 +68,9 @@ public class Category {
         return subcategories;
     }
 
-    public void setSubcategories(Set<Category> subcategories) {
-        this.subcategories = subcategories;
+    public void addSubcategory(Category subcategory) {
+        subcategory.setParentCategory(this);
+        subcategories.add(subcategory);
     }
     // endregion
 
