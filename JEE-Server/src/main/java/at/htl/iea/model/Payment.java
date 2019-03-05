@@ -30,6 +30,9 @@ public class Payment {
     private String note = "";
     private LocalDateTime valueDate = null; // valutadatum
     private Boolean evaluated = false;  //Vorkontierung in arbeit..
+
+    @OneToOne
+    private Category category;
     // endregion
 
     // region Constructor
@@ -147,6 +150,14 @@ public class Payment {
 
     public void setEvaluated(Boolean evaluated) {
         this.evaluated = evaluated;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     // endregion

@@ -1,6 +1,7 @@
 import { html } from '@polymer/lit-element';
 import { PageViewElement } from '../page-view-element.js';
 import '../../js/dropzone.js';
+import '../../js/category.js';
 import '@vaadin/vaadin-grid/vaadin-grid.js';
 
 import '@polymer/iron-icon/iron-icon.js';
@@ -126,9 +127,21 @@ class PaymentsView extends PageViewElement {
           border: 0; 
         }
         
+        category-view {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
       </style>
       ${SharedStyles}
-      <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
       
       <div style="margin-top: 40px;">
           <div id="cssmenu">  
@@ -149,9 +162,14 @@ class PaymentsView extends PageViewElement {
                 <vaadin-grid-column width="6%" path="amount"></vaadin-grid-column>
                 <vaadin-grid-column width="6%" path="currency"></vaadin-grid-column>
                 <vaadin-grid-column width="68%" path="bookingText"></vaadin-grid-column>
-                <vaadin-grid-column width="12%">
-                </vaadin-grid-column>
+                <vaadin-grid-column width="12%" header="Category"></vaadin-grid-column>
               </vaadin-grid>
+              <category-view></category-view>
+            </div>
+            <div id="thirdPage" style="display: none;">
+                <section>
+                    <div>Test</div>
+                </section>
             </div>
           </div>
           
@@ -174,11 +192,15 @@ class PaymentsView extends PageViewElement {
       columns[4].renderer = function(root, column, rowData) {
         root.innerHTML = '';
         const btn = window.document.createElement('button');
-        btn.textContent = 'Category ' + rowData.item.id;
+        btn.textContent = rowData.item.category.name;
         btn.style.marginLeft = "auto";
         btn.style.marginRight = "auto";
+        btn.classList.add("btn");
         btn.addEventListener('click', function(event) {
-          console.log(event.target.textContent);
+          var item = event.target.offsetParent.parentNode._item;
+          const payview = document.querySelector('iea-app').shadowRoot.children[4].querySelector('payments-view').shadowRoot;
+          payview.querySelector('category-view').currentCategory = item.id;
+          payview.querySelector('category-view').style.display = "block";
         });
 
         root.appendChild(btn);
