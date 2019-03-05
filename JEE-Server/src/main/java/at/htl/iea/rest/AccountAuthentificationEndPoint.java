@@ -32,61 +32,51 @@ public class AccountAuthentificationEndPoint {
     @Inject
     AccountDao accountDao;
 
-    private NewCookie buildCookie(String token){
-        long maxAge = LocalDate
-            .now()
-            .plusDays(2)
-            .atStartOfDay(ZoneId.systemDefault())
-            .toEpochSecond(); // converting date to seconds
+    private NewCookie buildCookie(String token) {
+        long maxAge = LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toEpochSecond(); // converting
+                                                                                                        // date to
+                                                                                                        // seconds
 
-        return new NewCookie(
-            "auth-token", 
-            token,
-            "/",
-            null,
-            0,
-            null,
-            (int)maxAge, //if maxAge = 0 --> cookie will be deleted; if maxAge < 0 --> cookie will be deleted when the web broswser is exited
-            null,
-            false,
-            true
-        );
+        return new NewCookie("auth-token", token, "/", null, 0, null, (int) maxAge, // if maxAge = 0 --> cookie will be
+                                                                                    // deleted; if maxAge < 0 --> cookie
+                                                                                    // will be deleted when the web
+                                                                                    // broswser is exited
+                null, false, true);
     }
 
-    private boolean doesUserExist(String username, String password){
-        try{
+    private boolean doesUserExist(String username, String password) {
+        try {
             Account account = accountDao.getAccountByUsername(username);
             return account.getPassword() == password;
-        } catch(EJBException  ex){
-            if (ex.getCausedByException() instanceof NoResultException){
+        } catch (EJBException ex) {
+            if (ex.getCausedByException() instanceof NoResultException) {
                 System.out.println("Account does not exist");
-            }
-            else {
+            } else {
                 ex.printStackTrace();
             }
             return false;
         }
     }
 
-    /*TODO: evtl. oauth2 george and elba
-        oauth2 explanation https://www.youtube.com/watch?v=996OiexHze0
-        george https://developers.erstegroup.com/docs/apis/bank.csas/bank.csas.v3%2Fnetbanking
-            scopes: transaction.history.read
-        elba R.I.P
-    */
+    /*
+     * TODO: evtl. oauth2 george and elba oauth2 explanation
+     * https://www.youtube.com/watch?v=996OiexHze0 george
+     * https://developers.erstegroup.com/docs/apis/bank.csas/bank.csas.v3%
+     * 2Fnetbanking scopes: transaction.history.read elba R.I.P
+     */
 
-    /* Paste into console to test authenticate
-        fetch("http://localhost:8080/iea/rs/auth/authenticate", {
-            method: "post",
-            credentials: "include"
-        })
-    */
+    /*
+     * Paste into console to test authenticate
+     * fetch("http://localhost:8080/iea/rs/auth/authenticate", { method: "post",
+     * credentials: "include" })
+     */
 
-    // muss über die console gemacht werden --> überprüft DIREKT am anfang, ob der token valide ist [request an /authenticate schicken]
+    // muss über die console gemacht werden --> überprüft DIREKT am anfang, ob der
+    // token valide ist [request an /authenticate schicken]
     @POST
     @Path("authenticate")
-    public Response authenticate(@CookieParam("auth-token") Cookie cookie){
-        if(cookie == null){ // log in has not yet happened
+    public Response authenticate(@CookieParam("auth-token") Cookie cookie) {
+        if (cookie == null) { // log in has not yet happened
             return Response.status(400).build();
         }
 
@@ -97,30 +87,20 @@ public class AccountAuthentificationEndPoint {
         String password = decodedTokenParts[1];
 
         // check for valid user
-        if(!doesUserExist(username, password)){
+        if (!doesUserExist(username, password)) {
             System.out.println("USERNAME/PASSWORD is not correct!");
             // delete cookie
-            return Response
-                .status(404)
-                .header("Set-Cookie", "auth-token=deleted;Path=/;max-age=0;HttpOnly")
-                .build();
+            return Response.status(404).header("Set-Cookie", "auth-token=deleted;Path=/;max-age=0;HttpOnly").build();
         }
-        System.out.println("TESTTESTTESTTESTTESTTEST");
         // return new cookie to extend the lifespan of the cookie
-        return Response
-            .ok()
-            .cookie(buildCookie(token))
-            .build();
+        return Response.ok().cookie(buildCookie(token)).build();
     }
 
     @POST
     @Path("logout")
-    public Response logout(){
+    public Response logout() {
         // delete cookie
-        return Response
-                .status(404)
-                .header("Set-Cookie", "auth-token=deleted;Path=/;max-age=0;HttpOnly")
-                .build(); 
+        return Response.status(404).header("Set-Cookie", "auth-token=deleted;Path=/;max-age=0;HttpOnly").build();
     }
 
     @POST
@@ -128,41 +108,40 @@ public class AccountAuthentificationEndPoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(JsonValue json) {
         JsonObject body = json.asJsonObject();
-        try{
+        try {
             String username = body.getString("username");
             String password = body.getString("password");
-            //String email = body.getString("email"); // TODO: erweitern in .html file
-            //TODO: weitere fields anpassen je nach Datenmodell (zB age, ...)
-            return Response 
-                .ok()
-                .entity("ID")
-                .build(); // access token wird nicht gebraucht, da dieser erst bei der authenfikation benötigt wird
-        } catch(Exception ex){
-            ex.printStackTrace();
-            System.err.println("[ERROR]: AccountAuthentificationEndPoint, Method: login");
+            String email = body.getString("email");
+            String fullName = body.getString("firstName") + " " + body.getString("lastName");
+
+            Account acc = new Account(username, password, fullName, email);
+
+            accountDao.persist(acc);
+
+            return Response.ok().build(); // access token wird nicht gebraucht, da dieser erst bei der
+                                          // authenfikation benötigt wird
+        } catch (Exception ex) {
+            System.err.println("[EXCEPTION]: AccountAuthentificationEndPoint, Method: register");
+            // exception wird geworfen wenn sich ein user registriert und die eingabeparameter schon in der datenbank sind
             return Response.status(500).build();
         }
-    }    
+    }
 
     @POST
-    @Path("login")    
+    @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(JsonValue json) {
         JsonObject body = json.asJsonObject();
-        try{
+        try {
             String username = body.getString("username");
             String password = body.getString("password");
-            String accessToken = Base64
-                .getEncoder()
-                .encodeToString((username + ":" + password).getBytes()); // basic auth procedure
+            String accessToken = Base64.getEncoder().encodeToString((username + ":" + password).getBytes()); // basic
+                                                                                                             // auth
+                                                                                                             // procedure
 
-            return Response
-                .ok()
-                .cookie(buildCookie(accessToken))
-                .build();
-        } catch(Exception ex){
-            ex.printStackTrace();
-            System.err.println("[ERROR]: AccountAuthentificationEndPoint, Method: login");
+            return Response.ok().cookie(buildCookie(accessToken)).build();
+        } catch (Exception ex) {
+            System.err.println("[EXCEPTION]: AccountAuthentificationEndPoint, Method: login");
             return Response.status(500).build();
         }
     }

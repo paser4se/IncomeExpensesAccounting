@@ -29,7 +29,7 @@ class RegisterView extends PageViewElement {
       <section>
         <div>Sign Up</div>
         <form
-          action="http://localhost:8080/iea/rs/auth/register"
+          action="http://localhost:8080/iea/api/auth/register"
           @submit="${event => this.handleSubmit(event)}"
         >
           <input type="text" name="username" value="winter_is_coming" />
