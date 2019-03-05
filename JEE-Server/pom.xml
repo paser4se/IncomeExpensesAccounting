@@ -33,11 +33,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>4.3.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20180813</version>
@@ -48,11 +43,6 @@
             <version>10.14.2.0</version>
             <scope>compile</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>com.airhacks</groupId>
-            <artifactId>jaxrs-cors</artifactId>
-            <version>0.0.2</version>
-        </dependency>-->
         <dependency> <!--following 3 dependencies are because of email validation-->
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
