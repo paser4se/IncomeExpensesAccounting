@@ -1,6 +1,7 @@
 import {LitElement, html} from "@polymer/lit-element";
 import 'https://code.jquery.com/jquery-3.3.1.min.js';
 import '@vaadin/vaadin-grid/vaadin-grid.js';
+import { ButtonSharedStyles } from '../components/button-shared-styles.js';
 
 class Category extends LitElement {
 
@@ -13,6 +14,7 @@ class Category extends LitElement {
     static get properties() {
         return {
             currentCategory: { type: Number },
+            currentPayment: { type: Number },
             categories: { type: String }
         };
     }
@@ -26,7 +28,7 @@ class Category extends LitElement {
                   margin: auto;
                   padding: 0;
                   border: 1px solid #888;
-                  width: 80%;
+                  width: 65%;
                   margin-top: 20px;
                   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
                   -webkit-animation-name: animatetop;
@@ -83,8 +85,16 @@ class Category extends LitElement {
                 .grid-item {
                   padding: 20px;
                   font-size: 30px;
+                  position: relative;
+                }
+                
+                #submitBtn {
+                    bottom: 12px;
+                    right: 1px;
+                    position: absolute;
                 }
             </style>
+            ${ButtonSharedStyles}
 
             <section>
                 <div class="modal-header">
@@ -95,13 +105,16 @@ class Category extends LitElement {
                   <div class="grid-container">
                       <div class="grid-item">
                         <vaadin-grid id="grid" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)" class="grid" theme="row-dividers" items="${this.categories}">
-                          <vaadin-grid-column path="text" header="Categories"></vaadin-grid-column>
+                          <vaadin-grid-column>
+                          <template class="header">Categories</template>
+                          <template>[[item.name]]</template>
+                          </vaadin-grid-column>
                         </vaadin-grid>
                       </div>
                       <div class="grid-item">
                         <p>Some text in the Modal Body</p>
-                        <p>Category ${this.currentCategory}</p>
-                        <button class="btn btn-primary" @click="${(evt) => this.loadContent(evt)}">Load</button>
+                        <p>Category: ${this.currentCategory}, Payment: ${this.currentPayment}</p>
+                        <button class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px;" id="submitBtn" @click="${(evt) => this.handleSubmit(evt)}">Change Category</button>
                       </div>
                   </div>
                 </div>
@@ -109,26 +122,25 @@ class Category extends LitElement {
         `;
     }
 
-    loadContent(evt) {
-        var tree = [
-            {
-                text: "Parent 1"
-            },
-            {
-                text: "Parent 2"
-            },
-            {
-                text: "==>  Parent 3"
-            },
-            {
-                text: "Parent 4"
-            },
-            {
-                text: "Parent 5"
-            }
-        ];
-        this.categories = JSON.stringify(tree);
+    handleSubmit(evt) {
+        let ids = this.currentPayment + ';' + this.shadowRoot.querySelector('#grid').selectedItems[0].id;
 
+        fetch('http://localhost:8080/iea/api/payments/changecategory', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: ids
+        }).then(
+            response => {
+                console.log(response);
+            }
+        ).catch(
+            error => console.log(error)
+        )
+    }
+
+    loadContent(evt) {
         var grid = this.shadowRoot.querySelector('#grid');
         grid.addEventListener('active-item-changed', function(event) {
             const item = event.detail.value;
@@ -136,21 +148,33 @@ class Category extends LitElement {
                 grid.selectedItems = [item];
             }
         });
-        //$(this.shadowRoot.querySelector('#grid')).treeview({data: tree, levels: 2});
-        //$('#tree').treeview('selectNode', [ 3, { silent: true } ]);
+
+        var catview = this;
+        fetch('http://localhost:8080/iea/api/preaccounting/category')
+        .then(async function(response) {
+            let tmp = await response.json();
+            var categories = JSON.stringify(tmp);
+            catview.categories = categories;
+        }).then(async function () {
+            catview.setSelectedCategory();
+        });
+    }
+
+    async setSelectedCategory() {
+        var grid = this.shadowRoot.querySelector('#grid');
+        console.log(await grid.items);
+        for (var i = 0; i < grid.items.length; i++) {
+            if(grid.items[i].id == this.currentCategory) {
+                grid.selectedItems = [];
+                grid.selectedItems = [grid.items[i]];
+                console.log(grid.selectedItems);
+                break;
+            }
+        }
     }
 
     close(evt) {
-
-
-        if (typeof jQuery == 'undefined') {
-
-            // jQuery IS NOT loaded, do stuff here.
-            console.log('disabled');
-        }
-        else{
-            console.log('enabled');
-        }
+        this.parentElement.offsetParent.updatePayments();
         this.style.display = "none";
     }
 }

@@ -195,12 +195,15 @@ class PaymentsView extends PageViewElement {
         btn.textContent = rowData.item.category.name;
         btn.style.marginLeft = "auto";
         btn.style.marginRight = "auto";
+        btn.style.width = '80px';
         btn.classList.add("btn");
         btn.addEventListener('click', function(event) {
           var item = event.target.offsetParent.parentNode._item;
           const payview = document.querySelector('iea-app').shadowRoot.children[4].querySelector('payments-view').shadowRoot;
-          payview.querySelector('category-view').currentCategory = item.id;
+          payview.querySelector('category-view').currentPayment = item.id;
+          payview.querySelector('category-view').currentCategory = item.category.id;
           payview.querySelector('category-view').style.display = "block";
+          payview.querySelector('category-view').loadContent();
         });
 
         root.appendChild(btn);
