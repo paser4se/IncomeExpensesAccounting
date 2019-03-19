@@ -68,7 +68,7 @@ export const DropZoneStyles = html`
     span {
       color: #0f3c4b !important;
     }
-<<<<<<< HEAD
+    
     button {
       font-weight: 700;
       color: white !important;
@@ -78,17 +78,6 @@ export const DropZoneStyles = html`
       margin: 40px auto 0;
       border-radius: 5px;
       border: none;
-=======
-    button
-    {
-        font-weight: 700;
-        color: white !important;
-        background-color: #288b9e !important;
-        display: block;
-        padding: 8px 16px;
-        margin: 40px auto 0;
-        border: none;
->>>>>>> 739c1a232cbc1d50fb1ef9cbad634734f85d661f
     }
     button:hover {
       background-color: #0f3c4b;

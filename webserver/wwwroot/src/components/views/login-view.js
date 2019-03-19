@@ -20,13 +20,17 @@ class LoginView extends PageViewElement {
     const url = event.target.getAttribute("action");
     const json = JSON.stringify(data);
     fetch(url, {
-      method: "post",
-      body: json,
+      method: 'POST',
       credentials: "include",
       headers: {
-        "content-type": "application/json"
-      }
-    });
+        "Content-Type": "text/plain"
+      },
+      body: json
+    }).then(
+        response => {
+          console.log(response);
+        }
+    );
   }
 
   processRegister(data) {
