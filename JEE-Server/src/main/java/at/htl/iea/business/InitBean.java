@@ -56,7 +56,11 @@ public class InitBean {
         tankAssignment.addKeyword("Avanti");
         tankAssignment.addKeyword("Shell");
 
+        Assignment wohnenAssignment = new Assignment(wohnen);
+        wohnenAssignment.addKeyword("TestW");
+
         em.persist(essenAssignment);
         em.persist(tankAssignment);
+        em.persist(wohnenAssignment);
     }
 }

@@ -10,7 +10,8 @@ import java.util.Set;
 @XmlRootElement
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Assignment.getAll", query = "select a from Assignment a")
+        @NamedQuery(name = "Assignment.getAll", query = "select a from Assignment a"),
+        @NamedQuery(name = "Assignment.getByCat", query = "select a from Assignment a where a.category.id = ?1")
 })
 public class Assignment {
 
@@ -36,6 +37,10 @@ public class Assignment {
     //region Getter and Setter
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Category getCategory() {

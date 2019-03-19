@@ -46,9 +46,9 @@ public class Category {
     }
 
     public String getName() {
-        if (this.parentCategory != null){
+        /*if (this.parentCategory != null){
             return "==> " + name;
-        }
+        }*/
         return name;
     }
 

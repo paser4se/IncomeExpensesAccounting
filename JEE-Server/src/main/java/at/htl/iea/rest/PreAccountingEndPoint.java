@@ -3,10 +3,16 @@ package at.htl.iea.rest;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,7 +36,7 @@ public class PreAccountingEndPoint {
             tmp.setId(category.getId());
             tmpCat.add(tmp);
             for (Category subcat : category.getSubcategories()) {
-                tmp = new Category(subcat.getName());
+                tmp = new Category("--> " + subcat.getName());
                 tmp.setId(subcat.getId());
                 tmpCat.add(tmp);
             }
@@ -39,10 +45,27 @@ public class PreAccountingEndPoint {
     }
 
     @GET
-    @Path("/assignment")
+    @Path("/assignment/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllAssignments() {
-        List<Assignment> assignments = em.createNamedQuery("Assignment.getAll", Assignment.class).getResultList();
-        return Response.ok(assignments, MediaType.APPLICATION_JSON).build();
+    public Response getAllAssignments(@PathParam("id") long id) {
+        Assignment assignment = null;
+        try{
+            TypedQuery query = em.createNamedQuery("Assignment.getByCat", Assignment.class).setParameter(1, id);
+            assignment = (Assignment)query.getSingleResult();
+        }
+        catch (NoResultException nre){
+
+        }
+
+        JsonArrayBuilder array = Json.createArrayBuilder();
+        if (assignment != null) {
+            for (String keyword : assignment.getKeywords()) {
+                JsonObjectBuilder obj = Json.createObjectBuilder();
+                obj.add("keyword", keyword);
+                array.add(obj.build());
+            }
+        }
+
+        return Response.ok(array.build(), MediaType.APPLICATION_JSON).build();
     }
 }
