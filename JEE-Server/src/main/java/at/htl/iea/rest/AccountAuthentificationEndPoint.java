@@ -1,27 +1,19 @@
 package at.htl.iea.rest;
 
-import at.htl.iea.business.Parser;
 import at.htl.iea.dao.AccountDao;
 import at.htl.iea.model.Account;
-import at.htl.iea.model.Payment;
-import org.jboss.resteasy.annotations.Body;
+import org.json.JSONObject;
 
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
 import java.util.Base64;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Cookie;
@@ -105,9 +97,9 @@ public class AccountAuthentificationEndPoint {
 
     @POST
     @Path("register")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response register(JsonValue json) {
-        JsonObject body = json.asJsonObject();
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response register(String json) {
+        JSONObject body = new JSONObject(json);
         try {
             String username = body.getString("username");
             String password = body.getString("password");
