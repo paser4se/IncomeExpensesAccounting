@@ -1,5 +1,5 @@
 {
-  "name": "pwa-starter-kit",
+  "name": "iea",
   "version": "0.9.0",
   "contributors": [
     "The Polymer Authors"
@@ -22,11 +22,17 @@
   "dependencies": {
     "@polymer/app-layout": "^3.0.0",
     "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-icons": "^3.0.1",
     "@polymer/lit-element": "^0.6.5",
     "@polymer/paper-dropdown-menu": "^3.0.1",
     "@polymer/paper-input": "^3.0.1",
     "@polymer/polymer": "^3.1.0",
+    "@vaadin/vaadin-button": "^2.1.3",
+    "@vaadin/vaadin-grid": "^5.2.8",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "mdbootstrap": "^4.7.1",
     "pwa-helpers": "^0.9.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
@@ -42,7 +48,7 @@
     "gulp-replace": "^1.0.0",
     "mocha": "^5.2.0",
     "pixelmatch": "^4.0.2",
-    "polymer-cli": "^1.9.3",
+    "polymer-cli": "^1.9.6",
     "polyserve": "^0.27.0",
     "prpl-server": "^1.3.0",
     "puppeteer": "^1.5.0",

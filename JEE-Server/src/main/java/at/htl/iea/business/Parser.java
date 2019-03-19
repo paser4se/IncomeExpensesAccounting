@@ -126,11 +126,15 @@ public class Parser {
 
         for (int i = 0; i < paymentList.size(); i++) {
             JsonObjectBuilder tmpPayment = Json.createObjectBuilder();
+            tmpPayment.add("id", paymentList.get(i).getId());
             tmpPayment.add("bookingDate", paymentList.get(i).getBookingDate().format(dt));
             tmpPayment.add("amount", doubleFormatter.format(paymentList.get(i).getAmount()));
             tmpPayment.add("currency", paymentList.get(i).getCurrency());
             tmpPayment.add("bookingText", paymentList.get(i).getBookingText());
-            tmpPayment.add("valueDate", paymentList.get(i).getValueDate().format(dt));
+            JsonObjectBuilder cat = Json.createObjectBuilder();
+            cat.add("id", paymentList.get(i).getCategory().getId());
+            cat.add("name", paymentList.get(i).getCategory().getName());
+            tmpPayment.add("category", cat.build());
 
             payments.add(tmpPayment);
         }

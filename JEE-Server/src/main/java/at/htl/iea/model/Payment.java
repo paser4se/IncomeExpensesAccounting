@@ -2,14 +2,13 @@ package at.htl.iea.model;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Payments.findAll", query = "select p from Payment p"),
+        @NamedQuery(name = "Payments.findAllUnevaluated", query = "select p from Payment p where p.evaluated = false")
 })
 public class Payment {
 
@@ -30,6 +29,10 @@ public class Payment {
     private String initialRecognitionReference = ""; // ersterfassungsreferenz (z.B.: 128379247QWEV2345FLHO9)
     private String note = "";
     private LocalDateTime valueDate = null; // valutadatum
+    private Boolean evaluated = false;  //Vorkontierung in arbeit..
+
+    @OneToOne
+    private Category category;
     // endregion
 
     // region Constructor
@@ -140,5 +143,22 @@ public class Payment {
     public void setValueDate(LocalDateTime valueDate) {
         this.valueDate = valueDate;
     }
+
+    public Boolean getEvaluated() {
+        return evaluated;
+    }
+
+    public void setEvaluated(Boolean evaluated) {
+        this.evaluated = evaluated;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     // endregion
 }

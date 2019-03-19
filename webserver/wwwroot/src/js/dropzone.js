@@ -29,7 +29,7 @@ class DropZone extends LitElement {
                     <input type="file" @change="${evt => this.handleChange(evt)}" id="file-select" name="csv[]" accept=".csv" multiple style="display: none;" />
                     <label for="file-select" id="choosefilelbl"><strong>Choose a file</strong><span> or drop it here...</span></label><br>
                     <label id="filename">0 file(s) selected</label>
-                    <button class="btn btn-default" @click="${evt => this.handleSubmit(evt)}" id="upload-button">Upload</button>
+                    <button class="btn btn-default" style="background-color: #288b9e !important" @click="${evt => this.handleSubmit(evt)}" id="upload-button">Upload</button>
                 </div>
             </form>
         `;
@@ -76,7 +76,7 @@ class DropZone extends LitElement {
         fileReader.onload = async function (fileLoadedEvent) {
             let textFromFileLoaded = fileLoadedEvent.target.result;
 
-            fetch('http://localhost:8080/iea/rs/files/uploadtext', {
+            fetch('http://localhost:8080/iea/api/files/uploadtext', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "text/plain"
@@ -128,4 +128,4 @@ class DropZone extends LitElement {
     }
 }
 
-customElements.define('drop-zone', DropZone);
+window.customElements.define('drop-zone', DropZone);

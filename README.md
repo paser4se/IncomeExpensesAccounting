@@ -3,6 +3,7 @@
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
+- [Projektstrukturplan](#scroll-projektstrukturplan)
 - [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
   - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
@@ -17,6 +18,9 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
+
+## :scroll: Projektstrukturplan
+![alt text](images/Projektstrukturplan_IEA.png)
 
 ## :chart_with_upwards_trend: Funktionsweise
 ![alt text](images/funktionsweise.png)

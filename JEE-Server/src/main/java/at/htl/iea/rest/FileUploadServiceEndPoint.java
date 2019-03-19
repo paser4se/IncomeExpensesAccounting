@@ -1,6 +1,7 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.business.Parser;
+import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
 
 import javax.persistence.EntityManager;
@@ -31,6 +32,7 @@ public class  FileUploadServiceEndPoint {
         try {
             List<Payment> paymentList = Parser.getInstance().persist(content);
             for (Payment p : paymentList) {
+                p.setCategory(em.createNamedQuery("Category.getByName", Category.class).setParameter(1, "Sonstiges").getSingleResult());
                 em.persist(p);
             }
             em.flush();

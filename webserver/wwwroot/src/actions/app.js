@@ -29,39 +29,41 @@ export const navigate = (path) => (dispatch) => {
 const loadPage = (page) => (dispatch) => {
   switch(page) {
     case 'Home':
-      import('../components/home-view.js').then((module) => {
+      import('../components/views/home-view.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view1 after home-view.js is loaded.
       });
       break;
     case 'Payments':
-      import('../components/payments-view.js').then((module) => {
+      import('../components/views/payments-view.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view2 after payments-view.js is loaded.
-        $('#paymentsTable').bootstrapTable('refresh');
+
+        //const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view');
+        //payview.updateItems();
       });
       break;
     case 'Overview':
-      import('../components/overview-view.js').then((module) => {
+      import('../components/views/overview-view.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view2 after payments-view.js is loaded.
       });
       break;
     case 'Evaluation':
-      import('../components/evaluation-view.js').then((module) => {
+      import('../components/views/evaluation-view.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view2 after payments-view.js is loaded.
       });
       break;
     case 'Login':
-      import('../components/login-view.js').then((module) => {
+      import('../components/views/login-view.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view2 after payments-view.js is loaded.
       });
       break;
     default:
       page = 'view404';
-      import('../components/my-view404.js');
+      import('../components/views/my-view404.js');
   }
 
   dispatch(updatePage(page));
