@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 @NamedQueries({
         @NamedQuery(name = "Category.getSortedCategories", query = "select c from Category c where c.parentCategory is null order by c.name asc"),
         @NamedQuery(name = "Category.getByName", query = "select c from Category c where c.name = ?1"),
-        @NamedQuery(name = "Category.getAll", query = "select c from Category c")
+        @NamedQuery(name = "Category.getAll", query = "select c from Category c"),
+        @NamedQuery(name = "Category.getByAssignmentKeyword", query = "select c from Category c join Assignment a on a.category.id=c.id where a.categoryKeyword = ?1")
 })
 public class Category {
 
