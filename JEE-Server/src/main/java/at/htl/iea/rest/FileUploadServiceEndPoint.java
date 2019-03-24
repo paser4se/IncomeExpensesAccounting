@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Set;
 
 @Path("files")
 public class  FileUploadServiceEndPoint {
@@ -35,18 +36,9 @@ public class  FileUploadServiceEndPoint {
             for (Payment p : paymentList) {
                 System.out.println("BookingText: " + p.getBookingText());
 
-                List<Assignment> assignments = em.createNamedQuery("Assignment.getAll", Assignment.class).getResultList();
-                List<Category> categories = em.createNamedQuery("Category.getAll", Category.class).getResultList();
+                String automaticallyAssignedCategory = getCategoryAssignedByBookingText(p.getBookingText());
 
-                for (Assignment a : assignments){
-                    System.out.println("Assignment-Category: " + a.getCategory().getName());
-                }
-
-                for (Category c : categories){
-                    System.out.println("Category: " + c.getName());
-                }
-
-                p.setCategory(em.createNamedQuery("Category.getByName", Category.class).setParameter(1, "Sonstiges").getSingleResult());
+                p.setCategory(em.createNamedQuery("Category.getByName", Category.class).setParameter(1, automaticallyAssignedCategory).getSingleResult());
                 em.persist(p);
             }
             em.flush();
@@ -58,5 +50,26 @@ public class  FileUploadServiceEndPoint {
             return Response.serverError().build();
         }
         return Response.ok("content recveived").build();
+    }
+
+    private String getCategoryAssignedByBookingText(String bookingText) {
+        String categoryText = "Sonstiges";
+        List<Category> categories = em.createNamedQuery("Category.getAll", Category.class).getResultList();
+
+        for (Category c : categories){
+            List<Assignment> assignmentsByCat = em.createNamedQuery("Assignment.getByCat", Assignment.class).setParameter(1, c.getId()).getResultList();
+            for (Assignment a : assignmentsByCat){
+                Set<String> keywords = a.getKeywords();
+                for (String s : keywords){
+                  if (bookingText.toLowerCase().contains(s.toLowerCase())){
+                      a.setCategoryKeyword(s);
+                      categoryText = em.createNamedQuery("Category.getByAssignmentKeyword", Category.class).setParameter(1, s).getSingleResult().getName();
+                  }
+                }
+            }
+        }
+
+        return categoryText;
+
     }
 }
