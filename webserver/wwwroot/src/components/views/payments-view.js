@@ -146,7 +146,7 @@ class PaymentsView extends PageViewElement {
       <div style="margin-top: 40px;">
           <div id="cssmenu">  
             <ul>
-              <li><a left-item><iron-icon icon="image:edit"></iron-icon>Write off</a></li>
+              <li><a left-item><iron-icon icon="image:edit"></iron-icon>Write-off</a></li>
               <li><a left-item><iron-icon icon="av:playlist-add-check"></iron-icon>Check Category</a></li>
               <li class="active"><a left-item><iron-icon icon="cloud-upload"></iron-icon>Upload CSV</a></li>
             </ul>
@@ -157,7 +157,7 @@ class PaymentsView extends PageViewElement {
               <drop-zone></drop-zone>
             </div>
             <div id="secondPage" style="display: none;">
-              <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 500px;" column-reordering-allowed multi-sort>
+              <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 600px;" column-reordering-allowed multi-sort>
                 <vaadin-grid-column width="8%" path="bookingDate"></vaadin-grid-column>
                 <vaadin-grid-column width="6%" path="amount"></vaadin-grid-column>
                 <vaadin-grid-column width="6%" path="currency"></vaadin-grid-column>
@@ -195,12 +195,16 @@ class PaymentsView extends PageViewElement {
         btn.textContent = rowData.item.category.name;
         btn.style.marginLeft = "auto";
         btn.style.marginRight = "auto";
+        btn.style.width = '110px';
         btn.classList.add("btn");
         btn.addEventListener('click', function(event) {
           var item = event.target.offsetParent.parentNode._item;
-          const payview = document.querySelector('iea-app').shadowRoot.children[4].querySelector('payments-view').shadowRoot;
-          payview.querySelector('category-view').currentCategory = item.id;
+          const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view').shadowRoot;
+          payview.querySelector('category-view').currentPayment = item.id;
+          payview.querySelector('category-view').currentCategory = item.category.id;
           payview.querySelector('category-view').style.display = "block";
+          payview.querySelector('category-view').loadContent();
+          payview.querySelector('category-view').loadKeywords();
         });
 
         root.appendChild(btn);
