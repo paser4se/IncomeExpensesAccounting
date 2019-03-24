@@ -22,6 +22,8 @@ public class Assignment {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> keywords = new HashSet<>();
 
+    private String categoryKeyword; // needed to determine which keyword belongs to which category
+
     @OneToOne
     private Category category;
 
@@ -39,6 +41,8 @@ public class Assignment {
         return id;
     }
 
+    public String getCategoryKeyword() { return categoryKeyword; }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -46,6 +50,8 @@ public class Assignment {
     public Category getCategory() {
         return category;
     }
+
+    public void setCategoryKeyword(String categoryKeyword){ this.categoryKeyword = categoryKeyword; }
 
     public void setCategory(Category category) {
         this.category = category;
