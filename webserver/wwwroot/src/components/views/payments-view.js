@@ -158,11 +158,11 @@ class PaymentsView extends PageViewElement {
             </div>
             <div id="secondPage" style="display: none;">
               <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 600px;" column-reordering-allowed multi-sort>
-                <vaadin-grid-column width="8%" path="bookingDate"></vaadin-grid-column>
-                <vaadin-grid-column width="6%" path="amount"></vaadin-grid-column>
-                <vaadin-grid-column width="6%" path="currency"></vaadin-grid-column>
-                <vaadin-grid-column width="68%" path="bookingText"></vaadin-grid-column>
-                <vaadin-grid-column width="12%" header="Category"></vaadin-grid-column>
+                <vaadin-grid-column width="8%" name="Bookingdate" path="bookingDate"></vaadin-grid-column>
+                <vaadin-grid-column width="6%" name="Amount" path="amount"></vaadin-grid-column>
+                <vaadin-grid-column width="6%" name="Currency" path="currency"></vaadin-grid-column>
+                <vaadin-grid-column width="68%" name="Bookingtext" path="bookingText"></vaadin-grid-column>
+                <vaadin-grid-column width="12%" name="Category" header="Category"></vaadin-grid-column>
               </vaadin-grid>
               <category-view></category-view>
             </div>
@@ -189,22 +189,29 @@ class PaymentsView extends PageViewElement {
       this.updatePayments();
 
       const columns = this.shadowRoot.querySelectorAll('vaadin-grid-column');
+      for (var i = 0; i < columns.length; i++) {
+        columns[i].headerRenderer = function(root, column) {
+          root.innerHTML = '<div style="font-weight: bold">' + column.getAttribute('name') + '</div>';
+        };
+      }
       columns[4].renderer = function(root, column, rowData) {
         root.innerHTML = '';
         const btn = window.document.createElement('button');
+        btn.id = rowData.index;
         btn.textContent = rowData.item.category.name;
         btn.style.marginLeft = "auto";
         btn.style.marginRight = "auto";
-        btn.style.width = '110px';
+        btn.style.width = '180px';
         btn.classList.add("btn");
         btn.addEventListener('click', function(event) {
-          var item = event.target.offsetParent.parentNode._item;
-          const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view').shadowRoot;
-          payview.querySelector('category-view').currentPayment = item.id;
-          payview.querySelector('category-view').currentCategory = item.category.id;
-          payview.querySelector('category-view').style.display = "block";
-          payview.querySelector('category-view').loadContent();
-          payview.querySelector('category-view').loadKeywords();
+          const payview = document.querySelector('iea-app').shadowRoot.children[3].querySelector('payments-view');
+          var item = JSON.parse(payview.payments)[parseInt(event.target.id)];
+          const catview = payview.shadowRoot.querySelector('category-view');
+          catview.currentPayment = item.id;
+          catview.style.display = "block";
+          catview.currentCategory = item.category.id;
+          catview.loadContent();
+          catview.loadKeywords();
         });
 
         root.appendChild(btn);

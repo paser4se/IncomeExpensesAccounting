@@ -1,6 +1,7 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.business.Parser;
+import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
 
@@ -38,5 +39,43 @@ public class PaymentServiceEndpoint {
         em.flush();
 
         return Response.ok("Category changed").build();
+    }
+
+    @POST
+    @Path("/addcategory")
+    @Transactional
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response addCategory(String categoryname) {
+        try {
+            Category category = new Category(categoryname);
+            em.persist(category);
+            Assignment assignment = new Assignment(category);
+            em.persist(assignment);
+            em.flush();
+        } catch (Exception ex) {
+            return Response.noContent().build();
+        }
+
+        return Response.ok("Added Keyword").build();
+    }
+
+    @POST
+    @Path("/addcategory/{id}")
+    @Transactional
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response addSubCategory(@PathParam("id") long id, String categoryname) {
+        try {
+            Category parentCategory = em.find(Category.class, id);
+            Category category = new Category(categoryname);
+            em.persist(category);
+            parentCategory.addSubcategory(category);
+            Assignment assignment = new Assignment(category);
+            em.persist(assignment);
+            em.flush();
+        } catch (Exception ex) {
+            return Response.noContent().build();
+        }
+
+        return Response.ok("Added Keyword").build();
     }
 }

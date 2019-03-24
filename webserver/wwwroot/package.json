@@ -29,6 +29,7 @@
     "@polymer/paper-input": "^3.0.1",
     "@polymer/polymer": "^3.1.0",
     "@vaadin/vaadin-button": "^2.1.4",
+    "@vaadin/vaadin-checkbox": "^2.2.7",
     "@vaadin/vaadin-grid": "^5.2.8",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "bootstrap": "^4.3.1",

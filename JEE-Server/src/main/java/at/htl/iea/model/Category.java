@@ -8,6 +8,7 @@ import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @XmlRootElement
@@ -25,6 +26,8 @@ public class Category {
     @OneToOne
     @JsonIgnore
     private Category parentCategory;
+
+    private Long parentCategoryId;
 
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Category> subcategories = new LinkedHashSet<>();
@@ -47,10 +50,18 @@ public class Category {
     }
 
     public String getName() {
-        /*if (this.parentCategory != null){
-            return "==> " + name;
-        }*/
         return name;
+    }
+
+    public Long getParentCategoryId() {
+        if (this.parentCategory != null) {
+            this.parentCategoryId = this.parentCategory.id;
+        }
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 
     public void setName(String name) {
@@ -65,8 +76,8 @@ public class Category {
         this.parentCategory = parentCategory;
     }
 
-    public Set<Category> getSubcategories() {
-        return subcategories;
+    public List<Category> getSubcategories() {
+        return this.subcategories.stream().sorted((o1, o2) -> o1.getName().compareTo(o2.getName())).collect(Collectors.toList());
     }
 
     public void addSubcategory(Category subcategory) {
@@ -74,5 +85,4 @@ public class Category {
         subcategories.add(subcategory);
     }
     // endregion
-
 }

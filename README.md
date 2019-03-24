@@ -10,6 +10,7 @@
 - [Konfiguration](#wrench-konfiguration)
   - [Inbetriebnahme des JEE-Servers](#computer-inbetriebnahme-des-jee-servers)
   - [Inbetriebnahme des Webservers](#computer-inbetriebnahme-des-webservers)
+  - [JEE- und Webserver dockern](#floppy_disk-jee--und-webserver-dockern)
 - [Technologien](#microscope-technologien)
 - [Das Team](#surfer-das-team)
 - [Lizenz](#closed_lock_with_key-lizenz)
@@ -71,7 +72,7 @@ cd wwwroot/
 npm i
 ```
 
-#### Webserver testen
+#### Webserver starten
 
 - Ins root-verzeichnis wechseln
 ```
@@ -82,29 +83,8 @@ cd wwwroot/
 npm start
 ```
 
-#### Nginx-server starten
-
-- Polymer build aufrufen
-```
-polymer build
-```
-- Docker starten
-
-```
-docker-compose up
-```
-
-#### Seite im Browser öffnen
-
-- Im Browser `localhost:80` eingeben
-
-#### Nginx-server stoppen
-
-- Docker herunterfahren 
-
-```
-docker-compose down
-```
+### :floppy_disk: JEE- und Webserver dockern
+Coming soon...
 
 ## :microscope: Technologien
 - Jakarta EE

@@ -1,10 +1,6 @@
 import { html } from '@polymer/lit-element';
 
 export const SharedStyles = html`
-<link rel="stylesheet" type="text/css" href="./libraries/SemanticUI/semantic.min.css">
-<script src="./libraries/SemanticUI/semantic.min.js"></script>
-
-
 <style>
   :host {
     display: block;
