@@ -1,6 +1,7 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.business.Parser;
+import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
 
@@ -32,6 +33,19 @@ public class  FileUploadServiceEndPoint {
         try {
             List<Payment> paymentList = Parser.getInstance().persist(content);
             for (Payment p : paymentList) {
+                System.out.println("BookingText: " + p.getBookingText());
+
+                List<Assignment> assignments = em.createNamedQuery("Assignment.getAll", Assignment.class).getResultList();
+                List<Category> categories = em.createNamedQuery("Category.getAll", Category.class).getResultList();
+
+                for (Assignment a : assignments){
+                    System.out.println("Assignment-Category: " + a.getCategory().getName());
+                }
+
+                for (Category c : categories){
+                    System.out.println("Category: " + c.getName());
+                }
+
                 p.setCategory(em.createNamedQuery("Category.getByName", Category.class).setParameter(1, "Sonstiges").getSingleResult());
                 em.persist(p);
             }
