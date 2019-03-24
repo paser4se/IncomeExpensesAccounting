@@ -1,5 +1,6 @@
 package at.htl.iea.business;
 
+import at.htl.iea.model.OnlineBankingSystem;
 import at.htl.iea.model.Payment;
 
 import javax.json.Json;
@@ -17,6 +18,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,63 +41,95 @@ public class Parser {
         List<String> header = Arrays.asList(lines[0].split(";")).stream()
                 .map(p -> p.replaceAll("\"", "").replaceAll("\r", ""))
                 .collect(Collectors.toList());
+        int lineStartIndex = 1;
+        OnlineBankingSystem bankingSystem = OnlineBankingSystem.GEORGE;
         if (!containsAllRequiredFields(header)){
-            throw new NoSuchFieldException();
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            try {
+                dateFormat.parse(header.get(0));
+                header = Arrays.asList("Buchungsdatum", "Buchungstext", "Valutadatum", "Betrag", "Währung", "", "");
+                lineStartIndex = 0;
+                bankingSystem = OnlineBankingSystem.ELBA;
+            } catch (ParseException ex) {
+                throw new NoSuchFieldException();
+            }
         }
 
-        for(int i = 1; i < lines.length; i++){
+        for(int i = lineStartIndex; i < lines.length; i++){
             String [] lineElements = lines[i].split(";");
 
-            payments.add(getPayment(header, lineElements));
+            payments.add(getPayment(header, lineElements, bankingSystem));
         }
 
         return payments;
     }
 
-    private static Payment getPayment(@NotNull List<String> header, @NotNull String[] lineElements) throws ParseException {
+    private static Payment getPayment(@NotNull List<String> header, @NotNull String[] lineElements, @NotNull OnlineBankingSystem bankingSystem) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Payment payment = new Payment();
 
         for (int i = 0; i < lineElements.length; i++) {
-            switch (header.get(i)) {
-                case "Buchungsdatum":
-                    payment.setBookingDate(dateFormat.parse(lineElements[i].replaceAll("\"", "")).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-                    break;
-                case "Partnername":
-                    payment.setPartnerName(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Partner IBAN":
-                    payment.setPartnerIban(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Partner BIC":
-                    payment.setPartnerBic(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Partner Kontonummer":
-                    payment.setPartnerAccountNumber(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Partner Bank-Code (BLZ)":
-                    payment.setPartnerBankCode(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Betrag":
-                    payment.setAmount(Double.parseDouble(replaceLast(lineElements[i].replaceAll("\"", "").replaceAll("\\.", ""), ",", ".")));
-                    break;
-                case "Währung":
-                    payment.setCurrency(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Buchungstext":
-                    payment.setBookingText(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Ersterfassungsreferenz":
-                    payment.setInitialRecognitionReference(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Notiz":
-                    payment.setNote(lineElements[i].replaceAll("\"", ""));
-                    break;
-                case "Valutadatum":
-                    payment.setValueDate(dateFormat.parse(lineElements[i].replaceAll("\"", "")).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-                    break;
-                default:
-                    break;
+            if (bankingSystem.equals(OnlineBankingSystem.GEORGE)) {
+                switch (header.get(i)) {
+                    case "Buchungsdatum":
+                        payment.setBookingDate(dateFormat.parse(lineElements[i].replaceAll("\"", "")).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        break;
+                    case "Partnername":
+                        payment.setPartnerName(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Partner IBAN":
+                        payment.setPartnerIban(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Partner BIC":
+                        payment.setPartnerBic(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Partner Kontonummer":
+                        payment.setPartnerAccountNumber(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Partner Bank-Code (BLZ)":
+                        payment.setPartnerBankCode(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Betrag":
+                        payment.setAmount(Double.parseDouble(replaceLast(lineElements[i].replaceAll("\"", "").replaceAll("\\.", ""), ",", ".")));
+                        break;
+                    case "Währung":
+                        payment.setCurrency(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Buchungstext":
+                        payment.setBookingText(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Ersterfassungsreferenz":
+                        payment.setInitialRecognitionReference(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Notiz":
+                        payment.setNote(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Valutadatum":
+                        payment.setValueDate(dateFormat.parse(lineElements[i].replaceAll("\"", "")).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        break;
+                    default:
+                        break;
+                }
+            } else if (bankingSystem.equals(OnlineBankingSystem.ELBA)) {
+                switch (header.get(i)) {
+                    case "Buchungsdatum":
+                        payment.setBookingDate(dateFormat.parse(lineElements[i].replaceAll("\"", "")).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        break;
+                    case "Betrag":
+                        payment.setAmount(Double.parseDouble(replaceLast(lineElements[i].replaceAll("\"", "").replaceAll("\\.", ""), ",", ".")));
+                        break;
+                    case "Währung":
+                        payment.setCurrency(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Buchungstext":
+                        payment.setBookingText(lineElements[i].replaceAll("\"", ""));
+                        break;
+                    case "Valutadatum":
+                        payment.setValueDate(dateFormat.parse(lineElements[i].replaceAll("\"", "")).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
