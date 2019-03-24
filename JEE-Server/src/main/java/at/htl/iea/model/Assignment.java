@@ -58,5 +58,9 @@ public class Assignment {
     public void addKeyword(String keyword) {
         keywords.add(keyword);
     }
+
+    public void setKeywords(Set<String> keywords) {
+        this.keywords = keywords;
+    }
     //endregion
 }

@@ -59,8 +59,19 @@ public class InitBean {
         Assignment wohnenAssignment = new Assignment(wohnen);
         wohnenAssignment.addKeyword("TestW");
 
+        Assignment assignment1 = new Assignment(strom);
+        Assignment assignment2 = new Assignment(bank);
+        Assignment assignment3 = new Assignment(auto);
+        Assignment assignment4 = new Assignment(versicherung);
+        Assignment assignment5 = new Assignment(sonstiges);
+
         em.persist(essenAssignment);
         em.persist(tankAssignment);
         em.persist(wohnenAssignment);
+        em.persist(assignment1);
+        em.persist(assignment2);
+        em.persist(assignment3);
+        em.persist(assignment4);
+        em.persist(assignment5);
     }
 }
