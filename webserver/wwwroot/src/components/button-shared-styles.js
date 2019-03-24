@@ -63,7 +63,7 @@ fieldset[disabled] .btn {
 .btn-primary {
   color: #fff;
   background-color: #428bca;
-  border-color: #357ebd;
+  border-color: #18535e;
 }
 .btn-primary:hover,
 .btn-primary:focus,

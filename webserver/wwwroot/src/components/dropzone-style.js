@@ -42,7 +42,8 @@ export const DropZoneStyles = html`
       margin-top: 20px;
       padding: 10px;
       width: 50%;
-      height: 230px;
+      display: grid;
+      height: 305px;
       text-align: center;
       position: relative;
     }
@@ -51,6 +52,10 @@ export const DropZoneStyles = html`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    .drop-content {
+      margin-top: auto;
+      margin-bottom: auto;
     }
     .drop-zone.entered {
       background-color: rgb(231, 241, 243);

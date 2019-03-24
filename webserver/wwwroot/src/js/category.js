@@ -1,10 +1,13 @@
 import {LitElement, html} from "@polymer/lit-element";
 import 'https://code.jquery.com/jquery-3.3.1.min.js';
 import '@vaadin/vaadin-grid/vaadin-grid.js';
-import { ButtonSharedStyles } from '../components/button-shared-styles.js';
+import { DropZoneStyles } from '../components/dropzone-style.js';
 
 import '@vaadin/vaadin-button/vaadin-button.js';
 import '@polymer/iron-icon/iron-icon.js';
+import '@polymer/paper-input/paper-input.js';
+import 'mdbootstrap';
+import '@vaadin/vaadin-checkbox/vaadin-checkbox.js';
 
 class Category extends LitElement {
 
@@ -32,7 +35,7 @@ class Category extends LitElement {
                   margin: auto;
                   padding: 0;
                   border: 1px solid #888;
-                  width: 65%;
+                  width: 30%;
                   margin-top: 20px;
                   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
                   -webkit-animation-name: animatetop;
@@ -54,7 +57,8 @@ class Category extends LitElement {
                 
                 /* The Close Button */
                 .close {
-                  color: white;
+                  color: white !important;
+                  opacity: 1 !important;
                   float: right;
                   font-size: 28px;
                   font-weight: bold;
@@ -71,68 +75,140 @@ class Category extends LitElement {
                   padding: 2px 16px;
                   background-color: #288b9e;
                   color: white;
+                  border-radius: 0px !important;
                 }
                 
-                .modal-body {padding: 2px 16px;}
+                /*.modal-body {padding: 2px 16px;}*/
                 
                 .grid {
                     width: 240px;
+                    margin-left: auto;
+                    margin-right: auto;
                 }
                 
                 .grid-container {
                   display: grid;
-                  grid-gap: 50px;
-                  grid-template-columns: 280px auto;
-                  padding: 10px;
+                  grid-gap: 15px;
+                  grid-template-columns: auto auto;
+                  grid-template-rows: auto 38px 46px;
+                  grid-template-areas:
+                  "grida gridb"
+                  "inputa inputb"
+                  "subcat inputb"
+                  "buttona buttonb"
                 }
                 
-                .grid-item {
-                  padding: 20px;
-                  font-size: 30px;
-                  position: relative;
-                }
-                
-                #submitBtn {
-                    bottom: 12px;
-                    right: 20px;
-                    position: absolute;
+                .submitBtn {
+                    width: 86%;
+                    position: absolute !important;
+                    display: inline;
+                    margin-left: auto;
+                    margin-right: auto;
                 }
                 #keywords {
-                    height: 350px;
                     float: right;
                     width: 230px;
                 }
+                paper-input-container.iea {
+                    --paper-input-container-color: red;
+                    --paper-input-container-focus-color: blue;
+                    --paper-input-container-invalid-color: green;
+                    --paper-input-container-input-color: black;
+                }
             </style>
-            ${ButtonSharedStyles}
+            ${DropZoneStyles}
 
             <section>
                 <div class="modal-header">
-                  <span @click="${(evt) => this.close(evt)}" class="close">&times;</span>
-                  <h2>Change Category</h2>
+                    <h2>Change Category</h2>
+                    <span @click="${(evt) => this.close(evt)}" class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                  <div class="grid-container">
-                      <div class="grid-item">
-                        <vaadin-grid id="grid" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)" class="grid" theme="row-dividers" items="${this.categories}">
-                          <vaadin-grid-column name="categories" path="name"></vaadin-grid-column>
+                    <div class="grid-container">
+                        <vaadin-grid id="grid" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19); grid-area: grida;" class="grid" theme="row-dividers" items="${this.categories}">
+                            <vaadin-grid-column name="categories" path="name"></vaadin-grid-column>
                         </vaadin-grid>
-                      </div>
-                      <div class="grid-item">
-                        <div>
-                            <vaadin-grid id="keywords" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)" theme="row-dividers" items="${this.keywords}">
-                                <vaadin-grid-column name="keywords" path="keyword"></vaadin-grid-column>
-                                <vaadin-grid-column width="7em"></vaadin-grid-column>
-                            </vaadin-grid>
+                        <input id="categoryInput" class="form-control" style="grid-area: inputa;">
+                        <vaadin-checkbox style="margin-left: auto; margin-right: auto;">Add as Subcategory</vaadin-checkbox>
+                        <div class="btn-group submitBtn" style="position: relative !important; grid-area: buttona;">
+                            <button type="button" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px; margin-left: auto;" @click="${(evt) => this.addCategory(evt)}">Add</button>
+                            <button type="button" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px; margin-right: auto;" @click="${(evt) => this.changeCategory(evt)}">Save</button>
                         </div>
-                        <button class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px;" id="submitBtn" @click="${(evt) => this.handleSubmit(evt)}">Change Category</button>
-                      </div>
+                        
+                        <vaadin-grid id="keywords" class="grid" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19); grid-area: gridb;" theme="row-dividers" items="${this.keywords}">
+                            <vaadin-grid-column name="keywords" path="keyword"></vaadin-grid-column>
+                            <vaadin-grid-column width="7em"></vaadin-grid-column>
+                        </vaadin-grid>
+                        <input id="keywordInput" class="form-control" style="grid-area: inputb; margin-top: auto; margin-bottom: auto;">
+                        <div class="btn-group submitBtn" style="position: relative !important; grid-area: buttonb;">
+                            <button type="button" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px; margin-left: auto;" @click="${(evt) => this.addKeyword(evt)}">Add</button>
+                            <button type="button" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px; margin-right: auto;" @click="${(evt) => this.changeKeywords(evt)}">Save</button>
+                        </div>
                   </div>
                 </div>
             </section>
         `;
     }
 
-    handleSubmit(evt) {
+    addCategory(evt) {
+        const categoryname = this.shadowRoot.querySelector('#categoryInput').value;
+        var grid = this.shadowRoot.querySelector('#grid');
+        var parentid = null;
+        if (this.shadowRoot.querySelector('vaadin-checkbox').checked) {
+            if (! grid.selectedItems[0].name.startsWith('--> ')) {
+                parentid = grid.selectedItems[0].id;
+            } else {
+                parentid = grid.selectedItems[0].parentCategoryId;
+            }
+        }
+        const catview = this;
+        if (parentid) {
+            fetch('http://localhost:8080/iea/api/payments/addcategory/' + parentid, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: categoryname
+            }).then(response => {
+                console.log(response);
+                catview.shadowRoot.querySelector('vaadin-checkbox').checked = false;
+                catview.shadowRoot.querySelector('#categoryInput').value = "";
+                catview.loadContent("t");
+            });
+        } else {
+            fetch('http://localhost:8080/iea/api/payments/addcategory', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: categoryname
+            }).then(response => {
+                console.log(response);
+                catview.shadowRoot.querySelector('vaadin-checkbox').checked = false;
+                catview.shadowRoot.querySelector('#categoryInput').value = "";
+                catview.loadContent("t");
+            });
+        }
+    }
+
+    addKeyword(evt) {
+        const keyword = this.shadowRoot.querySelector('#keywordInput').value;
+        const catview = this;
+        const categoryid = this.shadowRoot.querySelector('#grid').selectedItems[0].id;
+        fetch('http://localhost:8080/iea/api/preaccounting/assignment/addkeyword/' + categoryid, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: keyword
+        }).then(response => {
+            console.log(response);
+            catview.shadowRoot.querySelector('#keywordInput').value = "";
+            catview.loadKeywords();
+        });
+    }
+
+    changeCategory(evt) {
         let ids = this.currentPayment + ';' + this.shadowRoot.querySelector('#grid').selectedItems[0].id;
 
         fetch('http://localhost:8080/iea/api/payments/changecategory', {
@@ -147,7 +223,20 @@ class Category extends LitElement {
             }
         ).catch(
             error => console.log(error)
-        )
+        );
+    }
+
+    changeKeywords(evt) {
+        ///' + this.currentCategory
+        fetch('http://localhost:8080/iea/api/preaccounting/assignment/' + this.currentCategory, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: this.keywords
+        }).then(response => {
+            console.log(response);
+        });
     }
 
     loadContent(evt) {

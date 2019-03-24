@@ -2,7 +2,6 @@ import { html } from "@polymer/lit-element";
 import { PageViewElement } from "../page-view-element.js";
 
 import "mdbootstrap";
-import { LoginStyle } from "../login-style";
 
 class LoginView extends PageViewElement {
   handleSubmit(event, cb) {
