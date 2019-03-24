@@ -2,10 +2,10 @@
 
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
-- [Anwendungsfalldiagramm](use-case-diagram)
+- [Anwendungsfalldiagramm](#chart_with_upwards_trend-anwendungsfalldiagramm)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Projektstrukturplan](#scroll-projektstrukturplan)
-- [Funktionsweise](#chart_with_upwards_trend-funktionsweise)
+- [Funktionsweise](#currency_exchange-funktionsweise)
   - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
   - [Inbetriebnahme des JEE-Servers](#computer-inbetriebnahme-des-jee-servers)
@@ -17,7 +17,7 @@
 ## :money_with_wings: Was ist IEA?
 IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
-## Anwendungsfalldiagramm
+## :chart_with_upwards_trend: Anwendungsfalldiagramm
 ![alt text](images/IEA_use_case_diagram.png)
 
 ## :statue_of_liberty: Systemarchitektur
@@ -26,7 +26,7 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 ## :scroll: Projektstrukturplan
 ![alt text](images/Projektstrukturplan_IEA.png)
 
-## :chart_with_upwards_trend: Funktionsweise
+## :currency_exchange: Funktionsweise
 ![alt text](images/funktionsweise.png)
 
 ### :newspaper: Erklärung
