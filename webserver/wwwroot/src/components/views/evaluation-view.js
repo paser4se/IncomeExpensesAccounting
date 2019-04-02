@@ -5,15 +5,15 @@ import { SharedStyles } from "../shared-styles";
 
 import Chart from "chart.js";
 
+import { PolymerElement, html } from "@polymer/polymer";
+import "@google-web-components/google-chart/google-chart.js";
+
 class EvaluationView extends PageViewElement {
   render() {
     return html`
       ${SharedStyles}
 
-      <section>
-        <div>Evaluation</div>
-        <canvas id="pie-chart" width="800" height="450"></canvas>
-      </section>
+      <google-chart data='[["Month", "Days"], ["Jan", 31]]'></google-chart>
     `;
   }
   connectedCallback() {
