@@ -41,28 +41,28 @@ class PaymentsView extends PageViewElement {
     this.position = 1;
     this.colors = [
         "#61BC6D",
+        "#F57835",
         "#1BBC9B",
         "#54ACD2",
+        "#75706C",
+        "#EC6B58",
         "#2B82C9",
         "#9265B8",
+        "#28314E",
         "#475677",
         "#41A85F",
         "#00A885",
         "#3D8EB9",
         "#2969B0",
         "#553983",
-        "#28314E",
         "#F7DA64",
         "#FAA026",
-        "#EC6B58",
         "#E14A39",
         "#A38F84",
         "#EFEFEF",
         "#FBC51D",
-        "#F57835",
         "#D14840",
         "#B8312E",
-        "#75706C",
         "#D1D5D8"
     ];
     //this.setPayments("[]");
