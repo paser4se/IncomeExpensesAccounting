@@ -77,7 +77,7 @@ export const DropZoneStyles = html`
     button {
       font-weight: 700;
       color: white !important;
-      background-color: #288b9e !important;
+      background-color: #288b9e;
       display: block;
       padding: 8px 16px;
       margin: 40px auto 0;

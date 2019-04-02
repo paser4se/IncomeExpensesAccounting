@@ -39,6 +39,32 @@ class PaymentsView extends PageViewElement {
   constructor() {
     super();
     this.position = 1;
+    this.colors = [
+        "#61BC6D",
+        "#F57835",
+        "#1BBC9B",
+        "#54ACD2",
+        "#75706C",
+        "#EC6B58",
+        "#2B82C9",
+        "#9265B8",
+        "#28314E",
+        "#475677",
+        "#41A85F",
+        "#00A885",
+        "#3D8EB9",
+        "#2969B0",
+        "#553983",
+        "#F7DA64",
+        "#FAA026",
+        "#E14A39",
+        "#A38F84",
+        "#EFEFEF",
+        "#FBC51D",
+        "#D14840",
+        "#B8312E",
+        "#D1D5D8"
+    ];
     //this.setPayments("[]");
     //this.updatePayments();
   }
@@ -194,11 +220,14 @@ class PaymentsView extends PageViewElement {
           root.innerHTML = '<div style="font-weight: bold">' + column.getAttribute('name') + '</div>';
         };
       }
+      const payview = this;
       columns[4].renderer = function(root, column, rowData) {
         root.innerHTML = '';
         const btn = window.document.createElement('button');
         btn.id = rowData.index;
         btn.textContent = rowData.item.category.name;
+        //console.log(payview.colors[rowData.item.category.id - 1]);
+        btn.style.backgroundColor = payview.colors[rowData.item.category.id - 1];
         btn.style.marginLeft = "auto";
         btn.style.marginRight = "auto";
         btn.style.width = '180px';

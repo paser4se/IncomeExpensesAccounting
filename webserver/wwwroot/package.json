@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@cwmr/paper-chip": "^3.0.0",
+    "@google-web-components/google-chart": "^3.0.4",
     "@polymer/app-layout": "^3.0.0",
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-icons": "^3.0.1",

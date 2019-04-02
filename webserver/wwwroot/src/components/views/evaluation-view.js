@@ -3,47 +3,36 @@ import { PageViewElement } from "../page-view-element.js";
 
 import { SharedStyles } from "../shared-styles";
 
-import Chart from "chart.js";
+import '@google-web-components/google-chart/google-chart.js';
 
 import { PolymerElement, html } from "@polymer/polymer";
 import "@google-web-components/google-chart/google-chart.js";
 
 class EvaluationView extends PageViewElement {
+
   render() {
     return html`
+      <style>
+      
+      </style>
       ${SharedStyles}
 
+<<<<<<< HEAD
       <google-chart data='[["Month", "Days"], ["Jan", 31]]'></google-chart>
+=======
+      <section>
+        <div>Evaluation</div>
+        <google-chart
+          type='pie'
+          options='{"width": "400", "height": "400", "title": "Test Chart", "chartArea": {"width": "300", "height": "300"}, "legend": "none"}'
+          cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+          rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
+        </google-chart>
+      </section>
+>>>>>>> 17da7fe25e74f4dfc8a85a4e2649d019ae3a7d82
     `;
   }
-  connectedCallback() {
-    console.log(Chart);
-    new Chart(this.shadowRoot.getElementById("pie-chart"), {
-      type: "pie",
-      data: {
-        labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-        datasets: [
-          {
-            label: "Population (millions)",
-            backgroundColor: [
-              "#3e95cd",
-              "#8e5ea2",
-              "#3cba9f",
-              "#e8c3b9",
-              "#c45850"
-            ],
-            data: [2478, 5267, 734, 784, 433]
-          }
-        ]
-      },
-      options: {
-        title: {
-          display: true,
-          text: "Predicted world population (millions) in 2050"
-        }
-      }
-    });
-  }
+
 }
 
 window.customElements.define("evaluation-view", EvaluationView);
