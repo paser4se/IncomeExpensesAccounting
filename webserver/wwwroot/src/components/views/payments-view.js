@@ -169,7 +169,7 @@ class PaymentsView extends PageViewElement {
       </style>
       ${SharedStyles}
       
-      <div style="margin-top: 40px;">
+      <div style="margin-top: 40px;position: relative;">
           <div id="cssmenu">  
             <ul>
               <li><a left-item><iron-icon icon="image:edit"></iron-icon>Write-off</a></li>
@@ -178,12 +178,12 @@ class PaymentsView extends PageViewElement {
             </ul>
           </div>
           
-          <div id="pages">
+          <div id="pages" style="min-height: 500px; max-height: 500px;">
             <div id="firstPage">
               <drop-zone></drop-zone>
             </div>
             <div id="secondPage" style="display: none;">
-              <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 600px;" column-reordering-allowed multi-sort>
+              <vaadin-grid theme="row-dividers" items="${this.payments}" style="min-height: 500px;" column-reordering-allowed multi-sort>
                 <vaadin-grid-column width="8%" name="Bookingdate" path="bookingDate"></vaadin-grid-column>
                 <vaadin-grid-column width="6%" name="Amount" path="amount"></vaadin-grid-column>
                 <vaadin-grid-column width="6%" name="Currency" path="currency"></vaadin-grid-column>
@@ -199,7 +199,7 @@ class PaymentsView extends PageViewElement {
             </div>
           </div>
           
-          <div style="display: block; width: 50%; margin: auto; margin-top: 10px; position: absolute; bottom: 1px; left: 0; right: 0;">
+          <div style="display: block; width: 50%; margin: auto; margin-top: 10px; position: absolute; left: 0; right: 0;">
             <button id="btnback" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px;" disabled @click="${(evt) => this.handleBack(evt)}">Back</button>
             <button id="btnnext" class="btn btn-primary" style="background-color: #288b9e !important; min-width: 100px;" @click="${(evt) => this.handleNext(evt)}">Next</button>
           </div>
