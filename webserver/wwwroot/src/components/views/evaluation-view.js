@@ -8,7 +8,6 @@ import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
 
 class EvaluationView extends PageViewElement {
-
   render() {
     return html`
       <style>
@@ -142,6 +141,7 @@ class EvaluationView extends PageViewElement {
       content.style.maxHeight = content.scrollHeight + "px";
     }
   }
+
 }
 
 window.customElements.define("evaluation-view", EvaluationView);
