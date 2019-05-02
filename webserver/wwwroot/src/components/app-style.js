@@ -130,7 +130,7 @@ export const AppStyle = html`
   .page[active] {
     display: block;
     position: relative;
-    height: calc(100vh - 260px);
+    /*height: calc(100vh - 260px);*/
   }
 
   footer {

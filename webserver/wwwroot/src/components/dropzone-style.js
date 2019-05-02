@@ -39,7 +39,6 @@ export const DropZoneStyles = html`
       outline-offset: -6px;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 20px;
       padding: 10px;
       width: 50%;
       display: grid;
