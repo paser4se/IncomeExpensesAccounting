@@ -5,6 +5,8 @@ import { SharedStyles } from "../shared-styles";
 
 import "@google-web-components/google-chart/google-chart.js";
 
+const rowValues = [["Gehalt", 31], ["Auto", 28], ["Wohnen", 31]]; // momentan noch dummy data
+
 class EvaluationView extends PageViewElement {
   render() {
     return html`
@@ -14,9 +16,9 @@ class EvaluationView extends PageViewElement {
       <section>
         <google-chart
           type="pie"
-          options='{"width": "400", "height": "400", "title": "Test Chart", "chartArea": {"width": "300", "height": "300"}, "legend": "none"}'
-          cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
-          rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'
+          options='{"width": "400", "height": "400", "title": "Einnahmen & Ausgaben", "chartArea": {"width": "300", "height": "300"}, "legend": "none"}'
+          cols='[{"label":"Category", "type":"string"}, {"label":"Amount", "type":"number"}]'
+          rows=${JSON.stringify(rowValues)}
         >
         </google-chart>
       </section>
