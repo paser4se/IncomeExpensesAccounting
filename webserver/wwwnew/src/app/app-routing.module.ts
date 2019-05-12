@@ -9,6 +9,10 @@ import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { PaymentsComponent } from './pages/payments/payments.component';
 import { EvaluationComponent } from './pages/evaluation/evaluation.component';
 import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
+import { MatStepperModule, MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+
 
 const routes: Routes = [
   {
@@ -53,7 +57,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), DxDataGridModule, DxFormModule],
+  imports: [RouterModule.forRoot(routes), DxDataGridModule, DxFormModule, MatStepperModule, BrowserAnimationsModule, MatIconModule, MatButtonModule],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [HomeComponent, ProfileComponent, DisplayDataComponent, PaymentsComponent, EvaluationComponent, RegisterFormComponent]

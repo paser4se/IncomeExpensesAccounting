@@ -294,7 +294,7 @@
 }
 .dx-swatch-additional .dx-pivotgrid-fields-container.dx-drag .dx-area-field.dx-area-box {
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 87, 34, 0.5);
+  border: 1px solid rgba(40, 139, 158, 0.5);
 }
 .dx-swatch-additional .dx-pivotgrid-fields-container .dx-area-field.dx-area-box {
   background-color: #363640;
@@ -1064,10 +1064,10 @@
   color: #FFF;
 }
 .dx-swatch-additional .dx-filterbuilder .dx-filterbuilder-group .dx-filterbuilder-text.dx-filterbuilder-item-field {
-  background-color: rgba(255, 87, 34, 0.3);
+  background-color: rgba(40, 139, 158, 0.3);
 }
 .dx-swatch-additional .dx-filterbuilder .dx-filterbuilder-group .dx-filterbuilder-text.dx-filterbuilder-item-field:hover {
-  background-color: rgba(255, 87, 34, 0.5);
+  background-color: rgba(40, 139, 158, 0.5);
 }
 .dx-swatch-additional .dx-filterbuilder .dx-filterbuilder-group .dx-filterbuilder-text.dx-filterbuilder-item-field:focus,
 .dx-swatch-additional .dx-filterbuilder .dx-filterbuilder-group .dx-filterbuilder-text.dx-filterbuilder-item-field.dx-state-active {
@@ -2568,15 +2568,15 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .dx-swatch-additional .dx-button.dx-button-default.dx-state-hover {
-  background-color: #206F7E;
+  background-color: #206e7d;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
 }
 .dx-swatch-additional .dx-button.dx-button-default.dx-state-focused {
-  background-color: #1c616e;
+  background-color: #1c606d;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.48);
 }
 .dx-swatch-additional .dx-button.dx-button-default.dx-state-active {
-  background-color: #18535E;
+  background-color: #0f353c;
   box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.48);
 }
 .dx-swatch-additional .dx-button.dx-button-default.dx-state-disabled {
@@ -2764,15 +2764,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-disabled {
@@ -2786,7 +2786,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-button-mode-text.dx-button-default .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-button-mode-text.dx-button-danger {
   background-color: transparent;
@@ -2898,15 +2898,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-disabled {
@@ -2920,7 +2920,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-danger {
   background-color: transparent;
@@ -3045,7 +3045,7 @@
   background-color: #71a436;
 }
 .dx-swatch-additional .dx-buttongroup-item.dx-button.dx-item-selected.dx-button-default {
-  background-color: #ee3900;
+  background-color: #1e6775;
   color: rgba(0, 0, 0, 0.87);
 }
 .dx-swatch-additional .dx-buttongroup-item.dx-button.dx-item-selected.dx-button-danger {
@@ -3306,7 +3306,7 @@
 .dx-swatch-additional .dx-checkbox.dx-checkbox-indeterminate.dx-state-focused .dx-checkbox-icon:after,
 .dx-swatch-additional .dx-checkbox.dx-checkbox-checked.dx-state-active .dx-checkbox-icon:after,
 .dx-swatch-additional .dx-checkbox.dx-checkbox-indeterminate.dx-state-active .dx-checkbox-icon:after {
-  background-color: rgba(255, 87, 34, 0.1);
+  background-color: rgba(40, 139, 158, 0.1);
   transform: scale(1);
 }
 .dx-swatch-additional .dx-checkbox.dx-checkbox-checked.dx-state-readonly .dx-checkbox-icon,
@@ -3492,14 +3492,14 @@
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .dx-swatch-additional .dx-switch-on-value .dx-switch-container:before {
-  background-color: rgba(255, 87, 34, 0.5);
+  background-color: rgba(40, 139, 158, 0.5);
 }
 .dx-swatch-additional .dx-switch-on-value .dx-switch-handle:before {
   background-color: #288b9e;
 }
 .dx-swatch-additional .dx-switch-on-value.dx-state-active .dx-switch-handle:before,
 .dx-swatch-additional .dx-switch-on-value.dx-state-focused .dx-switch-handle:before {
-  box-shadow: 0 0 0 10px rgba(255, 87, 34, 0.1);
+  box-shadow: 0 0 0 10px rgba(40, 139, 158, 0.1);
   border-radius: 50%;
 }
 .dx-swatch-additional .dx-rtl .dx-switch .dx-switch-on,
@@ -4293,7 +4293,7 @@
   text-align: left;
 }
 .dx-swatch-additional .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-hover .dx-radiobutton-icon:before {
-  border-color: #e43700;
+  border-color: #1c606d;
 }
 .dx-swatch-additional .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-focused .dx-checkbox .dx-checkbox-icon:after {
   background-color: rgba(255, 255, 255, 0.1);
@@ -4301,7 +4301,7 @@
 }
 .dx-swatch-additional .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-focused .dx-checkbox.dx-checkbox-checked .dx-checkbox-icon:after,
 .dx-swatch-additional .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-focused .dx-checkbox.dx-checkbox-indeterminate .dx-checkbox-icon:after {
-  background-color: rgba(255, 87, 34, 0.1);
+  background-color: rgba(40, 139, 158, 0.1);
   transform: scale(1);
 }
 .dx-swatch-additional .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
@@ -4402,8 +4402,8 @@
 .dx-swatch-additional .dx-list-item.dx-list-item-ghost-reordering.dx-state-focused.dx-state-hover {
   color: #ffffff;
   background: #363640;
-  border-top: 1px solid rgba(255, 87, 34, 0.5);
-  border-bottom: 1px solid rgba(255, 87, 34, 0.5);
+  border-top: 1px solid rgba(40, 139, 158, 0.5);
+  border-bottom: 1px solid rgba(40, 139, 158, 0.5);
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 .dx-swatch-additional .dx-list-item,
@@ -4674,7 +4674,7 @@
   text-align: left;
 }
 .dx-swatch-additional .dx-device-mobile .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-hover .dx-radiobutton-icon:before {
-  border-color: #e43700;
+  border-color: #1c606d;
 }
 .dx-swatch-additional .dx-device-mobile .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-focused .dx-checkbox .dx-checkbox-icon:after {
   background-color: rgba(255, 255, 255, 0.1);
@@ -4682,7 +4682,7 @@
 }
 .dx-swatch-additional .dx-device-mobile .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-focused .dx-checkbox.dx-checkbox-checked .dx-checkbox-icon:after,
 .dx-swatch-additional .dx-device-mobile .dx-list.dx-list-select-decorator-enabled .dx-list-item.dx-state-focused .dx-checkbox.dx-checkbox-indeterminate .dx-checkbox-icon:after {
-  background-color: rgba(255, 87, 34, 0.1);
+  background-color: rgba(40, 139, 158, 0.1);
   transform: scale(1);
 }
 .dx-swatch-additional .dx-device-mobile .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
@@ -4783,8 +4783,8 @@
 .dx-swatch-additional .dx-device-mobile .dx-list-item.dx-list-item-ghost-reordering.dx-state-focused.dx-state-hover {
   color: #ffffff;
   background: #363640;
-  border-top: 1px solid rgba(255, 87, 34, 0.5);
-  border-bottom: 1px solid rgba(255, 87, 34, 0.5);
+  border-top: 1px solid rgba(40, 139, 158, 0.5);
+  border-bottom: 1px solid rgba(40, 139, 158, 0.5);
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 .dx-swatch-additional .dx-device-mobile .dx-list-item,
@@ -5810,7 +5810,7 @@
 .dx-swatch-additional .dx-tile.dx-state-focused,
 .dx-swatch-additional .dx-tile.dx-state-hover {
   background-color: #363640;
-  border-color: rgba(255, 87, 34, 0.4);
+  border-color: rgba(40, 139, 158, 0.4);
 }
 .dx-swatch-additional .dx-tile.dx-state-active {
   background-color: rgba(0, 0, 0, 0.2);
@@ -6067,7 +6067,7 @@
 }
 .dx-swatch-additional .dx-progressbar-container {
   height: 4px;
-  background-color: rgba(255, 87, 34, 0.3);
+  background-color: rgba(40, 139, 158, 0.3);
 }
 .dx-swatch-additional .dx-progressbar-range {
   position: relative;
@@ -6077,7 +6077,7 @@
 }
 .dx-swatch-additional .dx-progressbar-animating-container {
   height: 4px;
-  background-color: rgba(255, 87, 34, 0.3);
+  background-color: rgba(40, 139, 158, 0.3);
   background-size: 90% 5px;
   animation: loader 2s linear infinite;
   background-repeat: no-repeat;
@@ -6085,7 +6085,7 @@
   background-repeat: repeat;
 }
 .dx-swatch-additional .dx-state-disabled .dx-progressbar-range {
-  background-color: rgba(255, 87, 34, 0.6);
+  background-color: rgba(40, 139, 158, 0.6);
 }
 .dx-swatch-additional .dx-state-disabled .dx-progressbar-animating-container {
   animation: none;
@@ -6177,7 +6177,7 @@
 .dx-swatch-additional .dx-slider-bar {
   margin-right: 18px;
   margin-left: 18px;
-  background: rgba(255, 87, 34, 0.24);
+  background: rgba(40, 139, 158, 0.24);
 }
 .dx-swatch-additional .dx-slider-range {
   top: -15px;
@@ -6252,7 +6252,7 @@
   padding-bottom: 17px;
 }
 .dx-swatch-additional .dx-slider-handle .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.24);
+  background-color: rgba(40, 139, 158, 0.24);
 }
 .dx-swatch-additional .dx-slider-tooltip-position-top {
   padding-top: 40px;
@@ -7004,7 +7004,7 @@
 }
 .dx-swatch-additional .dx-radiobutton.dx-radiobutton-checked.dx-state-active .dx-radiobutton-icon-checked:after,
 .dx-swatch-additional .dx-radiobutton.dx-radiobutton-checked.dx-state-focused .dx-radiobutton-icon-checked:after {
-  background-color: rgba(255, 87, 34, 0.1);
+  background-color: rgba(40, 139, 158, 0.1);
   transform: scale(1);
 }
 .dx-swatch-additional .dx-radiobutton.dx-state-disabled {
@@ -7935,7 +7935,7 @@
   font-size: 12px;
 }
 .dx-swatch-additional .dx-datagrid-columns-separator {
-  background-color: rgba(255, 87, 34, 0.5);
+  background-color: rgba(40, 139, 158, 0.5);
 }
 .dx-swatch-additional .dx-datagrid-columns-separator-transparent {
   background-color: transparent;
@@ -8323,14 +8323,14 @@
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover > td,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row > tr > td,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover > tr > td {
-  background-color: rgba(255, 87, 34, 0.07);
+  background-color: rgba(40, 139, 158, 0.07);
   color: #fff;
 }
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row > td.dx-datagrid-group-space,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover > td.dx-datagrid-group-space,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row > tr > td.dx-datagrid-group-space,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover > tr > td.dx-datagrid-group-space {
-  border-right-color: rgba(255, 87, 34, 0.07);
+  border-right-color: rgba(40, 139, 158, 0.07);
 }
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row > td.dx-pointer-events-none,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover > td.dx-pointer-events-none,
@@ -8341,8 +8341,8 @@
 }
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-lines):not(.dx-row-focused) > td,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover:not(.dx-row-lines):not(.dx-row-focused) > td {
-  border-bottom: 1px solid rgba(255, 87, 34, 0.07);
-  border-top: 1px solid rgba(255, 87, 34, 0.07);
+  border-bottom: 1px solid rgba(40, 139, 158, 0.07);
+  border-top: 1px solid rgba(40, 139, 158, 0.07);
 }
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row.dx-row-lines > td,
 .dx-swatch-additional .dx-datagrid-rowsview .dx-selection.dx-row:hover.dx-row-lines > td {
@@ -8490,7 +8490,7 @@
 .dx-swatch-additional .dx-rtl .dx-datagrid-rowsview .dx-selection.dx-row:hover > td:not(.dx-focused).dx-datagrid-group-space,
 .dx-swatch-additional .dx-rtl .dx-datagrid-rowsview .dx-selection.dx-row > tr > td:not(.dx-focused).dx-datagrid-group-space,
 .dx-swatch-additional .dx-rtl .dx-datagrid-rowsview .dx-selection.dx-row:hover > tr > td:not(.dx-focused).dx-datagrid-group-space {
-  border-left-color: rgba(255, 87, 34, 0.07);
+  border-left-color: rgba(40, 139, 158, 0.07);
 }
 .dx-swatch-additional .dx-rtl .dx-datagrid-rowsview .dx-selection.dx-row > td.dx-pointer-events-none,
 .dx-swatch-additional .dx-rtl .dx-datagrid-rowsview .dx-selection.dx-row:hover > td.dx-pointer-events-none,
@@ -8514,15 +8514,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-datagrid-form-buttons-container .dx-button.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-datagrid-form-buttons-container .dx-button.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-datagrid-form-buttons-container .dx-button.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-datagrid-form-buttons-container .dx-button.dx-state-disabled {
@@ -8536,7 +8536,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-datagrid-form-buttons-container .dx-button .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-command-adaptive {
   width: 56px;
@@ -9390,7 +9390,7 @@
   font-size: 12px;
 }
 .dx-swatch-additional .dx-treelist-columns-separator {
-  background-color: rgba(255, 87, 34, 0.5);
+  background-color: rgba(40, 139, 158, 0.5);
 }
 .dx-swatch-additional .dx-treelist-columns-separator-transparent {
   background-color: transparent;
@@ -9778,14 +9778,14 @@
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover > td,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row > tr > td,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover > tr > td {
-  background-color: rgba(255, 87, 34, 0.07);
+  background-color: rgba(40, 139, 158, 0.07);
   color: #fff;
 }
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row > td.dx-treelist-group-space,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover > td.dx-treelist-group-space,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row > tr > td.dx-treelist-group-space,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover > tr > td.dx-treelist-group-space {
-  border-right-color: rgba(255, 87, 34, 0.07);
+  border-right-color: rgba(40, 139, 158, 0.07);
 }
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row > td.dx-pointer-events-none,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover > td.dx-pointer-events-none,
@@ -9796,8 +9796,8 @@
 }
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-lines):not(.dx-row-focused) > td,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover:not(.dx-row-lines):not(.dx-row-focused) > td {
-  border-bottom: 1px solid rgba(255, 87, 34, 0.07);
-  border-top: 1px solid rgba(255, 87, 34, 0.07);
+  border-bottom: 1px solid rgba(40, 139, 158, 0.07);
+  border-top: 1px solid rgba(40, 139, 158, 0.07);
 }
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row.dx-row-lines > td,
 .dx-swatch-additional .dx-treelist-rowsview .dx-selection.dx-row:hover.dx-row-lines > td {
@@ -9945,7 +9945,7 @@
 .dx-swatch-additional .dx-rtl .dx-treelist-rowsview .dx-selection.dx-row:hover > td:not(.dx-focused).dx-treelist-group-space,
 .dx-swatch-additional .dx-rtl .dx-treelist-rowsview .dx-selection.dx-row > tr > td:not(.dx-focused).dx-treelist-group-space,
 .dx-swatch-additional .dx-rtl .dx-treelist-rowsview .dx-selection.dx-row:hover > tr > td:not(.dx-focused).dx-treelist-group-space {
-  border-left-color: rgba(255, 87, 34, 0.07);
+  border-left-color: rgba(40, 139, 158, 0.07);
 }
 .dx-swatch-additional .dx-rtl .dx-treelist-rowsview .dx-selection.dx-row > td.dx-pointer-events-none,
 .dx-swatch-additional .dx-rtl .dx-treelist-rowsview .dx-selection.dx-row:hover > td.dx-pointer-events-none,
@@ -9969,15 +9969,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-treelist-form-buttons-container .dx-button.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-treelist-form-buttons-container .dx-button.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-treelist-form-buttons-container .dx-button.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-treelist-form-buttons-container .dx-button.dx-state-disabled {
@@ -9991,7 +9991,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-treelist-form-buttons-container .dx-button .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-command-adaptive {
   width: 56px;
@@ -10353,15 +10353,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-calendar-navigator .dx-button.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-calendar-navigator .dx-button.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-calendar-navigator .dx-button.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-calendar-navigator .dx-button.dx-state-disabled {
@@ -10375,7 +10375,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-calendar-navigator .dx-button .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-calendar-navigator .dx-button .dx-button-text {
   text-transform: none;
@@ -11579,7 +11579,7 @@
 }
 .dx-swatch-additional .dx-scheduler-work-space-month.dx-scheduler-work-space-count .dx-scheduler-date-table-first-of-month {
   color: #288b9e;
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   font-weight: bold;
 }
 .dx-swatch-additional .dx-scheduler-work-space-month .dx-scheduler-all-day-panel,
@@ -12390,11 +12390,11 @@
 }
 .dx-swatch-additional .dx-scheduler-all-day-table-cell.dx-state-hover.dx-state-focused,
 .dx-swatch-additional .dx-scheduler-date-table-cell.dx-state-hover.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.12);
+  background-color: rgba(40, 139, 158, 0.12);
 }
 .dx-swatch-additional .dx-scheduler-all-day-table-cell.dx-state-focused,
 .dx-swatch-additional .dx-scheduler-date-table-cell.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.12);
+  background-color: rgba(40, 139, 158, 0.12);
   opacity: 1;
 }
 .dx-swatch-additional .dx-scheduler-all-day-table-cell.dx-scheduler-focused-cell,
@@ -14452,15 +14452,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-scheduler-navigator .dx-button.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-scheduler-navigator .dx-button.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-scheduler-navigator .dx-button.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-scheduler-navigator .dx-button.dx-state-disabled {
@@ -14474,7 +14474,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-scheduler-navigator .dx-button .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-scheduler-navigator .dx-button .dx-button-text {
   text-transform: none;
@@ -15165,15 +15165,15 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-popup-content .dx-scheduler-dropdown-appointment-buttons-block .dx-button.dx-state-hover {
-  background-color: rgba(255, 87, 34, 0.08);
+  background-color: rgba(40, 139, 158, 0.08);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-popup-content .dx-scheduler-dropdown-appointment-buttons-block .dx-button.dx-state-focused {
-  background-color: rgba(255, 87, 34, 0.15);
+  background-color: rgba(40, 139, 158, 0.15);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-popup-content .dx-scheduler-dropdown-appointment-buttons-block .dx-button.dx-state-active {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
   box-shadow: none;
 }
 .dx-swatch-additional .dx-popup-content .dx-scheduler-dropdown-appointment-buttons-block .dx-button.dx-state-disabled {
@@ -15187,7 +15187,7 @@
   color: rgba(255, 255, 255, 0.35);
 }
 .dx-swatch-additional .dx-popup-content .dx-scheduler-dropdown-appointment-buttons-block .dx-button .dx-inkripple-wave {
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(40, 139, 158, 0.2);
 }
 .dx-swatch-additional .dx-popup-content .dx-scheduler-dropdown-appointment-buttons-block .dx-button .dx-icon {
   width: 24px;
@@ -15271,7 +15271,7 @@
   color: #288b9e;
 }
 .dx-swatch-additional .dx-desktop-layout-main-menu .dx-nav-item.dx-state-hover {
-  background: #ff916f;
+  background: #43b9cf;
 }
 .dx-swatch-additional .dx-desktop-layout-main-menu .dx-nav-item.dx-state-hover .dx-tab-text {
   color: #ffffff;
@@ -15379,7 +15379,7 @@
   border-right-color: #515159;
 }
 .dx-swatch-additional .dx-htmleditor-content .dx-variable > span {
-  background: rgba(255, 87, 34, 0.15);
+  background: rgba(40, 139, 158, 0.15);
 }
 .dx-swatch-additional .dx-htmleditor-toolbar {
   background-color: transparent;
@@ -15391,7 +15391,7 @@
   background-color: #71a436;
 }
 .dx-swatch-additional .dx-htmleditor-toolbar .dx-format-active:not(.dx-color-format):not(.dx-background-format).dx-button-default {
-  background-color: #ee3900;
+  background-color: #1e6775;
 }
 .dx-swatch-additional .dx-htmleditor-toolbar .dx-format-active:not(.dx-color-format):not(.dx-background-format).dx-button-danger {
   background-color: #c1134e;
@@ -15454,9 +15454,9 @@
   button-normal-active-bg: #1a1a1f;
   button-default-bg: #288b9e;
   button-default-color: rgba(0, 0, 0, 0.87);
-  button-default-hover-bg: #206F7E;
-  button-default-focused-bg: #e43700;
-  button-default-active-bg: #18535E;
+  button-default-hover-bg: #206e7d;
+  button-default-focused-bg: #1c606d;
+  button-default-active-bg: #0f353c;
   button-danger-bg: #E91E63;
   button-danger-color: rgba(0, 0, 0, 0.87);
   button-danger-hover-bg: #ca1452;
@@ -15470,13 +15470,13 @@
   button-flat-color: #fff;
   button-group-normal-selected-bg: #1f1f24;
   button-group-normal-selected-color: rgba(0, 0, 0, 0.87);
-  button-group-default-selected-bg: #ee3900;
+  button-group-default-selected-bg: #1e6775;
   button-group-danger-selected-bg: #c1134e;
   button-group-danger-selected-color: rgba(0, 0, 0, 0.87);
   button-group-success-selected-bg: #71a436;
   checkbox-border-color: rgba(255, 255, 255, 0.54);
   checkbox-bg: #288b9e;
-  checkbox-hover-border-color: #e43700;
+  checkbox-hover-border-color: #1c606d;
   checkbox-invalid-focused-border-color: #E91E63;
   drawer-shader-background-color: rgba(0, 0, 0, 0.5);
   fileuploader-filename-color: #fff;
@@ -15522,15 +15522,15 @@
   toast-success-bg: #8BC34A;
   load-indicator-segment-bg-color: #288b9e;
   loadpanel-content-bg: #363640;
-  material-slider-bar-bg: rgba(255, 87, 34, 0.24);
+  material-slider-bar-bg: rgba(40, 139, 158, 0.24);
   material-slider-tooltip-bg: #288b9e;
   material-slider-tooltip-color: rgba(0, 0, 0, 0.87);
-  progressbar-bg: rgba(255, 87, 34, 0.3);
+  progressbar-bg: rgba(40, 139, 158, 0.3);
   progressbar-range-bg: #288b9e;
   progressbar-label-color: #288b9e;
   switch-bg: #9494a4;
   switch-handle-off-bg: #3b3b46;
-  switch-on-bg: rgba(255, 87, 34, 0.5);
+  switch-on-bg: rgba(40, 139, 158, 0.5);
   switch-handle-on-bg: #288b9e;
   pager-page-hovered-bg: #3f3f4b;
   pager-page-selected-color: rgba(0, 0, 0, 0.87);
@@ -15541,7 +15541,7 @@
   datagrid-border-color: #515159;
   datagrid-columnchooser-item-color: rgba(255, 255, 255, 0.6);
   datagrid-columnchooser-font-weight: 500;
-  datagrid-selection-bg: rgba(255, 87, 34, 0.07);
+  datagrid-selection-bg: rgba(40, 139, 158, 0.07);
   datagrid-row-selected-color: #fff;
   datagrid-row-focused-color: rgba(0, 0, 0, 0.87);
   datagrid-row-focused-bg: #288b9e;
@@ -15572,7 +15572,7 @@
   treelist-border-color: #515159;
   treelist-columnchooser-item-color: rgba(255, 255, 255, 0.6);
   treelist-columnchooser-font-weight: 500;
-  treelist-selection-bg: rgba(255, 87, 34, 0.07);
+  treelist-selection-bg: rgba(40, 139, 158, 0.07);
   treelist-row-selected-color: #fff;
   treelist-row-focused-color: rgba(0, 0, 0, 0.87);
   treelist-row-focused-bg: #288b9e;
@@ -15611,7 +15611,7 @@
   SCHEDULER_APPOINTMENT_BASE_COLOR: #288b9e;
   SCHEDULER_APPOINTMENT_TEXT_COLOR: rgba(0, 0, 0, 0.87);
   SCHEDULER_APPOINTMENT_START_COLOR: rgba(0, 0, 0, 0.3);
-  SCHEDULER_WORKSPACE_FOCUSED_CELL_COLOR: rgba(255, 87, 34, 0.12);
+  SCHEDULER_WORKSPACE_FOCUSED_CELL_COLOR: rgba(40, 139, 158, 0.12);
   SCHEDULER_PANEL_TEXT_COLOR: rgba(255, 255, 255, 0.54);
   SCHEDULER_WORKSPACE_BACKGROUND_COLOR: #363640;
   SCHEDULER_WORKSPACE_ACCENT_COLOR: #288b9e;
@@ -15642,14 +15642,14 @@
   form-field-item-color: #ffffff;
   form-group-border-color: #515159;
   desktop-layout-menu-color: #ffffff;
-  desktop-layout-menu-hover-bg: #ff916f;
+  desktop-layout-menu-hover-bg: #43b9cf;
   desktop-layout-toolbar-border-color: #515159;
   desktop-layout-copyright-color: #ffffff;
   desktop-splitlayout-border-color: #515159;
   filterbuilder-plus-icon-color: rgba(139, 195, 74, 0.7);
   filterbuilder-remove-icon-color: rgba(233, 30, 99, 0.7);
   filterbuilder-group-operation-color: rgba(233, 30, 99, 0.3);
-  filterbuilder-item-field-color: rgba(255, 87, 34, 0.3);
+  filterbuilder-item-field-color: rgba(40, 139, 158, 0.3);
   filterbuilder-item-operator-color: rgba(139, 195, 74, 0.3);
   filterbuilder-item-value-color: rgba(81, 81, 89, 0.5);
   filterbuilder-text-color: #fff;
