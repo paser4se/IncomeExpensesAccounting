@@ -1,0 +1,8 @@
+<ng-content></ng-content>
+
+<div class="menu-container">
+    <dx-tree-view expandEvent="click" width="100%" [items]="items" (onInitialized)="onMenuInitialized($event)"
+        (onItemClick)="onItemClick($event)" (onContentReady)="setActiveElement($event)"
+        (onSelectionChanged)="updateSelection($event)" [selectByClick]="true" selectionMode="single" keyExpr="path">
+    </dx-tree-view>
+</div>

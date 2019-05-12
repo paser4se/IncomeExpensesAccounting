@@ -1,0 +1,36 @@
+<h2 class="content-block">Payments</h2>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="dx-card content-block responsive-paddings">
+    <mat-horizontal-stepper>
+        <ng-template matStepperIcon="edit">
+            <mat-icon>done</mat-icon>
+        </ng-template>
+        <mat-step label="Upload CSV">
+            <div>
+                Content
+            </div>
+            <div>
+                <button mat-raised-button disabled="true">Back</button>
+                <button class="right" color="primary" mat-raised-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step label="Check Category">
+            <div>
+                Content
+            </div>
+            <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button class="right" color="primary" mat-raised-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step label="Write-off">
+            <div>
+                Content
+            </div>
+            <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button class="right" color="primary" mat-raised-button matStepperNext [disabled]="true">Commit</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
