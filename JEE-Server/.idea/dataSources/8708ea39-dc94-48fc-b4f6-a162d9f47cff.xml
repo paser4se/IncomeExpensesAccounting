@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="db@localhost">
+  <database-model serializer="dbm" dbms="DERBY" family-id="DERBY" format-version="4.15">
+    <root id="1">
+      <ServerVersion>10.14.2.0</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="APP">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="NULLID"/>
+    <schema id="4" parent="1" name="SQLJ"/>
+    <schema id="5" parent="1" name="SYS"/>
+    <schema id="6" parent="1" name="SYSCAT"/>
+    <schema id="7" parent="1" name="SYSCS_DIAG"/>
+    <schema id="8" parent="1" name="SYSCS_UTIL"/>
+    <schema id="9" parent="1" name="SYSFUN"/>
+    <schema id="10" parent="1" name="SYSIBM"/>
+    <schema id="11" parent="1" name="SYSPROC"/>
+    <schema id="12" parent="1" name="SYSSTAT"/>
+    <table id="13" parent="2" name="ACCOUNT"/>
+    <table id="14" parent="2" name="ASSIGNMENT"/>
+    <table id="15" parent="2" name="ASSIGNMENT_KEYWORDS"/>
+    <table id="16" parent="2" name="CATEGORY"/>
+    <table id="17" parent="2" name="CATEGORY_CATEGORY"/>
+    <table id="18" parent="2" name="PAYMENT"/>
+    <column id="19" parent="13" name="ID">
+      <Position>1</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="20" parent="13" name="EMAIL">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="21" parent="13" name="FULLNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="22" parent="13" name="PASSWORD">
+      <Position>4</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="23" parent="13" name="USERNAME">
+      <Position>5</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <index id="24" parent="13" name="SQL190512175904760">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="25" parent="13" name="UK_CS5BNAGGWULUAHRDH8MBS1RPE">
+      <ColNames>EMAIL</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="26" parent="13" name="UK_DE34GSW4QT8AUHFFBNA969AHP">
+      <ColNames>USERNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="27" parent="13" name="SQL190512175904760">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="28" parent="13" name="UK_CS5BNAGGWULUAHRDH8MBS1RPE">
+      <ColNames>EMAIL</ColNames>
+    </key>
+    <key id="29" parent="13" name="UK_DE34GSW4QT8AUHFFBNA969AHP">
+      <ColNames>USERNAME</ColNames>
+    </key>
+    <column id="30" parent="14" name="ID">
+      <Position>1</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="31" parent="14" name="CATEGORYKEYWORD">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="32" parent="14" name="CATEGORY_ID">
+      <Position>3</Position>
+      <DataType>BIGINT|-5s</DataType>
+    </column>
+    <index id="33" parent="14" name="SQL190512175904770">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="34" parent="14" name="SQL190512175904860">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CATEGORY_ID</ColNames>
+    </index>
+    <key id="35" parent="14" name="SQL190512175904770">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="36" parent="14" name="FK29X65SLVONBBRDJKHI84GLLA7">
+      <ColNames>CATEGORY_ID</ColNames>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefKeyName>SQL190512175146930</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="37" parent="15" name="ASSIGNMENT_ID">
+      <Position>1</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="15" name="KEYWORDS">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <index id="39" parent="15" name="SQL190512175904870">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ASSIGNMENT_ID</ColNames>
+    </index>
+    <foreign-key id="40" parent="15" name="FKIR4O4WTBXO8WHWWSUW63PUWNX">
+      <ColNames>ASSIGNMENT_ID</ColNames>
+      <RefTableName>ASSIGNMENT</RefTableName>
+      <RefKeyName>SQL190512175146910</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="41" parent="16" name="ID">
+      <Position>1</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="42" parent="16" name="NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="43" parent="16" name="PARENTCATEGORYID">
+      <Position>3</Position>
+      <DataType>BIGINT|-5s</DataType>
+    </column>
+    <column id="44" parent="16" name="PARENTCATEGORY_ID">
+      <Position>4</Position>
+      <DataType>BIGINT|-5s</DataType>
+    </column>
+    <index id="45" parent="16" name="SQL190512175904790">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="46" parent="16" name="SQL190512175904880">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>PARENTCATEGORY_ID</ColNames>
+    </index>
+    <key id="47" parent="16" name="SQL190512175904790">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="48" parent="16" name="FKC4BOG6VTFVRB0P1LT7PQ6TC75">
+      <ColNames>PARENTCATEGORY_ID</ColNames>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefKeyName>SQL190512175146930</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="49" parent="17" name="CATEGORY_ID">
+      <Position>1</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="17" name="SUBCATEGORIES_ID">
+      <Position>2</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="51" parent="17" name="SQL190512175904800">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CATEGORY_ID
+SUBCATEGORIES_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="52" parent="17" name="SQL190512175904850">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SUBCATEGORIES_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="53" parent="17" name="SQL190512175904900">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CATEGORY_ID</ColNames>
+    </index>
+    <index id="54" parent="17" name="SQL190512175904890">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SUBCATEGORIES_ID</ColNames>
+    </index>
+    <key id="55" parent="17" name="SQL190512175904800">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CATEGORY_ID
+SUBCATEGORIES_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="56" parent="17" name="SQL190512175904850">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>SUBCATEGORIES_ID</ColNames>
+    </key>
+    <foreign-key id="57" parent="17" name="FKTOPIVT1ASQD7KG0GW47NOC3BI">
+      <ColNames>CATEGORY_ID</ColNames>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefKeyName>SQL190512175146930</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="58" parent="17" name="FKNJA2HVGB5MODNFRTJBMVVIM0D">
+      <ColNames>SUBCATEGORIES_ID</ColNames>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefKeyName>SQL190512175146930</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="59" parent="18" name="ID">
+      <Position>1</Position>
+      <DataType>BIGINT|-5s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="60" parent="18" name="AMOUNT">
+      <Position>2</Position>
+      <DataType>DOUBLE|8s</DataType>
+    </column>
+    <column id="61" parent="18" name="BOOKINGDATE">
+      <Position>3</Position>
+      <DataType>TIMESTAMP|93s</DataType>
+    </column>
+    <column id="62" parent="18" name="BOOKINGTEXT">
+      <Position>4</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="63" parent="18" name="CURRENCY">
+      <Position>5</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="64" parent="18" name="EVALUATED">
+      <Position>6</Position>
+      <DataType>BOOLEAN|16s</DataType>
+    </column>
+    <column id="65" parent="18" name="INITIALRECOGNITIONREFERENCE">
+      <Position>7</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="66" parent="18" name="NOTE">
+      <Position>8</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="67" parent="18" name="PARTNERACCOUNTNUMBER">
+      <Position>9</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="68" parent="18" name="PARTNERBANKCODE">
+      <Position>10</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="69" parent="18" name="PARTNERBIC">
+      <Position>11</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="70" parent="18" name="PARTNERIBAN">
+      <Position>12</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="71" parent="18" name="PARTNERNAME">
+      <Position>13</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="72" parent="18" name="VALUEDATE">
+      <Position>14</Position>
+      <DataType>TIMESTAMP|93s</DataType>
+    </column>
+    <column id="73" parent="18" name="CATEGORY_ID">
+      <Position>15</Position>
+      <DataType>BIGINT|-5s</DataType>
+    </column>
+    <index id="74" parent="18" name="SQL190512175904820">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="75" parent="18" name="SQL190512175904930">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CATEGORY_ID</ColNames>
+    </index>
+    <key id="76" parent="18" name="SQL190512175904820">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="77" parent="18" name="FKT58OOPHGPB0EWTDDFESSMJWLT">
+      <ColNames>CATEGORY_ID</ColNames>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefKeyName>SQL190512175146930</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
