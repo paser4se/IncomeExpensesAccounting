@@ -74,11 +74,15 @@ export class PaymentsComponent implements OnInit {
     this.showCategory = true;
   }
 
-  ngOnInit() {
+  refreshPayments() {
     this.paymentService.getAllPayments().subscribe((data) => {
       this.payments = data;
     }, error => {
       alert(error.message);
     });
+  }
+
+  ngOnInit() {
+    this.refreshPayments();
   }
 }

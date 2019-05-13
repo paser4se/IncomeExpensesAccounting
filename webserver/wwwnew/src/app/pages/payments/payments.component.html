@@ -29,10 +29,14 @@
             </div>
             <div>
                 <button mat-raised-button disabled="true">Back</button>
-                <button class="right" color="primary" mat-raised-button matStepperNext>Next</button>
+                <button class="right" color="primary" mat-raised-button matStepperNext
+                    (click)="refreshPayments()">Next</button>
             </div>
         </mat-step>
-        <mat-step label="Check Category">
+        <mat-step>
+            <ng-template matStepLabel>
+                <p (click)="refreshPayments()">Check Category</p>
+            </ng-template>
             <div class="content-area">
                 <table mat-table [dataSource]="payments">
                     <ng-container matColumnDef="bookingdate">
@@ -73,7 +77,7 @@
                 Content
             </div>
             <div>
-                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperPrevious (click)="refreshPayments()">Back</button>
                 <button class="right" color="primary" mat-raised-button matStepperNext [disabled]="true">Commit</button>
             </div>
         </mat-step>
