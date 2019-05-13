@@ -13,10 +13,12 @@ export class PaymentsComponent implements OnInit {
   files: File[];
   payments: Payment[];
   displayedColumns: string[] = ['bookingdate', 'amount', 'currency', 'bookingtext', 'category'];
+  showCategory: boolean;
 
   constructor(private paymentService: PaymentService) {
     this.disableDropzone = false;
     this.disableButtons = false;
+    this.showCategory = false;
   }
 
   commitPayments() {
@@ -62,6 +64,14 @@ export class PaymentsComponent implements OnInit {
 
       reader.readAsText(file);
     });
+  }
+
+  getBackground(catid: number) {
+    return this.paymentService.colors[catid];
+  }
+
+  showCategoryView() {
+    this.showCategory = true;
   }
 
   ngOnInit() {

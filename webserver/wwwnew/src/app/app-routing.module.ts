@@ -5,7 +5,7 @@ import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DisplayDataComponent } from './pages/display-data/display-data.component';
-import { DxDataGridModule, DxFormModule, DxButtonModule, DxTextBoxModule, DxValidatorModule, DxValidationGroupModule } from 'devextreme-angular';
+import { DxDataGridModule, DxFormModule, DxButtonModule, DxTextBoxModule, DxValidatorModule, DxValidationGroupModule, DxPopupModule } from 'devextreme-angular';
 import { PaymentsComponent } from './pages/payments/payments.component';
 import { EvaluationComponent } from './pages/evaluation/evaluation.component';
 import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
@@ -73,7 +73,8 @@ const routes: Routes = [
     DxValidatorModule,
     DxValidationGroupModule,
     NgxDropzoneModule,
-    MatTableModule
+    MatTableModule,
+    DxPopupModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
