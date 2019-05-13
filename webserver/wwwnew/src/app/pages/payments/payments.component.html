@@ -6,8 +6,19 @@
             <mat-icon>done</mat-icon>
         </ng-template>
         <mat-step label="Upload CSV">
-            <div>
-                Content
+            <div class="content-area">
+                <ngx-dropzone #dropzone [label]="'Drop your files here or click.'" [multiple]="false"
+                    [accept]="'application/vnd.ms-excel,text/csv'" [disabled]="disableDropzone"
+                    (filesAdded)="onFilesAdded($event)">
+                </ngx-dropzone>
+                <div class="dropzone-btn">
+                    <button class="right" mat-raised-button [disabled]="!disableDropzone || disableButtons"
+                        color="primary" (click)="uploadFiles()">Upload
+                        {{getFilesCount()}}
+                        File(s)</button>
+                    <button class="right" mat-raised-button [disabled]="!disableDropzone || disableButtons"
+                        (click)="cancleUpload()">Cancle</button><br>
+                </div>
             </div>
             <div>
                 <button mat-raised-button disabled="true">Back</button>
@@ -15,7 +26,7 @@
             </div>
         </mat-step>
         <mat-step label="Check Category">
-            <div>
+            <div class="content-area">
                 Content
             </div>
             <div>
@@ -24,7 +35,7 @@
             </div>
         </mat-step>
         <mat-step label="Write-off">
-            <div>
+            <div class="content-area">
                 Content
             </div>
             <div>

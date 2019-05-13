@@ -13,7 +13,7 @@ import { MatStepperModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 const routes: Routes = [
   {
@@ -58,12 +58,22 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), DxDataGridModule, DxFormModule, MatStepperModule, BrowserAnimationsModule, MatIconModule, MatButtonModule, CommonModule,
+  imports: [
+    RouterModule.forRoot(routes),
+    DxDataGridModule,
+    DxFormModule,
+    MatStepperModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    CommonModule,
     RouterModule,
     DxButtonModule,
     DxTextBoxModule,
     DxValidatorModule,
-    DxValidationGroupModule],
+    DxValidationGroupModule,
+    NgxDropzoneModule
+  ],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [HomeComponent, ProfileComponent, DisplayDataComponent, PaymentsComponent, EvaluationComponent, RegisterFormComponent]

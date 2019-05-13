@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
 import { FooterModule, LoginFormModule } from './shared/components';
-import { AuthService, ScreenService, AppInfoService, NavigationInfoService } from './shared/services';
+import { AuthService, ScreenService, AppInfoService, NavigationInfoService, PaymentService } from './shared/services';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,11 @@ import { AppRoutingModule } from './app-routing.module';
     SingleCardModule,
     FooterModule,
     LoginFormModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [AuthService, ScreenService, AppInfoService, NavigationInfoService],
+  providers: [AuthService, ScreenService, AppInfoService, NavigationInfoService, PaymentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
