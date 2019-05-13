@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentService } from 'src/app/shared/services/payment.service';
+import { Payment } from 'src/app/shared/models/payment.model';
 
 @Component({
   selector: 'app-payments',
@@ -10,6 +11,8 @@ export class PaymentsComponent implements OnInit {
   disableDropzone: boolean;
   disableButtons: boolean;
   files: File[];
+  payments: Payment[];
+  displayedColumns: string[] = ['bookingdate', 'amount', 'currency', 'bookingtext', 'category'];
 
   constructor(private paymentService: PaymentService) {
     this.disableDropzone = false;
@@ -62,5 +65,10 @@ export class PaymentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paymentService.getAllPayments().subscribe((data) => {
+      this.payments = data;
+    }, error => {
+      alert(error.message);
+    });
   }
 }

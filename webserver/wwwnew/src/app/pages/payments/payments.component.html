@@ -12,8 +12,8 @@
                     (filesAdded)="onFilesAdded($event)">
                 </ngx-dropzone>
                 <div class="dropzone-btn">
-                    <button class="right" mat-raised-button [disabled]="!disableDropzone || disableButtons"
-                        color="primary" (click)="uploadFiles()">Upload
+                    <button class="right" style="margin-left: 5px;" mat-raised-button
+                        [disabled]="!disableDropzone || disableButtons" color="primary" (click)="uploadFiles()">Upload
                         {{getFilesCount()}}
                         File(s)</button>
                     <button class="right" mat-raised-button [disabled]="!disableDropzone || disableButtons"
@@ -27,7 +27,32 @@
         </mat-step>
         <mat-step label="Check Category">
             <div class="content-area">
-                Content
+                <table mat-table [dataSource]="payments">
+                    <ng-container matColumnDef="bookingdate">
+                        <th mat-header-cell *matHeaderCellDef>Bookingdate</th>
+                        <td class="bookingDate-column" mat-cell *matCellDef="let payment">{{payment.bookingDate}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef>Amount</th>
+                        <td mat-cell *matCellDef="let payment">{{payment.amount}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="currency">
+                        <th mat-header-cell *matHeaderCellDef>Currency</th>
+                        <td class="currency-column" mat-cell *matCellDef="let payment">{{payment.currency}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="bookingtext">
+                        <th mat-header-cell *matHeaderCellDef>Bookingtext</th>
+                        <td mat-cell *matCellDef="let payment">{{payment.bookingText}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef>Category</th>
+                        <td mat-cell *matCellDef="let payment"><button mat-button>{{payment.category.name}}</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
             </div>
             <div>
                 <button mat-raised-button matStepperPrevious>Back</button>

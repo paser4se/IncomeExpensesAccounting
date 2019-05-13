@@ -6,9 +6,30 @@
 }
 .content-area {
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 .dropzone-btn {
     margin-top: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+}
+.dark-head {
+    color: #363640;
+}
+.bookingDate-column {
+    width: 110px;
+}
+.currency-column {
+    width: 60px;
+}
+th {
+    color: #fff !important;
+    font-weight: bold;
+    background-color: #363640 !important;
+}
+tr:hover {
+    transition: .5s;
+    background-color: rgba(0,0,0,.075);
+}
+table {
+    width: 100%;
 }

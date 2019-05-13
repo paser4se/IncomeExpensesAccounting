@@ -9,7 +9,7 @@ import { DxDataGridModule, DxFormModule, DxButtonModule, DxTextBoxModule, DxVali
 import { PaymentsComponent } from './pages/payments/payments.component';
 import { EvaluationComponent } from './pages/evaluation/evaluation.component';
 import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
-import { MatStepperModule, MatButtonModule } from '@angular/material';
+import { MatStepperModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -72,7 +72,8 @@ const routes: Routes = [
     DxTextBoxModule,
     DxValidatorModule,
     DxValidationGroupModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatTableModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
