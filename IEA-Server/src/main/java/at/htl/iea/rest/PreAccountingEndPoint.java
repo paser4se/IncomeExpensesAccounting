@@ -28,19 +28,30 @@ public class PreAccountingEndPoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCategories() {
         List<Category> categories = em.createNamedQuery("Category.getSortedCategories", Category.class).getResultList();
-        List<Category> tmpCat = new LinkedList<>();
+        JsonArrayBuilder cats = Json.createArrayBuilder();
         for (Category category : categories) {
-            Category tmp = new Category(category.getName());
-            tmp.setId(category.getId());
-            tmpCat.add(tmp);
+            JsonObjectBuilder cat = Json.createObjectBuilder();
+            cat.add("id", category.getId());
+            cat.add("text", category.getName());
+            cat.add("isSelected", false);
+            JsonArrayBuilder subCats = Json.createArrayBuilder();
             for (Category subcat : category.getSubcategories()) {
-                tmp = new Category("--> " + subcat.getName());
-                tmp.setId(subcat.getId());
-                tmp.setParentCategoryId(subcat.getParentCategoryId());
-                tmpCat.add(tmp);
+                JsonObjectBuilder subCat = Json.createObjectBuilder();
+                subCat.add("id", subcat.getId());
+                subCat.add("text", subcat.getName());
+
+                subCats.add(subCat);
             }
+            if (category.getSubcategories().size() >= 1) {
+                cat.add("expanded", true);
+                cat.add("items", subCats);
+            } else {
+                cat.add("expanded", false);
+            }
+
+            cats.add(cat);
         }
-        return Response.ok(tmpCat, MediaType.APPLICATION_JSON).build();
+        return Response.ok(cats.build(), MediaType.APPLICATION_JSON).build();
     }
 
     @GET
@@ -49,34 +60,27 @@ public class PreAccountingEndPoint {
     public Response getAllAssignments(@PathParam("id") long id) {
         Assignment assignment = getAssignment(id);
 
-        JsonArrayBuilder array = Json.createArrayBuilder();
-        if (assignment != null) {
-            for (String keyword : assignment.getKeywords()) {
-                JsonObjectBuilder obj = Json.createObjectBuilder();
-                obj.add("keyword", keyword);
-                array.add(obj.build());
-            }
+        if(assignment == null) {
+            return Response.noContent().build();
         }
 
-        return Response.ok(array.build(), MediaType.APPLICATION_JSON).build();
+        return Response.ok(assignment.getKeywords().toArray()).build();
     }
 
     @POST
     @Path("/assignment/{id}")
     @Transactional
-    @Consumes(MediaType.TEXT_PLAIN)
-    public Response changeAssigment(@PathParam("id") long id, String arr) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changeAssigment(@PathParam("id") long id, JsonArray keywords) {
         Assignment assignment = getAssignment(id);
         assignment.setKeywords(new HashSet<>());
 
-        JsonReader jsonReader = Json.createReader(new StringReader(arr));
-        JsonArray keywords = jsonReader.readArray();
         for (JsonValue val : keywords) {
-            String keyword = val.asJsonObject().getString("keyword");
+            String keyword = val.toString().replaceAll("\"", "");
             assignment.addKeyword(keyword);
         }
 
-        return Response.ok("Keywords changed").build();
+        return Response.ok().build();
     }
 
     @POST
