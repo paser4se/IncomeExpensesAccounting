@@ -282,6 +282,7 @@ class Category extends LitElement {
         })
         .then(async  function(response) {
             let tmp = await response.json();
+			
             var keywords = JSON.stringify(tmp);
             catview.keywords = keywords;
 
