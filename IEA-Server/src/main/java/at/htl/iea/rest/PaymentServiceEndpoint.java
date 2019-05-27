@@ -5,6 +5,7 @@ import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
 
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -26,14 +27,13 @@ public class PaymentServiceEndpoint {
     }
 
     @POST
-    @Path("/changecategory")
+    @Path("/changecategory/{id}")
     @Transactional
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response changeCategory(String ids) {
-        Long paymentId = Long.parseLong(ids.split(";")[0]);
-        Long categoryId = Long.parseLong(ids.split(";")[1]);
+    public Response changeCategory(@PathParam("id") long id, JsonObject catId) {
+        Long categoryId = Long.parseLong(catId.getString("catId"));
 
-        Payment payment = em.find(Payment.class, paymentId);
+        Payment payment = em.find(Payment.class, id);
         Category category = em.find(Category.class, categoryId);
         payment.setCategory(category);
         em.flush();
