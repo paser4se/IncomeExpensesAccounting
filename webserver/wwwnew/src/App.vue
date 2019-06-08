@@ -70,6 +70,17 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~vue-material/dist/theme/engine"; // Import the theme engine
+
+@include md-register-theme(
+  "default",
+  (
+    primary: #288b9e
+  )
+);
+
+@import "~vue-material/dist/theme/all";
+
 html,
 body {
   margin: 0px;

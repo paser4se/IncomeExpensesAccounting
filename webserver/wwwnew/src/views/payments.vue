@@ -4,110 +4,152 @@
     <h2 class="content-block">Payments</h2>
     <div class="content-block">
       <div class="dx-card responsive-paddings">
-        <v-app>
-          <v-stepper v-model="e1">
-            <v-stepper-header>
-              <v-stepper-step :complete="e1 > 1" step="1">Upload CSV</v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step :complete="e1 > 2" step="2">Check Category</v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step step="3">Write-off</v-stepper-step>
-            </v-stepper-header>
-
-            <v-stepper-items>
-              <v-stepper-content step="1">
-                <div class="content-area">
-                  <form
-                    class="drop-zone"
-                    id="file-form"
-                    action="http://localhost:8085/iea/rs/files/uploadcsv"
-                    method="POST"
-                    enctype="multipart/form-data"
-                    v-on:dragenter="handleDragenter"
-                    v-on:dragstart="handleDragstart"
-                    v-on:dragleave="handleDragleave"
-                    v-on:drop="handleDrop"
-                    v-on:dragover="handleDragover"
+        <md-steppers class="md-alternative" :md-active-step.sync="active" md-linear>
+          <md-step id="first" md-label="Upload CSV" :md-editable="false" :md-done.sync="first">
+            <div class="content-area">
+              <form
+                class="drop-zone"
+                id="file-form"
+                action="http://localhost:8085/iea/rs/files/uploadcsv"
+                method="POST"
+                enctype="multipart/form-data"
+                v-on:dragenter="handleDragenter"
+                v-on:dragstart="handleDragstart"
+                v-on:dragleave="handleDragleave"
+                v-on:drop="handleDrop"
+                v-on:dragover="handleDragover"
+              >
+                <div class="drop-content">
+                  <img
+                    id="dropdownimg"
+                    src="https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519672-178_Download-512.png"
+                    style="height: 15px; width: 15px;"
                   >
-                    <div class="drop-content">
-                      <img
-                        id="dropdownimg"
-                        src="https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519672-178_Download-512.png"
-                        style="height: 15px; width: 15px;"
-                      >
-                      <input
-                        type="file"
-                        v-on:change="this.handleChange"
-                        id="file-select"
-                        name="csv[]"
-                        accept=".csv"
-                        multiple
-                        style="display: none;"
-                      >
-                      <label for="file-select" id="choosefilelbl">
-                        <strong>Choose a file</strong>
-                        <span style="color: #0f3c4b !important;">&nbsp;or drop it here...</span>
-                      </label>
-                      <br>
-                      <label id="filename">{{getFilesCount()}} file(s) selected</label>
-                    </div>
-                  </form>
-                  <div class="dropzone-btn">
-                    <v-btn
-                      color="primary"
-                      @click="handleSubmit()"
-                      class="right"
-                      :disabled="disableButtons"
-                    >Upload {{getFilesCount()}} File(s)</v-btn>
-                    <v-btn @click="cancleUpload()" class="right" :disabled="disableButtons">Back</v-btn>
-                    <br>
-                  </div>
+                  <input
+                    type="file"
+                    v-on:change="this.handleChange"
+                    id="file-select"
+                    name="csv[]"
+                    accept=".csv"
+                    multiple
+                    style="display: none;"
+                  >
+                  <label for="file-select" id="choosefilelbl">
+                    <strong>Choose a file</strong>
+                    <span style="color: #0f3c4b !important;">&nbsp;or drop it here...</span>
+                  </label>
+                  <br>
+                  <label id="filename">{{getFilesCount()}} file(s) selected</label>
                 </div>
-                <v-btn @click="e1 = 1" :disabled="true">Back</v-btn>
-                <v-btn color="primary" class="right" @click="e1 = 2; getAllPayments();">Next</v-btn>
-              </v-stepper-content>
-              <v-stepper-content step="2">
-                <v-data-table
-                  :headers="headers"
-                  :items="payments"
-                  class="elevation-1 table"
-                  :hide-actions="true"
-                >
-                  <template v-slot:items="payments">
-                    <td class="text-xs-center">{{ payments.item.bookingDate }}</td>
-                    <td class="text-xs-right">{{ payments.item.amount }}</td>
-                    <td class="text-xs-left">{{ payments.item.currency }}</td>
-                    <td class="text-xs-center">{{ payments.item.bookingText }}</td>
-                    <td class="text-xs-center">
-                      <v-btn
-                        depressed
-                        class="categoryButton"
-                        :style="{ backgroundColor: getBackgroundColor(payments.item.category.id) }"
-                        @click="showPopup(payments.item)"
-                      >{{payments.item.category.name}}</v-btn>
-                    </td>
-                  </template>
-                </v-data-table>
-                <v-btn @click="e1 = 1">Back</v-btn>
-                <v-btn color="primary" class="right" @click="e1 = 3">Next</v-btn>
-              </v-stepper-content>
-              <v-stepper-content step="3">
-                <v-card class="mb-5" color="grey lighten-1" style="margin-bottom: 15px;"></v-card>
-                <v-btn @click="e1 = 2">Back</v-btn>
-                <v-btn color="primary" class="right" @click="commitPayments()">Commit</v-btn>
-              </v-stepper-content>
-            </v-stepper-items>
-          </v-stepper>
-        </v-app>
+              </form>
+              <div class="dropzone-btn">
+                <md-button
+                  class="md-raised md-primary right"
+                  @click="handleSubmit()"
+                  :disabled="disableButtons"
+                >Upload {{getFilesCount()}} File(s)</md-button>
+                <md-button
+                  @click="cancleUpload()"
+                  class="md-raised right"
+                  :disabled="disableButtons"
+                >Cancle</md-button>
+                <br>
+              </div>
+            </div>
+            <md-button class="md-raised" :disabled="true">Back</md-button>
+            <md-button
+              class="md-raised md-primary right"
+              @click="nextStep('first', 'second'); getAllPayments();"
+            >Next</md-button>
+          </md-step>
+          <md-step
+            id="second"
+            md-label="Check Category"
+            :md-editable="false"
+            :md-done.sync="second"
+          >
+            <md-table>
+              <md-table-row class="dark-head">
+                <md-table-head class="white-color">Bookingdate</md-table-head>
+                <md-table-head class="white-color" md-numeric>Amount</md-table-head>
+                <md-table-head class="white-color">Currency</md-table-head>
+                <md-table-head class="white-color">Bookingtext</md-table-head>
+                <md-table-head class="white-color">Category</md-table-head>
+              </md-table-row>
+              <md-table-row v-for="payment in payments" :key="payment.id">
+                <md-table-cell>{{payment.bookingDate}}</md-table-cell>
+                <md-table-cell md-numeric>{{payment.amount}}</md-table-cell>
+                <md-table-cell>{{payment.currency}}</md-table-cell>
+                <md-table-cell>{{payment.bookingText}}</md-table-cell>
+                <md-table-cell>
+                  <md-button
+                    class="categoryButton"
+                    :style="{ backgroundColor: getBackgroundColor(payment.category.id) }"
+                    @click="showPopup(payment)"
+                  >{{payment.category.name}}</md-button>
+                </md-table-cell>
+              </md-table-row>
+            </md-table>
+            <md-button class="md-raised" @click="previousStep('second', 'first')">Back</md-button>
+            <md-button class="md-raised md-primary right" @click="nextStep('second', 'third')">Next</md-button>
+          </md-step>
+          <md-step id="third" md-label="Write-off" :md-editable="false" :md-done.sync="third">
+            <md-button class="md-raised" @click="previousStep('third', 'second')">Back</md-button>
+            <md-button
+              class="md-raised md-primary right"
+              :disabled="true"
+              @click="commitPayments()"
+            >Commit</md-button>
+          </md-step>
+        </md-steppers>
         <dx-popup
           :visible.sync="popupVisible"
           :drag-enabled="false"
           :close-on-outside-click="true"
           :show-title="true"
-          :width="450"
+          :width="700"
           :height="500"
           v-bind:title="getCurrentCategoryName()"
-        >test</dx-popup>
+        >
+          <div class="md-layout md-gutter fullheight">
+            <div class="md-layout-item fullheight md-size-30">
+              <dx-scroll-view>
+                <div>
+                  <dx-tree-view
+                    id="categoryview"
+                    ref="categoryview"
+                    class="categoryview"
+                    :items="categories"
+                    :width="200"
+                    @item-click="selectItem"
+                    :selectByClick="true"
+                    :selectionMode="'single'"
+                  />
+                </div>
+              </dx-scroll-view>
+            </div>
+            <div class="md-layout-item fullheight" style="position: relative">
+              <md-chips
+                v-model="keywords"
+                md-placeholder="New keyword"
+                @md-insert="updateKeywords()"
+                @md-delete="updateKeywords()"
+              ></md-chips>
+
+              <div class="add-div">
+                <md-field>
+                  <md-input class="add-input" placeholder="New category" v-model="newCategoryName"></md-input>
+                </md-field>
+                <dx-check-box
+                  style="line-height: 3"
+                  v-model="addAsSubcategory"
+                  text="Add as Subcategory"
+                ></dx-check-box>
+                <md-button class="md-raised md-primary add-btn right" @click="addCategory()">Add</md-button>
+              </div>
+            </div>
+          </div>
+        </dx-popup>
       </div>
     </div>
   </div>
@@ -115,7 +157,7 @@
 
 <script lang="js">
 import Vue from "vue";
-import { DxPopup } from 'devextreme-vue/popup';
+import { DxPopup, DxTreeView, DxScrollView, DxCheckBox } from 'devextreme-vue';
 
 export default Vue.extend({
   data() {
@@ -129,13 +171,6 @@ export default Vue.extend({
         thumbnailWidth: 150,
         autoProcessQueue: false
       },
-      headers: [
-        { text: 'Bookingdate', value: 'bookingdate', align: 'center', sortable: false },
-        { text: 'Amount', value: 'amount', align: 'right', sortable: false },
-        { text: 'Currency', value: 'currency', align: 'left', sortable: false },
-        { text: 'Bookingtext', value: 'bookingtext', align: 'center', sortable: false },
-        { text: 'Category', value: 'category', align: 'center', sortable: false },
-      ],
       payments: new Array(),
       popupVisible: false,
       colors: [
@@ -164,13 +199,39 @@ export default Vue.extend({
         "#B8312E",
         "#D1D5D8"
       ],
-      currentPayment: null
+      currentPayment: null,
+      categories: new Array(),
+      keywords: [],
+      active: 'first',
+      first: false,
+      second: false,
+      third: false,
+      newCategoryName: '',
+      addAsSubcategory: false
     };
   },
   components: {
-    DxPopup
+    DxPopup,
+    DxTreeView,
+    DxScrollView,
+    DxCheckBox
   },
   methods: {
+    nextStep (id, index) {
+      this[id] = true;
+
+      if (index) {
+        this.active = index;
+      }
+    },
+    previousStep(id, index) {
+      this[id] = false;
+
+      if (index) {
+        this[index] = false;
+        this.active = index;
+      }
+    },
     getFilesCount() {
       return this.file == null ? "0" : "1";
     },
@@ -238,23 +299,138 @@ export default Vue.extend({
     commitPayments() {
       //TODO
     },
-    getAllPayments() {
-      fetch('http://localhost:8085/iea/api/payments')
-      .then(async function(response) {
-        let tmp = await response.json();
-        this.payments = tmp;
-        console.log(this.payments);
-      }.bind(this));
-    },
     getBackgroundColor(catid) {
       return this.colors[catid];
     },
     showPopup(payment) {
       this.popupVisible = true;
       this.currentPayment = payment;
+      this.getAllCategories();
+    },
+    getAllPayments() {
+      fetch('http://localhost:8085/iea/api/payments')
+      .then(async function(response) {
+        let tmp = await response.json();
+        this.payments = tmp;
+      }.bind(this));
+    },
+    getAllCategories() {
+      fetch('http://localhost:8085/iea/api/preaccounting/category')
+      .then(async function(response) {
+        let tmp = await response.json();
+        this.categories = tmp;
+
+        this.getSelectedItem().selected = true;
+        this.getAllKeywords(this.getSelectedItem().id);
+      }.bind(this));
+    },
+    getAllKeywords(categoryId) {
+      fetch('http://localhost:8085/iea/api/preaccounting/assignment/' + categoryId)
+      .then(async function(response) {
+        let tmp = await response.json();
+        this.keywords = tmp;
+      }.bind(this));
     },
     getCurrentCategoryName() {
       return this.currentPayment ? "Change Category (" + this.currentPayment.category.name + ")" : "";
+    },
+    selectItem(args) {
+      if (this.currentPayment.category.id != args.itemData.id) {
+        this.currentPayment.category.id = args.itemData.id;
+        this.currentPayment.category.name = args.itemData.text;
+
+        this.saveCategory();
+      }
+    },
+    changeSelectedItem(categories) {
+      categories.forEach(item => {
+        if (item.id == this.currentPayment.category.id) {
+          item.isSelected = true;
+        } else {
+          item.isSelected = false;
+          if (item.items) {
+            item.items.forEach(i => {
+              if (i.id == this.currentPayment.category.id) {
+                i.isSelected = true;
+              } else {
+                i.isSelected = false;
+              }
+            });
+          }
+        }
+      });
+      return categories;
+    },
+    getSelectedItem() {
+      var id = this.currentPayment.category.id;
+      var returnval = null;
+      this.categories.forEach(item => {
+        if (item.id == id) {
+          returnval = item;
+        } else {
+          if (item.items) {
+            item.items.forEach(i => {
+              if (i.id == id) {
+                returnval = i;
+              }
+            });
+          }
+        }
+      });
+      return returnval;
+    },
+    saveCategory() {
+      fetch('http://localhost:8085/iea/api/payments/changecategory/' + this.currentPayment.id, {
+        method: 'POST',
+        body: JSON.stringify({catId: this.currentPayment.category.id.toString() }), 
+        headers: {'Content-Type': 'text/plain'}
+      })
+      .then(function(response) {
+        console.log(response);
+        this.getAllKeywords(this.currentPayment.category.id);
+      }.bind(this)).catch(error => alert(error));
+    },
+    updateKeywords() {
+      fetch('http://localhost:8085/iea/api/preaccounting/assignment/' + this.currentPayment.category.id, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(this.keywords)
+      })
+      .then((response) => {
+        console.log(response);
+      }).catch(error => {
+        console.error(error);
+      });
+    },
+    addCategory() {
+      var url = '';
+      if (this.addAsSubcategory) {
+        var selectedItem = this.getSelectedItem();
+        console.log(selectedItem);
+        if (typeof selectedItem !== 'undefined' && selectedItem) {
+          var parentId = this.getSelectedItem().parentId == -1 ? this.getSelectedItem().id : this.getSelectedItem().parentId;
+          url = 'http://localhost:8085/iea/api/payments/addcategory/' + parentId;
+        }
+      } else {
+        url = 'http://localhost:8085/iea/api/payments/addcategory';
+      }
+
+      if (url != '') {
+        fetch(url, {
+          method: 'POST',
+          headers: {
+              "Content-Type": "text/plain"
+          },
+          body: this.newCategoryName
+        }).then(function(response) {
+          console.log(response);
+          this.addAsSubcategory = false;
+          this.newCategoryName = "";
+          this.getAllCategories();
+        }.bind(this));
+      }
     }
   }
 });
@@ -312,6 +488,37 @@ button:hover {
 }
 .categoryButton {
   color: white !important;
-  min-width: 110px !important;
+  min-width: 135px !important;
+}
+.gridcontainer {
+  padding: 0px !important;
+}
+.fullheight {
+  height: 100%;
+}
+.dx-treeview-item-content > span:first-child:nth-last-child(1) {
+  float: left;
+}
+.dark-head {
+  background-color: #363640;
+}
+.white-color {
+  color: white !important;
+}
+.add-btn {
+  margin-left: 15px;
+}
+.add-div {
+  margin-top: 25px;
+  width: 100%;
+  position: absolute;
+  bottom: 1px;
+  padding-right: 25px;
+}
+.add-input {
+  width: 100%;
+}
+.md-field {
+  margin: 0 !important;
 }
 </style>

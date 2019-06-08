@@ -2,6 +2,7 @@ package at.htl.iea.rest;
 
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
+import org.json.JSONArray;
 
 import javax.json.*;
 import javax.persistence.EntityManager;
@@ -34,11 +35,13 @@ public class PreAccountingEndPoint {
             cat.add("id", category.getId());
             cat.add("text", category.getName());
             cat.add("isSelected", false);
+            cat.add("parentId", -1);
             JsonArrayBuilder subCats = Json.createArrayBuilder();
             for (Category subcat : category.getSubcategories()) {
                 JsonObjectBuilder subCat = Json.createObjectBuilder();
                 subCat.add("id", subcat.getId());
                 subCat.add("text", subcat.getName());
+                subCat.add("parentId", category.getId());
 
                 subCats.add(subCat);
             }
@@ -70,13 +73,14 @@ public class PreAccountingEndPoint {
     @POST
     @Path("/assignment/{id}")
     @Transactional
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response changeAssigment(@PathParam("id") long id, JsonArray keywords) {
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response changeAssigment(@PathParam("id") long id, String keywords) {
+        JSONArray keywordArray = new JSONArray(keywords);
         Assignment assignment = getAssignment(id);
         assignment.setKeywords(new HashSet<>());
 
-        for (JsonValue val : keywords) {
-            String keyword = val.toString().replaceAll("\"", "");
+        for(int i = 0; i < keywordArray.length(); i++) {
+            String keyword = keywordArray.get(i).toString().replaceAll("\"", "");
             assignment.addKeyword(keyword);
         }
 
