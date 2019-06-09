@@ -6,45 +6,37 @@
     </div>
 
     <div class="dx-field">
-      <dx-text-box placeholder="Login" width="100%" :value.sync="login">
+      <dx-text-box placeholder="Username" width="100%" :value.sync="username">
         <dx-validator>
-          <dx-required-rule message="Login is required" />
+          <dx-required-rule message="Username is required"/>
         </dx-validator>
       </dx-text-box>
     </div>
 
     <div class="dx-field">
-      <dx-text-box
-        placeholder="Password"
-        width="100%"
-        mode="password"
-        :value.sync="password"
-      >
+      <dx-text-box placeholder="Password" width="100%" mode="password" :value.sync="password">
         <dx-validator>
-          <dx-required-rule message="Password is required" />
+          <dx-required-rule message="Password is required"/>
         </dx-validator>
       </dx-text-box>
     </div>
 
     <div class="dx-field">
-      <dx-check-box :value.sync="rememberUser" text="Remember me" />
+      <dx-check-box :value.sync="rememberUser" text="Remember me"/>
     </div>
 
     <div class="dx-field">
-      <dx-button
-        type="default"
-        text="Login"
-        width="100%"
-        @click="onLoginClick"
-      />
+      <dx-button type="default" text="Login" width="100%" @click="onLoginClick"/>
     </div>
 
     <div class="dx-field">
-      <router-link to="/recovery"><a>Forgot password ?</a></router-link>
+      <router-link to="/recovery">
+        <a>Forgot password ?</a>
+      </router-link>
     </div>
 
     <div class="dx-field">
-      <dx-button type="normal" text="Create an account" width="100%" />
+      <dx-button type="normal" text="Create an account" @click="registerAccount()" width="100%"/>
     </div>
   </dx-validation-group>
 </template>
@@ -55,6 +47,7 @@ import DxCheckBox from "devextreme-vue/check-box";
 import DxTextBox from "devextreme-vue/text-box";
 import DxValidationGroup from "devextreme-vue/validation-group";
 import DxValidator, { DxRequiredRule } from "devextreme-vue/validator";
+import sha512 from "js-sha512/src/sha512.js";
 
 import auth from "../auth";
 
@@ -62,22 +55,10 @@ export default {
   data() {
     return {
       title: this.$appInfo.title,
-      login: "",
-      password: "",
-      rememberUser: false
+      username: localStorage.getItem("username"),
+      password: localStorage.getItem("password"),
+      rememberUser: localStorage.getItem("rememberme") == "true"
     };
-  },
-  methods: {
-    onLoginClick(e) {
-      if (!e.validationGroup.validate().isValid) {
-        return;
-      }
-
-      auth.logIn();
-      this.$router.push(this.$route.query.redirect || "/home");
-
-      e.validationGroup.reset();
-    }
   },
   components: {
     DxButton,
@@ -86,6 +67,63 @@ export default {
     DxValidator,
     DxRequiredRule,
     DxValidationGroup
+  },
+  methods: {
+    logIn(username, hashedpassword) {
+      var user = {
+        username: username,
+        password: hashedpassword
+      };
+
+      fetch("http://localhost:8085/iea/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        credentials: "include",
+        body: JSON.stringify(user)
+      })
+        .then(
+          function(response) {
+            console.log(response);
+            if (response.status == 200) {
+              auth.setAuthenticated(true);
+              localStorage.setItem("isLoggedIn", "true");
+              this.$router.push(this.$route.query.redirect || "/home");
+            } else {
+              localStorage.setItem("isLoggedIn", "false");
+            }
+          }.bind(this)
+        )
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    logOut() {
+      auth.setAuthenticated(false);
+    },
+    onLoginClick(e) {
+      if (!e.validationGroup.validate().isValid) {
+        return;
+      }
+
+      this.logIn(this.username, sha512(this.password));
+      this.$router.push(this.$route.query.redirect || "/home");
+
+      if (this.rememberUser) {
+        localStorage.setItem("username", this.username);
+        localStorage.setItem("password", this.password);
+        localStorage.setItem("rememberme", true);
+      } else {
+        localStorage.setItem("username", "");
+        localStorage.setItem("password", "");
+        localStorage.setItem("rememberme", false);
+      }
+      e.validationGroup.reset();
+    },
+    registerAccount() {
+      this.$router.push("/register");
+    }
   }
 };
 </script>

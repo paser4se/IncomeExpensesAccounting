@@ -33,16 +33,23 @@ const router = new Router({
       }
     },
     {
-      path: "/login-form",
-      name: "login-form",
+      path: "/login",
+      name: "login",
       meta: { requiresAuth: false },
       components: {
         layout: simpleLayout,
-        // route level code-splitting
-        // this generates a separate chunk (login.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         content: () =>
-          import(/* webpackChunkName: "login" */ "./views/login-form")
+          import("./views/login-form")
+      }
+    },
+    {
+      path: "/register",
+      name: "register",
+      meta: { requiresAuth: false },
+      components: {
+        layout: simpleLayout,
+        content: () =>
+          import("./views/register-form")
       }
     },
     {
@@ -78,23 +85,12 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-
-  if (to.name === "login-form" && auth.authenticated()) {
-    next({ name: "home" });
-  }
-
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!auth.authenticated()) {
-      next({
-        name: "login-form",
-        query: { redirect: to.fullPath }
-      });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
+  auth.authenticate().then(res => {
+    if (res.status != 200 && to.meta.requiresAuth)
+      next({ path: '/login', query: { origin: from.path } })
+    else
+      next()
+  });
 });
 
 export default router;

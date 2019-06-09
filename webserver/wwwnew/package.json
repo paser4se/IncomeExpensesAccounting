@@ -13,6 +13,7 @@
     "core-js": "^2.6.5",
     "devextreme": "19.1-next",
     "devextreme-vue": "19.1-next",
+    "js-sha512": "^0.8.0",
     "node-sass": "^4.11.0",
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",

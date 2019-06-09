@@ -1,9 +1,11 @@
 package at.htl.iea.rest;
 
+import at.htl.iea.dao.CategoryDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import org.json.JSONArray;
 
+import javax.inject.Inject;
 import javax.json.*;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -21,14 +23,14 @@ import java.util.List;
 @Path("preaccounting")
 public class PreAccountingEndPoint {
 
-    @PersistenceContext
-    EntityManager em;
+    @Inject
+    CategoryDao categoryDao;
 
     @GET
     @Path("/category")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCategories() {
-        List<Category> categories = em.createNamedQuery("Category.getSortedCategories", Category.class).getResultList();
+        List<Category> categories = categoryDao.getSortedCategories();
         JsonArrayBuilder cats = Json.createArrayBuilder();
         for (Category category : categories) {
             JsonObjectBuilder cat = Json.createObjectBuilder();
@@ -60,7 +62,7 @@ public class PreAccountingEndPoint {
     @GET
     @Path("/assignment/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllAssignments(@PathParam("id") long id) {
+    public Response getAllAssignments(@PathParam("id") Long id) {
         Assignment assignment = getAssignment(id);
 
         if(assignment == null) {
@@ -74,7 +76,7 @@ public class PreAccountingEndPoint {
     @Path("/assignment/{id}")
     @Transactional
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response changeAssigment(@PathParam("id") long id, String keywords) {
+    public Response changeAssigment(@PathParam("id") Long id, String keywords) {
         JSONArray keywordArray = new JSONArray(keywords);
         Assignment assignment = getAssignment(id);
         assignment.setKeywords(new HashSet<>());
@@ -91,11 +93,11 @@ public class PreAccountingEndPoint {
     @Path("/assignment/addkeyword/{id}")
     @Transactional
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response addKeyword(@PathParam("id") long id, String keyword) {
+    public Response addKeyword(@PathParam("id") Long id, String keyword) {
         try {
-            Assignment assignment = em.createNamedQuery("Assignment.getByCat", Assignment.class).setParameter(1, id).getSingleResult();
+            Assignment assignment = categoryDao.getAssignmentByCategory(id);
             assignment.addKeyword(keyword);
-            em.flush();
+            categoryDao.flush();
         } catch (Exception ex) {
             return Response.noContent().build();
         }
@@ -103,11 +105,10 @@ public class PreAccountingEndPoint {
         return Response.ok("Added Keyword").build();
     }
 
-    public Assignment getAssignment(long id) {
+    public Assignment getAssignment(Long id) {
         Assignment assignment = null;
         try{
-            TypedQuery query = em.createNamedQuery("Assignment.getByCat", Assignment.class).setParameter(1, id);
-            assignment = (Assignment)query.getSingleResult();
+            assignment = categoryDao.getAssignmentByCategory(id);
         }
         catch (NoResultException nre){
 
