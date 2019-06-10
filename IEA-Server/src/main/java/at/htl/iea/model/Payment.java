@@ -1,5 +1,7 @@
 package at.htl.iea.model;
 
+import at.htl.iea.model.enums.WriteOffUnit;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
@@ -30,6 +32,8 @@ public class Payment {
     private String note = "";
     private LocalDateTime valueDate = null; // valutadatum
     private Boolean evaluated = false;  //Vorkontierung in arbeit..
+    private WriteOffUnit writeOffUnit = WriteOffUnit.NONE;
+    private int writeOffNumber = 0;
 
     @OneToOne
     private Category category;
@@ -160,5 +164,20 @@ public class Payment {
         this.category = category;
     }
 
-    // endregion
+    public WriteOffUnit getWriteOffUnit() {
+        return writeOffUnit;
+    }
+
+    public void setWriteOffUnit(WriteOffUnit writeOffUnit) {
+        this.writeOffUnit = writeOffUnit;
+    }
+
+    public int getWriteOffNumber() {
+        return writeOffNumber;
+    }
+
+    public void setWriteOffNumber(int writeOffNumber) {
+        this.writeOffNumber = writeOffNumber;
+    }
+// endregion
 }

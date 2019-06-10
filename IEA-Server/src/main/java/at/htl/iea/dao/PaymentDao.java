@@ -20,6 +20,10 @@ public class PaymentDao {
         return em.find(Payment.class, id);
     }
 
+    public void updatePayment(Payment payment) {
+        em.merge(payment);
+    }
+
     public void flush() {
         em.flush();
     }

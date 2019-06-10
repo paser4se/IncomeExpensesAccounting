@@ -1,9 +1,13 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.dao.CategoryDao;
+import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
+import at.htl.iea.model.Payment;
+import at.htl.iea.model.enums.WriteOffUnit;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 import javax.json.*;
@@ -25,6 +29,8 @@ public class PreAccountingEndPoint {
 
     @Inject
     CategoryDao categoryDao;
+    @Inject
+    PaymentDao paymentDao;
 
     @GET
     @Path("/category")
@@ -105,13 +111,41 @@ public class PreAccountingEndPoint {
         return Response.ok("Added Keyword").build();
     }
 
+    @POST
+    @Path("/writeoff/{id}")
+    @Transactional
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response writeOff(@PathParam("id") Long id, String infos) {
+        JSONObject infoObject = new JSONObject(infos);
+        String unit = infoObject.get("wunit").toString();
+        int writeOffNumber = Integer.parseInt(infoObject.get("wnum").toString());
+        Payment payment = paymentDao.getPaymentById(id);
+        WriteOffUnit writeOffUnit = WriteOffUnit.NONE;
+        switch (unit) {
+            case "Month":
+                writeOffUnit = WriteOffUnit.MONTH;
+                break;
+            case "Quarter":
+                writeOffUnit = WriteOffUnit.QUARTER;
+                break;
+            case "Year":
+                writeOffUnit = WriteOffUnit.YEAR;
+                break;
+        }
+
+        payment.setWriteOffUnit(writeOffUnit);
+        payment.setWriteOffNumber(writeOffNumber);
+        paymentDao.updatePayment(payment);
+
+        return Response.ok().build();
+    }
+
     public Assignment getAssignment(Long id) {
         Assignment assignment = null;
         try{
             assignment = categoryDao.getAssignmentByCategory(id);
         }
         catch (NoResultException nre){
-
         }
 
         return assignment;
