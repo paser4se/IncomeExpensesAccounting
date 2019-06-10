@@ -10,6 +10,7 @@
     "postinstall": "npm run build-themes"
   },
   "dependencies": {
+    "@syncfusion/ej2-charts": "^17.1.47",
     "core-js": "^2.6.5",
     "devextreme": "19.1-next",
     "devextreme-vue": "19.1-next",
