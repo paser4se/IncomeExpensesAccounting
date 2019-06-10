@@ -20,6 +20,10 @@ public class PaymentDao {
         return em.createNamedQuery("Payments.findAllEvaluated", Payment.class).getResultList();
     }
 
+    public List<Payment> getAllPayments(){
+        return em.createNamedQuery("Payments.findAll", Payment.class).getResultList();
+    }
+
     public Payment getPaymentById(Long id) {
         return em.find(Payment.class, id);
     }
