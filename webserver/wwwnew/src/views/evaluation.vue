@@ -48,35 +48,35 @@ export default {
       areas: [
         {
           country: "Russia",
-          area: 12
+          area: 24
         },
         {
           country: "Canada",
-          area: 7
+          area: 14
         },
         {
           country: "USA",
-          area: 7
+          area: 14
         },
         {
           country: "China",
-          area: 7
+          area: 14
         },
         {
           country: "Brazil",
-          area: 6
+          area: 12
         },
         {
           country: "Australia",
-          area: 5
+          area: 10
         },
         {
           country: "India",
-          area: 2
+          area: 4
         },
         {
           country: "Others",
-          area: 55
+          area: 110
         }
       ]
     };
