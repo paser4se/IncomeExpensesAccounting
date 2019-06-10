@@ -1,10 +1,14 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.business.Parser;
+import at.htl.iea.dao.CategoryDao;
+import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
+import org.json.JSONObject;
 
+import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,13 +20,15 @@ import java.util.List;
 
 @Path("payments")
 public class PaymentServiceEndpoint {
-    @PersistenceContext
-    EntityManager em;
+    @Inject
+    PaymentDao paymentDao;
+    @Inject
+    CategoryDao categoryDao;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPayments() {
-        List<Payment> payments = em.createNamedQuery("Payments.findAllUnevaluated", Payment.class).getResultList();
+        List<Payment> payments = paymentDao.getAllUnevaluatedPayments();
         return Response.ok(Parser.getInstance().getAllPayments(payments), MediaType.APPLICATION_JSON).build();
     }
 
@@ -30,13 +36,15 @@ public class PaymentServiceEndpoint {
     @Path("/changecategory/{id}")
     @Transactional
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response changeCategory(@PathParam("id") long id, JsonObject catId) {
-        Long categoryId = Long.parseLong(catId.getString("catId"));
+    public Response changeCategory(@PathParam("id") Long id, String catId) {
+        JSONObject obj = new JSONObject(catId);
+        Long categoryId = Long.parseLong(obj.getString("catId"));
 
-        Payment payment = em.find(Payment.class, id);
-        Category category = em.find(Category.class, categoryId);
+        Payment payment = paymentDao.getPaymentById(id);
+        Category category = categoryDao.getCategoryById(categoryId);
         payment.setCategory(category);
-        em.flush();
+        paymentDao.flush();
+        categoryDao.flush();
 
         return Response.ok("Category changed").build();
     }
@@ -48,10 +56,10 @@ public class PaymentServiceEndpoint {
     public Response addCategory(String categoryname) {
         try {
             Category category = new Category(categoryname);
-            em.persist(category);
+            categoryDao.saveCategory(category);
             Assignment assignment = new Assignment(category);
-            em.persist(assignment);
-            em.flush();
+            categoryDao.saveAssignment(assignment);
+            categoryDao.flush();
         } catch (Exception ex) {
             return Response.noContent().build();
         }
@@ -63,15 +71,15 @@ public class PaymentServiceEndpoint {
     @Path("/addcategory/{id}")
     @Transactional
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response addSubCategory(@PathParam("id") long id, String categoryname) {
+    public Response addSubCategory(@PathParam("id") Long id, String categoryname) {
         try {
-            Category parentCategory = em.find(Category.class, id);
+            Category parentCategory = categoryDao.getCategoryById(id);
             Category category = new Category(categoryname);
-            em.persist(category);
+            categoryDao.saveCategory(category);
             parentCategory.addSubcategory(category);
             Assignment assignment = new Assignment(category);
-            em.persist(assignment);
-            em.flush();
+            categoryDao.saveAssignment(assignment);
+            categoryDao.flush();
         } catch (Exception ex) {
             return Response.noContent().build();
         }
