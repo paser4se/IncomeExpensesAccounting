@@ -85,7 +85,7 @@
                   <md-button
                     class="categoryButton"
                     :style="{ backgroundColor: getBackgroundColor(payment.category.id) }"
-                    @click="showPopup(payment)"
+                    @click="showCategoryPopup(payment)"
                   >{{payment.category.name}}</md-button>
                 </md-table-cell>
               </md-table-row>
@@ -94,6 +94,28 @@
             <md-button class="md-raised md-primary right" @click="nextStep('second', 'third')">Next</md-button>
           </md-step>
           <md-step id="third" md-label="Write-off" :md-editable="false" :md-done.sync="third">
+            <md-table>
+              <md-table-row class="dark-head">
+                <md-table-head class="white-color">Bookingdate</md-table-head>
+                <md-table-head class="white-color" md-numeric>Amount</md-table-head>
+                <md-table-head class="white-color">Currency</md-table-head>
+                <md-table-head class="white-color">Bookingtext</md-table-head>
+                <md-table-head class="white-color">Write-off</md-table-head>
+              </md-table-row>
+              <md-table-row v-for="payment in payments" :key="payment.id">
+                <md-table-cell>{{payment.bookingDate}}</md-table-cell>
+                <md-table-cell md-numeric>{{payment.amount}}</md-table-cell>
+                <md-table-cell>{{payment.currency}}</md-table-cell>
+                <md-table-cell>{{payment.bookingText}}</md-table-cell>
+                <md-table-cell>
+                  <md-button
+                    class="categoryButton"
+                    :style="{ backgroundColor: payment.writeOffUnit == 0 ? '#CC0000' : '#00CC00' }"
+                    @click="showWriteOffPopup(payment)"
+                  >Write-off</md-button>
+                </md-table-cell>
+              </md-table-row>
+            </md-table>
             <md-button class="md-raised" @click="previousStep('third', 'second')">Back</md-button>
             <md-button
               class="md-raised md-primary right"
@@ -103,7 +125,7 @@
           </md-step>
         </md-steppers>
         <dx-popup
-          :visible.sync="popupVisible"
+          :visible.sync="categoryPopupVisible"
           :drag-enabled="false"
           :close-on-outside-click="true"
           :show-title="true"
@@ -150,6 +172,28 @@
             </div>
           </div>
         </dx-popup>
+        <dx-popup
+          :visible.sync="writeoffPopupVisible"
+          :drag-enabled="false"
+          :close-on-outside-click="true"
+          :show-title="true"
+          :width="350"
+          :height="250"
+          v-bind:title="'Write-off'"
+        >
+          <div class="md-layout md-gutter fullheight" style="position: relative;">
+            <div class="md-layout-item">
+              <dx-select-box :items="units" :value.sync="writeoffunit"/>
+            </div>
+            <div class="md-layout-item fullheight">
+              <dx-number-box :min="2" :show-spin-buttons="true" :value.sync="writeOffNumber"/>
+
+              <div class="add-div" style="width: 50% !important;">
+                <md-button class="md-raised md-primary add-btn right" @click="saveWriteOff()">Save</md-button>
+              </div>
+            </div>
+          </div>
+        </dx-popup>
       </div>
     </div>
   </div>
@@ -157,7 +201,7 @@
 
 <script lang="js">
 import Vue from "vue";
-import { DxPopup, DxTreeView, DxScrollView, DxCheckBox } from 'devextreme-vue';
+import { DxPopup, DxTreeView, DxScrollView, DxCheckBox, DxNumberBox, DxSelectBox } from 'devextreme-vue';
 
 export default Vue.extend({
   data() {
@@ -172,7 +216,8 @@ export default Vue.extend({
         autoProcessQueue: false
       },
       payments: new Array(),
-      popupVisible: false,
+      categoryPopupVisible: false,
+      writeoffPopupVisible: false,
       colors: [
         "#61BC6D",
         "#F57835",
@@ -207,14 +252,19 @@ export default Vue.extend({
       second: false,
       third: false,
       newCategoryName: '',
-      addAsSubcategory: false
+      addAsSubcategory: false,
+      writeOffNumber: 2,
+      writeoffunit: 'None',
+      units: ['None', 'Month', 'Quarter', 'Year']
     };
   },
   components: {
     DxPopup,
     DxTreeView,
     DxScrollView,
-    DxCheckBox
+    DxCheckBox,
+    DxNumberBox,
+    DxSelectBox
   },
   methods: {
     nextStep (id, index) {
@@ -302,10 +352,34 @@ export default Vue.extend({
     getBackgroundColor(catid) {
       return this.colors[catid];
     },
-    showPopup(payment) {
-      this.popupVisible = true;
+    showCategoryPopup(payment) {
+      this.categoryPopupVisible = true;
       this.currentPayment = payment;
       this.getAllCategories();
+    },
+    showWriteOffPopup(payment) {
+      this.writeoffPopupVisible = true;
+      this.currentPayment = payment;
+      if (this.currentPayment.writeOffNumber >= 2){
+        this.writeOffNumber = this.currentPayment.writeOffNumber;
+      }else {
+        this.writeOffNumber = 2;
+      }
+      var unit = 'None';
+      switch (this.currentPayment.writeOffUnit) {
+        case 1:
+          unit = "Month";
+          break;
+        case 2:
+          unit = "Quarter";
+          break;
+        case 3:
+          unit = "Year";
+          break;
+        default:
+          break;
+      }
+      this.writeoffunit = unit;
     },
     getAllPayments() {
       fetch('http://localhost:8085/iea/api/payments')
@@ -408,7 +482,6 @@ export default Vue.extend({
       var url = '';
       if (this.addAsSubcategory) {
         var selectedItem = this.getSelectedItem();
-        console.log(selectedItem);
         if (typeof selectedItem !== 'undefined' && selectedItem) {
           var parentId = this.getSelectedItem().parentId == -1 ? this.getSelectedItem().id : this.getSelectedItem().parentId;
           url = 'http://localhost:8085/iea/api/payments/addcategory/' + parentId;
@@ -429,6 +502,25 @@ export default Vue.extend({
           this.addAsSubcategory = false;
           this.newCategoryName = "";
           this.getAllCategories();
+        }.bind(this));
+      }
+    },
+    saveWriteOff() {
+      if (this.writeOffNumber != 'None') {
+        var writeoff = {
+          wunit: this.writeoffunit,
+          wnum: this.writeOffNumber
+        };
+
+        fetch('http://localhost:8085/iea/api/preaccounting/writeoff/' + this.currentPayment.id, {
+          method: 'POST',
+          headers: {
+              "Content-Type": "text/plain"
+          },
+          body: JSON.stringify(writeoff)
+        }).then(function(response) {
+          this.getAllPayments();
+          console.log(response);
         }.bind(this));
       }
     }

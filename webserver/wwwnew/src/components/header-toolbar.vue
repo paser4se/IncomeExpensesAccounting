@@ -19,7 +19,7 @@
           <!-- eslint-enable -->
           <dx-button
             class="user-button authorization"
-            :width="170"
+            :width="200"
             height="100%"
             styling-mode="text"
           >

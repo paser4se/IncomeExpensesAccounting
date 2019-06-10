@@ -1,14 +1,12 @@
 package at.htl.iea.business;
 
-import at.htl.iea.model.OnlineBankingSystem;
+import at.htl.iea.model.enums.OnlineBankingSystem;
 import at.htl.iea.model.Payment;
 
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -18,7 +16,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -165,6 +162,8 @@ public class Parser {
             tmpPayment.add("amount", doubleFormatter.format(paymentList.get(i).getAmount()));
             tmpPayment.add("currency", paymentList.get(i).getCurrency());
             tmpPayment.add("bookingText", paymentList.get(i).getBookingText());
+            tmpPayment.add("writeOffUnit", paymentList.get(i).getWriteOffUnit().ordinal());
+            tmpPayment.add("writeOffNumber", paymentList.get(i).getWriteOffNumber());
             JsonObjectBuilder cat = Json.createObjectBuilder();
             cat.add("id", paymentList.get(i).getCategory().getId());
             cat.add("name", paymentList.get(i).getCategory().getName());
