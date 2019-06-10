@@ -5,13 +5,13 @@
       <div class="dx-card responsive-paddings">
         <dx-pie-chart
           id="pie"
-          :data-source="areas"
+          :data-source="payments"
           palette="Bright"
-          title="Area of Countries"
+          title="Payments"
           @point-click="pointClickHandler($event)"
           @legend-click="legendClickHandler($event)"
         >
-          <dx-series argument-field="country" value-field="area">
+          <dx-series argument-field="category" value-field="amount">
             <dx-label :visible="true">
               <dx-connector :visible="true" :width="1"/>
             </dx-label>
@@ -37,38 +37,34 @@ import {
 export default {
   data() {
     return {
-      areas: [
+      payments: [
         {
-          country: "Russia",
-          area: 12
+          category: "Bank",
+          amount: 12
         },
         {
-          country: "Canada",
-          area: 7
+          category: "Zalando",
+          amount: 7
         },
         {
-          country: "USA",
-          area: 7
+          category: "Essen",
+          amount: 7
         },
         {
-          country: "China",
-          area: 7
+          category: "Auto",
+          amount: 7
         },
         {
-          country: "Brazil",
-          area: 6
+          category: "Studium Tochter",
+          amount: 6
         },
         {
-          country: "Australia",
-          area: 5
+          category: "Entertainment",
+          amount: 5
         },
         {
-          country: "India",
-          area: 2
-        },
-        {
-          country: "Others",
-          area: 55
+          category: "Sonstige",
+          amount: 55
         }
       ]
     };
