@@ -1,8 +1,10 @@
 package at.htl.iea.rest;
 
+import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.model.Evaluation;
 import at.htl.iea.model.Payment;
 
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.persistence.EntityManager;
@@ -16,39 +18,55 @@ import java.util.*;
 
 @Path("evaluation")
 public class EvaluationEndpoint {
-    @PersistenceContext
-    EntityManager em;
-
+    @Inject
+    PaymentDao paymentDao;
 
     @GET
-    @Path("/getAll")
+    @Path("/income")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEvaluations(){
-    //public Set<Map.Entry<String, Double>> getEvaluations(){
-        JsonArrayBuilder resultBuilder = Json.createArrayBuilder();
-        HashMap<String, Double> evaluationResults = new HashMap<>();
-        List<Evaluation> evaluations = new LinkedList<>();
-        List<Payment> payments = em.createNamedQuery("Payments.findAll", Payment.class).getResultList();
+    public Response getEvaluationIncome(){
+        return Response.ok(getEvaluations("income")).build();
+    }
 
-        /*for (Payment p: payments) {
-            if (!evaluationResults.containsKey(p.getCategory().getName())){
-                evaluationResults.put(p.getCategory().getName(), p.getAmount());
-            }
-        }*/
+    @GET
+    @Path("/expanses")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEvaluationExpanses(){
+        return Response.ok(getEvaluations("expanses")).build();
+    }
+
+    private List<Evaluation> getEvaluations(String mode) {
+        List<Evaluation> evaluationIncome = new LinkedList<>();
+        List<Evaluation> evaluationExpanses = new LinkedList<>();
+        List<Payment> payments = paymentDao.getAllEvaluatedPayments();
+
         for (int i = 0; i < payments.size(); i++){
-            if (!containingInEvaluationList(evaluations, payments.get(i).getCategory().getName())){
-                evaluations.add(new Evaluation(payments.get(i).getCategory().getName(), payments.get(i).getAmount()));
+            if(payments.get(i).getAmount() > 0) {
+                evaluationIncome = addAmountToList(evaluationIncome, payments.get(i));
+            } else {
+                evaluationExpanses = addAmountToList(evaluationExpanses, payments.get(i));
+            }
+
+        }
+
+        if(mode == "income") {
+            return evaluationIncome;
+        }
+
+        return evaluationExpanses;
+    }
+
+    private List<Evaluation> addAmountToList(List<Evaluation> evaluations, Payment payment) {
+        if (!containingInEvaluationList(evaluations, payment.getCategory().getName())){
+            evaluations.add(new Evaluation(payment.getCategory().getName(), payment.getAmount()));
+        }
+        else {
+            int index = getIndexOfPayment(evaluations, payment);
+            if (index != -1) {
+                evaluations.get(index).addAmount(payment.getAmount());
             }
         }
-
-        //to delete
-        for (Evaluation e: evaluations) {
-            System.out.println(e.getName() + ": " + e.getAmount());
-        }
-
-        return Response.ok(evaluations).build();
-
-        //return evaluationResults.entrySet();
+        return evaluations;
     }
 
     private boolean containingInEvaluationList(List<Evaluation> evaluations, String categoryName){
@@ -60,5 +78,12 @@ public class EvaluationEndpoint {
         return false;
     }
 
-
+    private int getIndexOfPayment(List<Evaluation> evaluations, Payment payment) {
+        for (int i = 0; i < evaluations.size(); i++) {
+            if (evaluations.get(i).getName().equals(payment.getCategory().getName())) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

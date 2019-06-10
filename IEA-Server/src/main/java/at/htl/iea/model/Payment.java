@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Payments.findAll", query = "select p from Payment p"),
-        @NamedQuery(name = "Payments.findAllUnevaluated", query = "select p from Payment p where p.evaluated = false")
+        @NamedQuery(name = "Payments.findAllUnevaluated", query = "select p from Payment p where p.evaluated = false"),
+        @NamedQuery(name = "Payments.findAllEvaluated", query = "select p from Payment p where p.evaluated = true")
 })
 public class Payment {
 

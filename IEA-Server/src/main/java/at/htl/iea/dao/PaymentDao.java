@@ -16,6 +16,10 @@ public class PaymentDao {
         return em.createNamedQuery("Payments.findAllUnevaluated", Payment.class).getResultList();
     }
 
+    public List<Payment> getAllEvaluatedPayments() {
+        return em.createNamedQuery("Payments.findAllEvaluated", Payment.class).getResultList();
+    }
+
     public Payment getPaymentById(Long id) {
         return em.find(Payment.class, id);
     }

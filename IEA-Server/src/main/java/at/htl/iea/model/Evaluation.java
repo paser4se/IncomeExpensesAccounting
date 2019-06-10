@@ -1,6 +1,5 @@
 package at.htl.iea.model;
 
-
 public class Evaluation { // wird benoetigt, um im EvaluationEndpoint eine List<Evaluation> zu returnen, damit der client die daten besser verarbeiten kann
     private String name; // category name
     private Double amount;
@@ -27,5 +26,7 @@ public class Evaluation { // wird benoetigt, um im EvaluationEndpoint eine List<
         this.amount = amount;
     }
 
-
+    public void addAmount(Double amount) {
+        this.amount += amount;
+    }
 }
