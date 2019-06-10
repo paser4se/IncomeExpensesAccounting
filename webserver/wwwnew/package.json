@@ -19,7 +19,11 @@
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.5.14"
+    "vuetify": "^1.5.14",
+    "systemjs-vue-browser": "latest",
+    "quill": "1.3.6",
+    "jszip": "3.1.3",
+    "devexpress-diagram": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
