@@ -5,13 +5,13 @@
       <div class="dx-card responsive-paddings">
         <dx-pie-chart
           id="pie"
-          :data-source="areas"
+          :data-source="payments"
           palette="Bright"
-          title="Area of Countries"
+          title="Payments"
           @point-click="pointClickHandler($event)"
           @legend-click="legendClickHandler($event)"
         >
-          <dx-series argument-field="country" value-field="area">
+          <dx-series argument-field="category" value-field="amount">
             <dx-label :visible="true">
               <dx-connector :visible="true" :width="1"/>
             </dx-label>
@@ -35,75 +35,42 @@ import {
 } from "devextreme-vue/pie-chart";
 
 export default {
-  components: {
-    DxPieChart,
-    DxSize,
-    DxSeries,
-    DxLabel,
-    DxConnector,
-    DxExport
-  },
   data() {
     return {
-      areas: [
+      payments: [
         {
-          country: "Russia",
-          area: 24
+          category: "Bank",
+          amount: 12
         },
         {
-          country: "Canada",
-          area: 14
+          category: "Zalando",
+          amount: 7
         },
         {
-          country: "USA",
-          area: 14
+          category: "Essen",
+          amount: 7
         },
         {
-          country: "China",
-          area: 14
+          category: "Auto",
+          amount: 7
         },
         {
-          country: "Brazil",
-          area: 12
+          category: "Studium Tochter",
+          amount: 6
         },
         {
-          country: "Australia",
-          area: 10
+          category: "Entertainment",
+          amount: 5
         },
         {
-          country: "India",
-          area: 4
-        },
-        {
-          country: "Others",
-          area: 110
+          category: "Sonstige",
+          amount: 55
         }
       ]
     };
-  },
-  methods: {
-    pointClickHandler(e) {
-      this.toggleVisibility(e.target);
-    },
-    legendClickHandler(e) {
-      let arg = e.target,
-        item = e.component.getAllSeries()[0].getPointsByArg(arg)[0];
-
-      this.toggleVisibility(item);
-    },
-    toggleVisibility(item) {
-      item.isVisible() ? item.hide() : item.show();
-    }
   }
 };
 </script>
 
-<style>
-#pie {
-  height: 440px;
-}
-
-#pie * {
-  margin: 0 auto;
-}
+<style scoped>
 </style>

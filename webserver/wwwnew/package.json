@@ -11,18 +11,20 @@
   },
   "dependencies": {
     "@syncfusion/ej2-charts": "^17.1.47",
+    "chart.js": "^2.8.0",
     "core-js": "^2.6.5",
+    "devexpress-diagram": "latest",
     "devextreme": "19.1-next",
     "devextreme-vue": "19.1-next",
+    "hchs-vue-charts": "^1.2.8",
     "js-sha512": "^0.8.0",
+    "jszip": "3.1.3",
     "node-sass": "^4.11.0",
+    "quill": "1.3.6",
+    "systemjs-vue-browser": "latest",
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",
-    "vue-router": "^3.0.1",
-    "systemjs-vue-browser": "latest",
-    "quill": "1.3.6",
-    "jszip": "3.1.3",
-    "devexpress-diagram": "latest"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",

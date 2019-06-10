@@ -3,6 +3,8 @@ import './themes/generated/theme.base.css';
 import './themes/generated/theme.additional.css';
 import Vue from "vue";
 
+import "chart.js";
+import "hchs-vue-charts";
 
 import App from "./App";
 import router from "./router";
