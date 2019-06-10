@@ -3,6 +3,7 @@ package at.htl.iea.rest;
 import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.model.Evaluation;
 import at.htl.iea.model.Payment;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -38,7 +39,8 @@ public class EvaluationEndpoint {
     private List<Evaluation> getEvaluations(String mode) {
         List<Evaluation> evaluationIncome = new LinkedList<>();
         List<Evaluation> evaluationExpenses = new LinkedList<>();
-        List<Payment> payments = paymentDao.getAllEvaluatedPayments();
+        //List<Payment> payments = paymentDao.getAllEvaluatedPayments();
+        List<Payment> payments = paymentDao.getAllPayments();
 
         for (int i = 0; i < payments.size(); i++){
             if(payments.get(i).getAmount() > 0) {
