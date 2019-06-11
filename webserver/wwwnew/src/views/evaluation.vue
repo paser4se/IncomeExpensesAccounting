@@ -34,6 +34,7 @@ import {
   DxExport
 } from "devextreme-vue/pie-chart";
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -82,6 +83,7 @@ export default {
         console.log("Error: ", error);
       });
   },
+
   components: {
     DxPieChart,
     DxSize,
@@ -96,7 +98,7 @@ export default {
     },
     legendClickHandler(e) {
       let arg = e.target,
-        item = e.component.getAllSeries()[0].getPointsByArg(arg)[0];
+      item = e.component.getAllSeries()[0].getPointsByArg(arg)[0];
       this.toggleVisibility(item);
     },
     toggleVisibility(item) {
