@@ -27,7 +27,7 @@
           <div class="md-layout-item half">
             <dx-pie-chart
               id="expanses_pie"
-              :data-source="paymentsExpanses"
+              :data-source="paymentsExpenses"
               palette="Bright"
               title="Expenses"
               :resolveLabelOverlapping="'shift'"
@@ -48,12 +48,24 @@
           :drag-enabled="false"
           :close-on-outside-click="true"
           :show-title="true"
-          :width="350"
-          :height="250"
+          :width="500"
+          :height="260"
           v-bind:title="'Filter payments'"
         >
-          Filter elements.
+          <div class="dx-field">
+            <div class="dx-field-label">From:</div>
+            <div class="dx-field-value">
+              <dx-date-box :value.sync="from" type="date"/>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">To:</div>
+            <div class="dx-field-value">
+              <dx-date-box :value.sync="to" type="date"/>
+            </div>
+          </div>
           <md-button class="md-raised md-primary right" @click="filterPaymentes()">Apply</md-button>
+          <md-button class="md-raised right" @click="resetPayments()">Reset</md-button>
         </dx-popup>
       </div>
     </div>
@@ -68,14 +80,16 @@ import {
   DxLabel,
   DxConnector
 } from "devextreme-vue/pie-chart";
-import { DxPopup } from "devextreme-vue";
+import { DxPopup, DxDateBox } from "devextreme-vue";
 
 export default {
   data() {
     return {
       paymentsIncome: [],
-      paymentsExpanses: [],
-      filterPopupVisible: false
+      paymentsExpenses: [],
+      filterPopupVisible: false,
+      from: new Date(),
+      to: new Date()
     };
   },
   mounted() {
@@ -83,7 +97,7 @@ export default {
       .then(
         async function(response) {
           let tmp = await response.json();
-          this.paymentsExpanses = tmp;
+          this.paymentsExpenses = tmp;
         }.bind(this)
       )
       .catch(err => console.log(err.message));
@@ -103,7 +117,8 @@ export default {
     DxSeries,
     DxLabel,
     DxConnector,
-    DxPopup
+    DxPopup,
+    DxDateBox
   },
   methods: {
     pointClickHandler(e) {
@@ -121,7 +136,68 @@ export default {
       this.filterPopupVisible = true;
     },
     filterPaymentes() {
-      //TODO
+      this.filterPopupVisible = false;
+      console.log(this.dateToString(this.from));
+      var filter = {
+        from: this.dateToString(this.from),
+        to: this.dateToString(this.to)
+      };
+      fetch("http://localhost:8085/iea/api/evaluation/filterincome", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(filter)
+      }).then(
+        async function(response) {
+          let tmp = await response.json();
+          this.paymentsIncome = tmp;
+          console.log(tmp);
+        }.bind(this)
+      );
+      fetch("http://localhost:8085/iea/api/evaluation/filterexpenses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(filter)
+      }).then(
+        async function(response) {
+          let tmp = await response.json();
+          this.paymentsExpenses = tmp;
+          console.log(tmp);
+        }.bind(this)
+      );
+    },
+    dateToString(date) {
+      var mm = date.getMonth() + 1; // getMonth() is zero-based
+      var dd = date.getDate();
+
+      return [
+        date.getFullYear(),
+        (mm > 9 ? "" : "0") + mm,
+        (dd > 9 ? "" : "0") + dd
+      ].join("/");
+    },
+    resetPayments() {
+      this.filterPopupVisible = false;
+      fetch("http://localhost:8085/iea/api/evaluation/expenses")
+        .then(
+          async function(response) {
+            let tmp = await response.json();
+            this.paymentsExpenses = tmp;
+          }.bind(this)
+        )
+        .catch(err => console.log(err.message));
+      fetch("http://localhost:8085/iea/api/evaluation/income")
+        .then(
+          async function(response) {
+            let tmp = await response.json();
+            this.paymentsIncome = tmp;
+            console.log(this.paymentsIncome);
+          }.bind(this)
+        )
+        .catch(err => console.log(err.message));
     }
   }
 };
@@ -139,5 +215,9 @@ export default {
 }
 .right {
   float: right;
+}
+.dx-field-label {
+  color: black !important;
+  font-size: 20px !important;
 }
 </style>

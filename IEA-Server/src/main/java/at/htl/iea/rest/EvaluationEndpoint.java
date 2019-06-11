@@ -11,10 +11,14 @@ import javax.json.JsonArrayBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Path("evaluation")
@@ -26,28 +30,54 @@ public class EvaluationEndpoint {
     @Path("/income")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEvaluationIncome(){
-        return Response.ok(getEvaluations("income")).build();
+        return Response.ok(getEvaluations("income", LocalDateTime.MIN, LocalDateTime.MIN)).build();
     }
 
     @GET
     @Path("/expenses")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEvaluationExpenses(){
-        return Response.ok(getEvaluations("expenses")).build();
+        return Response.ok(getEvaluations("expenses", LocalDateTime.MIN, LocalDateTime.MIN)).build();
     }
 
-    private List<Evaluation> getEvaluations(String mode) {
+    @POST
+    @Path("/filterincome")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFilteredIncome(String body) {
+        JSONObject json = new JSONObject(body);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime from = LocalDate.parse(json.getString("from"), formatter).atStartOfDay();
+        LocalDateTime to = LocalDate.parse(json.getString("to"), formatter).atStartOfDay();
+
+        return Response.ok(getEvaluations("income", from, to)).build();
+    }
+
+    @POST
+    @Path("/filterexpenses")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFilteredExpenses(String body) {
+        JSONObject json = new JSONObject(body);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime from = LocalDate.parse(json.getString("from"), formatter).atStartOfDay();
+        LocalDateTime to = LocalDate.parse(json.getString("to"), formatter).atStartOfDay();
+
+        return Response.ok(getEvaluations("expenses", from, to)).build();
+    }
+
+    private List<Evaluation> getEvaluations(String mode, LocalDateTime from, LocalDateTime to) {
         List<Evaluation> evaluationIncome = new LinkedList<>();
         List<Evaluation> evaluationExpenses = new LinkedList<>();
         List<Payment> payments = paymentDao.getAllEvaluatedPayments();
 
         for (int i = 0; i < payments.size(); i++){
-            if(payments.get(i).getAmount() > 0) {
-                evaluationIncome = addAmountToList(evaluationIncome, payments.get(i));
-            } else {
-                evaluationExpenses = addAmountToList(evaluationExpenses, payments.get(i));
+            if ((from == LocalDateTime.MIN || payments.get(i).getBookingDate().compareTo(from) >= 0)
+                && (to == LocalDateTime.MIN || payments.get(i).getBookingDate().compareTo(to) <= 0)) {
+                if (payments.get(i).getAmount() > 0) {
+                    evaluationIncome = addAmountToList(evaluationIncome, payments.get(i));
+                } else {
+                    evaluationExpenses = addAmountToList(evaluationExpenses, payments.get(i));
+                }
             }
-
         }
 
         if(mode == "income") {
