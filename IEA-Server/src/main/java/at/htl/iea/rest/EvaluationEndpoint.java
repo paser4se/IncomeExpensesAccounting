@@ -39,8 +39,7 @@ public class EvaluationEndpoint {
     private List<Evaluation> getEvaluations(String mode) {
         List<Evaluation> evaluationIncome = new LinkedList<>();
         List<Evaluation> evaluationExpenses = new LinkedList<>();
-        //List<Payment> payments = paymentDao.getAllEvaluatedPayments();
-        List<Payment> payments = paymentDao.getAllPayments();
+        List<Payment> payments = paymentDao.getAllEvaluatedPayments();
 
         for (int i = 0; i < payments.size(); i++){
             if(payments.get(i).getAmount() > 0) {
