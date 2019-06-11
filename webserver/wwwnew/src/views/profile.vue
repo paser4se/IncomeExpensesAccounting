@@ -4,7 +4,7 @@
 
     <div class="content-block dx-card responsive-paddings">
       <div class="form-avatar">
-        <img :src="imageSrc" />
+        <img :src="imageSrc">
       </div>
       <span>{{ formData.Notes }}</span>
     </div>
@@ -17,6 +17,7 @@
         :form-data="formData"
         :min-col-width="233"
       />
+      <md-button class="md-raised md-primary right" @click="updateAccount()">Update</md-button>
     </div>
   </div>
 </template>
@@ -25,33 +26,58 @@
 import DxForm from "devextreme-vue/form";
 
 export default {
-  props: {
-    picture: String
-  },
   data() {
-    const picture = "images/employees/06.png";
     return {
-      imageSrc: `https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/${picture}`,
+      imageSrc: `https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png`,
       formData: {
-        ID: 7,
-        FirstName: "Sandra",
-        LastName: "Johnson",
-        Prefix: "Mrs.",
-        Position: "Controller",
-        Picture: picture,
-        BirthDate: new Date("1974/11/15"),
-        HireDate: new Date("2005/05/11"),
-        Notes:
-          "Sandra is a CPA and has been our controller since 2008." +
-          "She loves to interact with staff so if yo`ve not met her, be certain to say hi." +
-          "\r\n\r\n" +
-          "Sandra has 2 daughters both of whom are accomplished gymnasts.",
-        Address: "4600 N Virginia Rd."
-      }
+        prefix: "",
+        fullName: "",
+        address: "",
+        notes: "",
+        email: ""
+      },
+      account: {}
     };
+  },
+  mounted() {
+    fetch("http://localhost:8085/iea/api/auth/account", {
+      method: "GET",
+      credentials: "include"
+    }).then(
+      async function(response) {
+        let tmp = await response.json();
+        this.account = tmp;
+        this.formData.prefix = this.account.prefix;
+        this.formData.fullName = this.account.fullName;
+        this.formData.address = this.account.address;
+        this.formData.notes = this.account.notes;
+        this.formData.email = this.account.email;
+      }.bind(this)
+    );
   },
   components: {
     DxForm
+  },
+  methods: {
+    updateAccount() {
+      var obj = {
+        prefix: this.formData.prefix ? this.formData.prefix : "",
+        fullName: this.formData.fullName ? this.formData.fullName : "",
+        address: this.formData.address ? this.formData.address : "",
+        notes: this.formData.notes ? this.formData.notes : "",
+        email: this.formData.email ? this.formData.email : "",
+        id: this.account.id + ""
+      };
+      fetch("http://localhost:8085/iea/api/auth/account/" + this.account.id, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(obj)
+      }).then(function(response) {
+        console.log(response);
+      });
+    }
   }
 };
 </script>
@@ -74,5 +100,8 @@ export default {
     display: block;
     margin: 0 auto;
   }
+}
+.right {
+  float: right;
 }
 </style>

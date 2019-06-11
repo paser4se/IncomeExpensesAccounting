@@ -4,6 +4,7 @@ package at.htl.iea.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDate;
 
 @Entity
 @XmlRootElement
@@ -21,6 +22,9 @@ public class Account {
     @Email(message = "Email should be valid")
     private String email;
     private String fullName;
+    private String prefix;
+    private String address;
+    private String notes;
 
     // region Constructor
     public Account(){}
@@ -68,6 +72,31 @@ public class Account {
     public void setPassword(String password){
         this.password = password;
     }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     // endregion
 
 }

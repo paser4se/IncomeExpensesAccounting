@@ -123,6 +123,28 @@ public class AuthentificationEndPoint {
         return Response.ok().build();
     }
 
+    @POST
+    @Path("/account/{id}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response updateAccount(@PathParam("id") Long id, String json) {
+        JSONObject body = new JSONObject(json);
+        try {
+            Long accountId = Long.parseLong(body.getInt("id")+"");
+            Account temp = accountDao.getAccountById(accountId);
+            temp.setPrefix(body.getString("prefix"));
+            temp.setFullName(body.getString("fullName"));
+            temp.setAddress(body.getString("address"));
+            temp.setNotes(body.getString("notes"));
+            temp.setEmail(body.getString("email"));
+
+            accountDao.merge(temp);
+            return Response.ok().build();
+        } catch (Exception ex) {
+            System.err.println("[EXCEPTION]: AuthentificationEndPoint, Method: updateAccount");
+            return Response.status(500).build();
+        }
+    }
+
     private NewCookie buildCookie(String token) {
         long maxAge = 60 * 60; //1 hour
         return new NewCookie("auth-token", token, "/", null, 0, null, (int) maxAge,

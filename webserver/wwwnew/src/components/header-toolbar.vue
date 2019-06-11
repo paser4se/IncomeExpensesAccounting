@@ -53,7 +53,8 @@ export default {
       userMenuItems: [
         {
           text: "Profile",
-          icon: "user"
+          icon: "user",
+          onClick: this.onProfileClick
         },
         {
           text: "Logout",
@@ -70,6 +71,9 @@ export default {
         path: "/login",
         query: { redirect: this.$route.path }
       });
+    },
+    onProfileClick() {
+      this.$router.push("/profile");
     }
   },
   components: {
