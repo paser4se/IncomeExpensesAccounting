@@ -140,6 +140,59 @@ public class PreAccountingEndPoint {
         return Response.ok().build();
     }
 
+    @POST
+    @Path("/commit")
+    @Transactional
+    public Response commitPayments() {
+        List<Payment> payments = paymentDao.getAllUnevaluatedPayments();
+        List<Payment> commitedPayments = new LinkedList<>();
+
+        for (int i = 0; i < payments.size(); i++) {
+            Payment currentPayment = payments.get(i);
+            currentPayment.setEvaluated(true);
+
+            if (currentPayment.getWriteOffUnit() != WriteOffUnit.NONE) {
+                List<Payment> newPayments = new LinkedList<>();
+                for (int a = 0; a < currentPayment.getWriteOffNumber(); a++) {
+                    Payment tmpPayment = currentPayment;
+                    tmpPayment.setAmount(tmpPayment.getAmount()/currentPayment.getWriteOffNumber());
+                    if (a > 0) {
+                        switch (currentPayment.getWriteOffUnit()) {
+                            case MONTH:
+                                tmpPayment.setBookingDate(tmpPayment.getBookingDate().plusMonths(1));
+                                tmpPayment.setValueDate(tmpPayment.getValueDate().plusMonths(1));
+                                break;
+                            case QUARTER:
+                                tmpPayment.setBookingDate(tmpPayment.getBookingDate().plusMonths(3));
+                                tmpPayment.setValueDate(tmpPayment.getValueDate().plusMonths(3));
+                                break;
+                            case YEAR:
+                                tmpPayment.setBookingDate(tmpPayment.getBookingDate().plusYears(1));
+                                tmpPayment.setValueDate(tmpPayment.getValueDate().plusYears(1));
+                                break;
+                        }
+                    }
+                    newPayments.add(tmpPayment);
+                }
+                for (int j = 0; j < currentPayment.getWriteOffNumber(); j++) {
+                    if (j+1 < currentPayment.getWriteOffNumber()) {
+                        newPayments.get(j).setNextPayment(newPayments.get(j+1));
+                    }
+                    if (j-1 >= 0) {
+                        newPayments.get(j).setPreviousPayment(newPayments.get(j-1));
+                    }
+                }
+                newPayments.forEach(item -> commitedPayments.add(item));
+            } else {
+                commitedPayments.add(currentPayment);
+            }
+        }
+
+        paymentDao.commitPayments(commitedPayments);
+
+        return Response.ok().build();
+    }
+
     public Assignment getAssignment(Long id) {
         Assignment assignment = null;
         try{

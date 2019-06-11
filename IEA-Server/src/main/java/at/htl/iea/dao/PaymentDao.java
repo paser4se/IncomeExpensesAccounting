@@ -28,6 +28,13 @@ public class PaymentDao {
         em.merge(payment);
     }
 
+    public void commitPayments(List<Payment> payments) {
+        em.createQuery("DELETE FROM Payment p where p.evaluated = false");
+
+        payments.forEach(item -> em.persist(item));
+        flush();
+    }
+
     public void flush() {
         em.flush();
     }

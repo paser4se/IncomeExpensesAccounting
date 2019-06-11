@@ -33,11 +33,11 @@ import {
   DxConnector,
   DxExport
 } from "devextreme-vue/pie-chart";
-
+import axios from "axios";
 export default {
   data() {
     return {
-      payments: [
+      /*payments: [
         {
           category: "Bank",
           amount: 12
@@ -66,8 +66,42 @@ export default {
           category: "Sonstige",
           amount: 55
         }
-      ]
+      ]*/
+      payments: []
     };
+  },
+  mounted() {
+    //var self = this;
+    axios
+      .get("http://localhost:8085/iea/api/evaluation/expenses")
+      .then(function(res) {
+        //self.payments = res.data;
+        console.log("Data: ", res.data);
+      })
+      .catch(function(error) {
+        console.log("Error: ", error);
+      });
+  },
+  components: {
+    DxPieChart,
+    DxSize,
+    DxSeries,
+    DxLabel,
+    DxConnector,
+    DxExport
+  },
+  methods: {
+    pointClickHandler(e) {
+      this.toggleVisibility(e.target);
+    },
+    legendClickHandler(e) {
+      let arg = e.target,
+        item = e.component.getAllSeries()[0].getPointsByArg(arg)[0];
+      this.toggleVisibility(item);
+    },
+    toggleVisibility(item) {
+      item.isVisible() ? item.hide() : item.show();
+    }
   }
 };
 </script>

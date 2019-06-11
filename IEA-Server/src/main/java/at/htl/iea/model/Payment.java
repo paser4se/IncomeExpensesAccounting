@@ -37,6 +37,11 @@ public class Payment {
     private int writeOffNumber = 0;
 
     @OneToOne
+    private Payment nextPayment = null;
+    @OneToOne
+    private Payment previousPayment = null;
+
+    @OneToOne
     private Category category;
     // endregion
 
@@ -179,6 +184,22 @@ public class Payment {
 
     public void setWriteOffNumber(int writeOffNumber) {
         this.writeOffNumber = writeOffNumber;
+    }
+
+    public Payment getNextPayment() {
+        return nextPayment;
+    }
+
+    public void setNextPayment(Payment nextPayment) {
+        this.nextPayment = nextPayment;
+    }
+
+    public Payment getPreviousPayment() {
+        return previousPayment;
+    }
+
+    public void setPreviousPayment(Payment previousPayment) {
+        this.previousPayment = previousPayment;
     }
 // endregion
 }
