@@ -101,6 +101,28 @@ public class AuthentificationEndPoint {
         return Response.ok("Authenticated").build();
     }
 
+    @GET
+    @Path("/account")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAccountInfos(@CookieParam("auth-token") Cookie cookie) {
+        if (cookie == null) {
+            return Response.status(400).build();
+        }
+
+        String token = cookie.getValue();
+        String decodedToken = new String(Base64.getDecoder().decode(token));
+        String[] decodedTokenParts = decodedToken.split(":");
+        String username = decodedTokenParts[0];
+
+        try {
+            Account tmp = accountDao.getAccountByUsername(username);
+            return Response.ok(tmp).build();
+        } catch (NoResultException ex) {
+            Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok().build();
+    }
+
     private NewCookie buildCookie(String token) {
         long maxAge = 60 * 60; //1 hour
         return new NewCookie("auth-token", token, "/", null, 0, null, (int) maxAge,

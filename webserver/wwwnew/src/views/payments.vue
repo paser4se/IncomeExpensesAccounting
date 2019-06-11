@@ -117,11 +117,7 @@
               </md-table-row>
             </md-table>
             <md-button class="md-raised" @click="previousStep('third', 'second')">Back</md-button>
-            <md-button
-              class="md-raised md-primary right"
-              :disabled="true"
-              @click="commitPayments()"
-            >Commit</md-button>
+            <md-button class="md-raised md-primary right" @click="commitPayments()">Commit</md-button>
           </md-step>
         </md-steppers>
         <dx-popup
@@ -347,7 +343,12 @@ export default Vue.extend({
         fileReader.readAsText(fileToLoad, "UTF-8");
     },
     commitPayments() {
-      //TODO
+      fetch('http://localhost:8085/iea/api/preaccounting/commit', {
+        method: "POST"
+      }).then(function(response) {
+        console.log(response);
+        this.getAllPayments();
+      }.bind(this));
     },
     getBackgroundColor(catid) {
       return this.colors[catid];
@@ -520,6 +521,7 @@ export default Vue.extend({
           body: JSON.stringify(writeoff)
         }).then(function(response) {
           this.getAllPayments();
+          this.writeoffPopupVisible = false;
           console.log(response);
         }.bind(this));
       }
