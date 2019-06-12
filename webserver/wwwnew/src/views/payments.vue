@@ -56,7 +56,6 @@
                 <br>
               </div>
             </div>
-            <md-button class="md-raised" :disabled="true">Back</md-button>
             <md-button
               class="md-raised md-primary right"
               @click="nextStep('first', 'second'); getAllPayments();"
@@ -68,7 +67,14 @@
             :md-editable="false"
             :md-done.sync="second"
           >
-            <md-table>
+            <md-empty-state
+              md-rounded
+              md-icon="report_problem"
+              md-label="No uploaded payments!"
+              md-description="The uploaded payments will be displayed here."
+              v-if="this.payments.length == 0"
+            ></md-empty-state>
+            <md-table v-if="this.payments.length != 0">
               <md-table-row class="dark-head">
                 <md-table-head class="white-color">Bookingdate</md-table-head>
                 <md-table-head class="white-color" md-numeric>Amount</md-table-head>
@@ -94,7 +100,14 @@
             <md-button class="md-raised md-primary right" @click="nextStep('second', 'third')">Next</md-button>
           </md-step>
           <md-step id="third" md-label="Write-off" :md-editable="false" :md-done.sync="third">
-            <md-table>
+            <md-empty-state
+              md-rounded
+              md-icon="report_problem"
+              md-label="No uploaded payments!"
+              md-description="The uploaded payments will be displayed here."
+              v-if="this.payments.length == 0"
+            ></md-empty-state>
+            <md-table v-if="this.payments.length != 0">
               <md-table-row class="dark-head">
                 <md-table-head class="white-color">Bookingdate</md-table-head>
                 <md-table-head class="white-color" md-numeric>Amount</md-table-head>
@@ -117,7 +130,11 @@
               </md-table-row>
             </md-table>
             <md-button class="md-raised" @click="previousStep('third', 'second')">Back</md-button>
-            <md-button class="md-raised md-primary right" @click="commitPayments()">Commit</md-button>
+            <md-button
+              class="md-raised md-primary right"
+              @click="commitPayments()"
+              :disabled="this.payments.length == 0"
+            >Commit</md-button>
           </md-step>
         </md-steppers>
         <dx-popup

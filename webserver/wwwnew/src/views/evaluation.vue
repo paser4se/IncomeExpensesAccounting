@@ -3,7 +3,17 @@
     <h2 class="content-block">Evaluation</h2>
     <div class="content-block">
       <div class="dx-card responsive-paddings">
-        <div class="md-layout md-gutter">
+        <md-empty-state
+          md-rounded
+          md-icon="report_problem"
+          md-label="No commited payments!"
+          md-description="The evaluation of commited payments will show up here."
+          v-if="this.paymentsExpenses.length == 0 && this.paymentsIncome.length == 0"
+        ></md-empty-state>
+        <div
+          class="md-layout md-gutter"
+          v-if="this.paymentsExpenses.length != 0 || this.paymentsIncome.length != 0"
+        >
           <div class="md-layout-item full">
             <md-button class="md-raised md-primary right" @click="showFilterPayments()">Filter</md-button>
           </div>
