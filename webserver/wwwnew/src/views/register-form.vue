@@ -52,6 +52,18 @@
     <div class="dx-field">
       <dx-button type="default" text="Register" @click="onRegisterClick($event)" width="100%"></dx-button>
     </div>
+
+    <div class="dx-field">
+      <dx-button type="normal" text="Back" @click="onBackClick()" width="100%"></dx-button>
+    </div>
+    <md-snackbar
+      :md-position="'center'"
+      :md-duration="4000"
+      :md-active.sync="showSnackbar"
+      md-persistent
+    >
+      <span class="snackbar">Account already exists!</span>
+    </md-snackbar>
   </dx-validation-group>
 </template>
 
@@ -77,7 +89,8 @@ export default {
       confPassword: "",
       passwordComparison: () => {
         return this.password;
-      }
+      },
+      showSnackbar: false
     };
   },
   components: {
@@ -90,26 +103,26 @@ export default {
     DxValidationGroup
   },
   methods: {
-      registerAccount(user) {
-        fetch("http://localhost:8085/iea/api/auth/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(user)
-        })
-        .then(
-            function(response) {
-            if (response.status == 200) {
-                this.$router.push("/login");
-            } else {
-                console.log(response);
-            }
-            }.bind(this)
-        )
-        .catch(error => {
-            console.log(error);
-        });
+    registerAccount(user) {
+      fetch("http://localhost:8085/iea/api/auth/register", {
+      method: "POST",
+      headers: {
+          "Content-Type": "text/plain"
+      },
+      body: JSON.stringify(user)
+      })
+      .then(
+        function(response) {
+        if (response.status == 200) {
+          this.$router.push("/login");
+        } else {
+          this.showSnackbar = true;
+        }
+        }.bind(this)
+      )
+      .catch(error => {
+          console.log(error);
+      });
     },
     onRegisterClick(e) {
       if (!e.validationGroup.validate().isValid) {
@@ -117,12 +130,15 @@ export default {
       }
 
       var user = {
-          fullName: this.fullName,
-          email: this.email,
-          username: this.username,
-          password: sha512(this.password)
+        fullName: this.fullName,
+        email: this.email,
+        username: this.username,
+        password: sha512(this.password)
       };
       this.registerAccount(user);
+    },
+    onBackClick() {
+      this.$router.push("/login");
     }
   }
 };
@@ -141,5 +157,9 @@ export default {
     font-size: 30px;
     margin: 0;
   }
+}
+.snackbar {
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
