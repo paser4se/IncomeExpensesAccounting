@@ -52,7 +52,7 @@
                   @click="cancleUpload()"
                   class="md-raised right"
                   :disabled="disableButtons"
-                >Cancle</md-button>
+                >Cancel</md-button>
                 <br>
               </div>
             </div>
