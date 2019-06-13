@@ -56,7 +56,7 @@ export default {
     return {
       title: this.$appInfo.title,
       username: localStorage.getItem("username"),
-      password: localStorage.getItem("password"),
+      password: "",
       rememberUser: localStorage.getItem("rememberme") == "true"
     };
   },
@@ -112,11 +112,9 @@ export default {
 
       if (this.rememberUser) {
         localStorage.setItem("username", this.username);
-        localStorage.setItem("password", this.password);
         localStorage.setItem("rememberme", true);
       } else {
         localStorage.setItem("username", "");
-        localStorage.setItem("password", "");
         localStorage.setItem("rememberme", false);
       }
       e.validationGroup.reset();
