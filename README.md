@@ -24,9 +24,6 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
 
-## :scroll: Projektstrukturplan
-![alt text](images/Projektstrukturplan_IEA.png)
-
 ## :currency_exchange: Funktionsweise
 ![alt text](images/funktionsweise.png)
 
@@ -90,7 +87,7 @@ Coming soon...
 - Jakarta EE
 - Docker
 - Nginx 
-- Polymer 3 LitElement
+- Vuejs
 - HTML5
 - CSS
 - JavaScript
