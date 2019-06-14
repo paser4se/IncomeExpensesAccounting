@@ -103,7 +103,10 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:8085/iea/api/evaluation/expenses")
+    fetch("http://localhost:8085/iea/api/evaluation/expenses", {
+      method: "GET",
+      credentials: "include"
+    })
       .then(
         async function(response) {
           let tmp = await response.json();
@@ -111,7 +114,10 @@ export default {
         }.bind(this)
       )
       .catch(err => console.log(err.message));
-    fetch("http://localhost:8085/iea/api/evaluation/income")
+    fetch("http://localhost:8085/iea/api/evaluation/income", {
+      method: "GET",
+      credentials: "include"
+    })
       .then(
         async function(response) {
           let tmp = await response.json();
@@ -157,6 +163,7 @@ export default {
         headers: {
           "Content-Type": "text/plain"
         },
+        credentials: "include",
         body: JSON.stringify(filter)
       }).then(
         async function(response) {
@@ -170,6 +177,7 @@ export default {
         headers: {
           "Content-Type": "text/plain"
         },
+        credentials: "include",
         body: JSON.stringify(filter)
       }).then(
         async function(response) {
@@ -191,7 +199,10 @@ export default {
     },
     resetPayments() {
       this.filterPopupVisible = false;
-      fetch("http://localhost:8085/iea/api/evaluation/expenses")
+      fetch("http://localhost:8085/iea/api/evaluation/expenses", {
+        method: "GET",
+        credentials: "include"
+      })
         .then(
           async function(response) {
             let tmp = await response.json();
@@ -199,7 +210,10 @@ export default {
           }.bind(this)
         )
         .catch(err => console.log(err.message));
-      fetch("http://localhost:8085/iea/api/evaluation/income")
+      fetch("http://localhost:8085/iea/api/evaluation/income", {
+        method: "GET",
+        credentials: "include"
+      })
         .then(
           async function(response) {
             let tmp = await response.json();

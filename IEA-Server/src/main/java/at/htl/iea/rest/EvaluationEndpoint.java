@@ -3,6 +3,7 @@ package at.htl.iea.rest;
 import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.model.Evaluation;
 import at.htl.iea.model.Payment;
+import at.htl.iea.rest.auth.Secured;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
@@ -28,6 +29,7 @@ public class EvaluationEndpoint {
 
     @GET
     @Path("/income")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEvaluationIncome(){
         return Response.ok(getEvaluations("income", LocalDateTime.MIN, LocalDateTime.MIN)).build();
@@ -35,6 +37,7 @@ public class EvaluationEndpoint {
 
     @GET
     @Path("/expenses")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEvaluationExpenses(){
         return Response.ok(getEvaluations("expenses", LocalDateTime.MIN, LocalDateTime.MIN)).build();
@@ -42,6 +45,7 @@ public class EvaluationEndpoint {
 
     @POST
     @Path("/filterincome")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFilteredIncome(String body) {
         JSONObject json = new JSONObject(body);
@@ -54,6 +58,7 @@ public class EvaluationEndpoint {
 
     @POST
     @Path("/filterexpenses")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFilteredExpenses(String body) {
         JSONObject json = new JSONObject(body);

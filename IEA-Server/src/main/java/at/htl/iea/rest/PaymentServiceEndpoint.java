@@ -6,6 +6,7 @@ import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
+import at.htl.iea.rest.auth.Secured;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
