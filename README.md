@@ -25,7 +25,7 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 ![alt text](images/systemarchitektur.png)
 
 ## :currency_exchange: Funktionsweise
-![alt text](images/funktionsweise.png)
+![alt text](webserver/wwwnew/src/assets/Homescreen.png)
 
 ### :newspaper: Erklärung
 Die Zahlungen werden von der Bank als csv-File zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
