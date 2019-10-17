@@ -81,7 +81,7 @@ npm start
 ```
 
 ### :floppy_disk: JEE- und Webserver dockern
-- Im Projekt Verzeichnis docker-compose starten
+- Im Projekt Verzeichnis docker starten
 ```
 docker-compose up
 ```
