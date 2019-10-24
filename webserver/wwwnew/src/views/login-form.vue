@@ -75,7 +75,7 @@ export default {
         password: hashedpassword
       };
 
-      fetch("http://localhost:8085/iea/api/auth/login", {
+      fetch("http://localhost:8080/iea/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"

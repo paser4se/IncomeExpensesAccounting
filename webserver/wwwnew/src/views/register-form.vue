@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     registerAccount(user) {
-      fetch("http://localhost:8085/iea/api/auth/register", {
+      fetch("http://localhost:8080/iea/api/auth/register", {
       method: "POST",
       headers: {
           "Content-Type": "text/plain"

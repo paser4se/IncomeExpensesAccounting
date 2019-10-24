@@ -40,7 +40,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:8085/iea/api/auth/account", {
+    fetch("http://localhost:8080/iea/api/auth/account", {
       method: "GET",
       credentials: "include"
     }).then(
@@ -68,7 +68,7 @@ export default {
         email: this.formData.email ? this.formData.email : "",
         id: this.account.id + ""
       };
-      fetch("http://localhost:8085/iea/api/auth/account/" + this.account.id, {
+      fetch("http://localhost:8080/iea/api/auth/account/" + this.account.id, {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"

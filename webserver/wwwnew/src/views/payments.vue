@@ -10,7 +10,7 @@
               <form
                 class="drop-zone"
                 id="file-form"
-                action="http://localhost:8085/iea/rs/files/uploadcsv"
+                action="http://localhost:8080/iea/rs/files/uploadcsv"
                 method="POST"
                 enctype="multipart/form-data"
                 v-on:dragenter="handleDragenter"
@@ -337,7 +337,7 @@ export default Vue.extend({
         fileReader.onload = async function (fileLoadedEvent) {
             let textFromFileLoaded = fileLoadedEvent.target.result;
 
-            fetch('http://localhost:8085/iea/api/files/uploadtext', {
+            fetch('http://localhost:8080/iea/api/files/uploadtext', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "text/plain"
@@ -360,7 +360,7 @@ export default Vue.extend({
         fileReader.readAsText(fileToLoad, "UTF-8");
     },
     commitPayments() {
-      fetch('http://localhost:8085/iea/api/preaccounting/commit', {
+      fetch('http://localhost:8080/iea/api/preaccounting/commit', {
         method: "POST"
       }).then(function(response) {
         console.log(response);
@@ -400,14 +400,14 @@ export default Vue.extend({
       this.writeoffunit = unit;
     },
     getAllPayments() {
-      fetch('http://localhost:8085/iea/api/payments')
+      fetch('http://localhost:8080/iea/api/payments')
       .then(async function(response) {
         let tmp = await response.json();
         this.payments = tmp;
       }.bind(this));
     },
     getAllCategories() {
-      fetch('http://localhost:8085/iea/api/preaccounting/category')
+      fetch('http://localhost:8080/iea/api/preaccounting/category')
       .then(async function(response) {
         let tmp = await response.json();
         this.categories = tmp;
@@ -417,7 +417,7 @@ export default Vue.extend({
       }.bind(this));
     },
     getAllKeywords(categoryId) {
-      fetch('http://localhost:8085/iea/api/preaccounting/assignment/' + categoryId)
+      fetch('http://localhost:8080/iea/api/preaccounting/assignment/' + categoryId)
       .then(async function(response) {
         let tmp = await response.json();
         this.keywords = tmp;
@@ -472,7 +472,7 @@ export default Vue.extend({
       return returnval;
     },
     saveCategory() {
-      fetch('http://localhost:8085/iea/api/payments/changecategory/' + this.currentPayment.id, {
+      fetch('http://localhost:8080/iea/api/payments/changecategory/' + this.currentPayment.id, {
         method: 'POST',
         body: JSON.stringify({catId: this.currentPayment.category.id.toString() }), 
         headers: {'Content-Type': 'text/plain'}
@@ -483,7 +483,7 @@ export default Vue.extend({
       }.bind(this)).catch(error => alert(error));
     },
     updateKeywords() {
-      fetch('http://localhost:8085/iea/api/preaccounting/assignment/' + this.currentPayment.category.id, {
+      fetch('http://localhost:8080/iea/api/preaccounting/assignment/' + this.currentPayment.category.id, {
         method: 'POST',
         headers: {
             "Content-Type": "text/plain"
@@ -502,10 +502,10 @@ export default Vue.extend({
         var selectedItem = this.getSelectedItem();
         if (typeof selectedItem !== 'undefined' && selectedItem) {
           var parentId = this.getSelectedItem().parentId == -1 ? this.getSelectedItem().id : this.getSelectedItem().parentId;
-          url = 'http://localhost:8085/iea/api/payments/addcategory/' + parentId;
+          url = 'http://localhost:8080/iea/api/payments/addcategory/' + parentId;
         }
       } else {
-        url = 'http://localhost:8085/iea/api/payments/addcategory';
+        url = 'http://localhost:8080/iea/api/payments/addcategory';
       }
 
       if (url != '') {
@@ -530,7 +530,7 @@ export default Vue.extend({
           wnum: this.writeOffNumber
         };
 
-        fetch('http://localhost:8085/iea/api/preaccounting/writeoff/' + this.currentPayment.id, {
+        fetch('http://localhost:8080/iea/api/preaccounting/writeoff/' + this.currentPayment.id, {
           method: 'POST',
           headers: {
               "Content-Type": "text/plain"
