@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "npx vue-cli-service serve",
+    "build": "npx vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build-themes": "devextreme build",
-    "postinstall": "npm rebuild node-sass",
     "postinstall": "npm run build-themes"
   },
   "dependencies": {
@@ -25,12 +24,12 @@
     "systemjs-vue-browser": "latest",
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "@vue/cli-service": "^3.7.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
     "babel-eslint": "^10.0.1",
     "devextreme-cli": "next",
     "eslint": "^5.16.0",
@@ -56,7 +55,7 @@
     }
   },
   "config": {
-    "unsafe-perm":true
+    "unsafe-perm": true
   },
   "postcss": {
     "plugins": {
