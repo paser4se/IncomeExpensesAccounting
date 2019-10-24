@@ -36,60 +36,19 @@ Bestandskonten werden wir in weiterer Folge auch noch brauchen um die Anschaffun
 
 ## :wrench: Konfiguration
 
-### :computer: Inbetriebnahme des JEE-Servers (veraltet)
-
-#### DB starten
-
-```
-cd db/
-/opt/derbydb/bin/startNetworkServer -noSecurityManager
-```
-
-#### Wildfly konfigurieren
-
-- In der Toolbar auf "Add Configuration..." klicken
-- JBoss-server local hinzufügen
-- Darauf achten, dass der wildfly server mit der ip `localhost:8080` konfiguriert ist
-
-#### JEE-Server starten bzw. stoppen
-
-- Starten: in der Toolbar auf "Run" klicken
-- Stoppen: in der Toolbar auf "Stop" klicken
-
-
-### :computer: Inbetriebnahme des Webservers (veraltet)
-
-- Webserver projekt in der Webstorm IDE öffnen
-- Ins root-verzeichnis wechseln
-```
-cd wwwroot/
-```
-- Pakete installieren
-```
-npm i
-```
-
-#### Webserver starten
-
-- Ins root-verzeichnis wechseln
-```
-cd wwwroot/
-```
-- Polymer starten
-```
-npm start
-```
-
 ### :floppy_disk: JEE- und Webserver dockern
-- Im Projekt Verzeichnis docker starten
+- Dem Script Rechte erteilen
 ```
-docker-compose up
+chmod +x startup.sh
+```
+- Das Script "startup.sh" starten
+```
+./startup.sh
 ```
 
 ## :microscope: Technologien
 - Jakarta EE
 - Docker
-- Nginx 
 - Vuejs
 - HTML5
 - CSS
