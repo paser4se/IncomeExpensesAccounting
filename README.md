@@ -8,8 +8,6 @@
 - [Funktionsweise](#currency_exchange-funktionsweise)
   - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
-  - [Inbetriebnahme des JEE-Servers](#computer-inbetriebnahme-des-jee-servers)
-  - [Inbetriebnahme des Webservers](#computer-inbetriebnahme-des-webservers)
   - [JEE- und Webserver dockern](#floppy_disk-jee--und-webserver-dockern)
 - [Technologien](#microscope-technologien)
 - [Das Team](#surfer-das-team)
@@ -45,6 +43,8 @@ chmod +x startup.sh
 ```
 ./startup.sh
 ```
+- Website unter [localhost:8081/iea](localhost:8081/iea) aufrufen
+
 
 ## :microscope: Technologien
 - Jakarta EE
