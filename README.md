@@ -36,7 +36,7 @@ Bestandskonten werden wir in weiterer Folge auch noch brauchen um die Anschaffun
 
 ## :wrench: Konfiguration
 
-### :computer: Inbetriebnahme des JEE-Servers
+### :computer: Inbetriebnahme des JEE-Servers (veraltet)
 
 #### DB starten
 
@@ -57,7 +57,7 @@ cd db/
 - Stoppen: in der Toolbar auf "Stop" klicken
 
 
-### :computer: Inbetriebnahme des Webservers
+### :computer: Inbetriebnahme des Webservers (veraltet)
 
 - Webserver projekt in der Webstorm IDE öffnen
 - Ins root-verzeichnis wechseln
@@ -81,7 +81,10 @@ npm start
 ```
 
 ### :floppy_disk: JEE- und Webserver dockern
-Coming soon...
+- Im Projekt Verzeichnis docker starten
+```
+docker-compose up
+```
 
 ## :microscope: Technologien
 - Jakarta EE
