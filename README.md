@@ -43,7 +43,7 @@ chmod +x startup.sh
 ```
 ./startup.sh
 ```
-- Website unter [localhost:8081/iea](localhost:8081/iea) aufrufen
+- Website unter [http://localhost:8081/iea](http://localhost:8081/iea) aufrufen
 
 
 ## :microscope: Technologien
