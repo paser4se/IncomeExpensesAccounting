@@ -37,11 +37,11 @@ Bestandskonten werden wir in weiterer Folge auch noch brauchen um die Anschaffun
 ## :wrench: Konfiguration
 
 ### :floppy_disk: JEE- und Webserver dockern
-- Dem Script Rechte erteilen
+- Dem Script "startup.sh" Rechte erteilen
 ```
 chmod +x startup.sh
 ```
-- Das Script "startup.sh" starten
+- Das Script ausführen
 ```
 ./startup.sh
 ```
