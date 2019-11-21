@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "Payments.findAllUnevaluated", query = "select p from Payment p where p.evaluated = false"),
         @NamedQuery(name = "Payments.findAllEvaluated", query = "select p from Payment p where p.evaluated = true")
 })
-public class Payment {
+public class Payment implements Cloneable {
 
     // region Variables
     @Id
@@ -37,6 +37,11 @@ public class Payment {
     private int writeOffNumber = 0;
 
     @OneToOne
+    private Payment nextPayment = null;
+    @OneToOne
+    private Payment previousPayment = null;
+
+    @OneToOne
     private Category category;
     // endregion
 
@@ -48,6 +53,10 @@ public class Payment {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getBookingDate() {
@@ -180,5 +189,26 @@ public class Payment {
     public void setWriteOffNumber(int writeOffNumber) {
         this.writeOffNumber = writeOffNumber;
     }
+
+    public Payment getNextPayment() {
+        return nextPayment;
+    }
+
+    public void setNextPayment(Payment nextPayment) {
+        this.nextPayment = nextPayment;
+    }
+
+    public Payment getPreviousPayment() {
+        return previousPayment;
+    }
+
+    public void setPreviousPayment(Payment previousPayment) {
+        this.previousPayment = previousPayment;
+        this.previousPayment.setNextPayment(this);
+    }
 // endregion
+
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
 }

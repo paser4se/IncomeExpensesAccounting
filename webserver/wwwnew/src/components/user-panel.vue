@@ -4,7 +4,7 @@
       <div class="image-container">
         <div class="user-image"/>
       </div>
-      <div class="user-name">Max Mustermann</div>
+      <div class="user-name">{{getUsername()}}</div>
     </div>
 
     <dx-context-menu
@@ -35,12 +35,29 @@ export default {
       menuPositionConfig: {
         my: "top center",
         at: "bottom center"
-      }
+      },
+      account: {}
     };
   },
   components: {
     DxContextMenu,
     DxList
+  },
+  mounted() {
+    fetch("http://localhost:8080/iea/api/auth/account", {
+      method: "GET",
+      credentials: "include"
+    }).then(
+      async function(response) {
+        let tmp = await response.json();
+        this.account = tmp;
+      }.bind(this)
+    );
+  },
+  methods: {
+    getUsername() {
+      return this.account ? this.account.fullName : "";
+    }
   }
 };
 </script>
@@ -60,8 +77,8 @@ export default {
   .image-container {
     overflow: hidden;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     margin: 0 4px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -69,7 +86,7 @@ export default {
     .user-image {
       width: 100%;
       height: 100%;
-      background: url("https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/06.png")
+      background: url("https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png")
         no-repeat #fff;
       background-size: cover;
     }

@@ -7,7 +7,7 @@ export default {
     authenticated = value;
   },
   authenticate() {
-    return fetch('http://localhost:8085/iea/api/auth/authenticate', {
+    return fetch('http://localhost:8080/iea/api/auth/authenticate', {
       method: 'GET',
       credentials: 'include',
     })

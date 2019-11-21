@@ -8,8 +8,6 @@
 - [Funktionsweise](#currency_exchange-funktionsweise)
   - [Erklärung](#newspaper-erklärung)
 - [Konfiguration](#wrench-konfiguration)
-  - [Inbetriebnahme des JEE-Servers](#computer-inbetriebnahme-des-jee-servers)
-  - [Inbetriebnahme des Webservers](#computer-inbetriebnahme-des-webservers)
   - [JEE- und Webserver dockern](#floppy_disk-jee--und-webserver-dockern)
 - [Technologien](#microscope-technologien)
 - [Das Team](#surfer-das-team)
@@ -24,11 +22,8 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches ein
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
 
-## :scroll: Projektstrukturplan
-![alt text](images/Projektstrukturplan_IEA.png)
-
 ## :currency_exchange: Funktionsweise
-![alt text](images/funktionsweise.png)
+![alt text](webserver/wwwnew/src/assets/Homescreen.png)
 
 ### :newspaper: Erklärung
 Die Zahlungen werden von der Bank als csv-File zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
@@ -39,58 +34,22 @@ Bestandskonten werden wir in weiterer Folge auch noch brauchen um die Anschaffun
 
 ## :wrench: Konfiguration
 
-### :computer: Inbetriebnahme des JEE-Servers
-
-#### DB starten
-
-```
-cd db/
-/opt/derbydb/bin/startNetworkServer -noSecurityManager
-```
-
-#### Wildfly konfigurieren
-
-- In der Toolbar auf "Add Configuration..." klicken
-- JBoss-server local hinzufügen
-- Darauf achten, dass der wildfly server mit der ip `localhost:8080` konfiguriert ist
-
-#### JEE-Server starten bzw. stoppen
-
-- Starten: in der Toolbar auf "Run" klicken
-- Stoppen: in der Toolbar auf "Stop" klicken
-
-
-### :computer: Inbetriebnahme des Webservers
-
-- Webserver projekt in der Webstorm IDE öffnen
-- Ins root-verzeichnis wechseln
-```
-cd wwwroot/
-```
-- Pakete installieren
-```
-npm i
-```
-
-#### Webserver starten
-
-- Ins root-verzeichnis wechseln
-```
-cd wwwroot/
-```
-- Polymer starten
-```
-npm start
-```
-
 ### :floppy_disk: JEE- und Webserver dockern
-Coming soon...
+- Dem Script "startup.sh" Rechte erteilen
+```
+chmod +x startup.sh
+```
+- Das Script ausführen
+```
+./startup.sh
+```
+- Website unter [http://localhost:8081/iea](http://localhost:8081/iea) aufrufen
+
 
 ## :microscope: Technologien
 - Jakarta EE
 - Docker
-- Nginx 
-- Polymer 3 LitElement
+- Vuejs
 - HTML5
 - CSS
 - JavaScript

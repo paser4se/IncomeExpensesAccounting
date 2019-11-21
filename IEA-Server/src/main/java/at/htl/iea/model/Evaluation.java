@@ -19,7 +19,7 @@ public class Evaluation { // wird benoetigt, um im EvaluationEndpoint eine List<
     }
 
     public Double getAmount() {
-        return amount;
+        return Math.round(amount*100.0)/100.0;
     }
 
     public void setAmount(Double amount) {

@@ -10,7 +10,7 @@
               <form
                 class="drop-zone"
                 id="file-form"
-                action="http://localhost:8085/iea/rs/files/uploadcsv"
+                action="http://localhost:8080/iea/rs/files/uploadcsv"
                 method="POST"
                 enctype="multipart/form-data"
                 v-on:dragenter="handleDragenter"
@@ -52,11 +52,10 @@
                   @click="cancleUpload()"
                   class="md-raised right"
                   :disabled="disableButtons"
-                >Cancle</md-button>
+                >Cancel</md-button>
                 <br>
               </div>
             </div>
-            <md-button class="md-raised" :disabled="true">Back</md-button>
             <md-button
               class="md-raised md-primary right"
               @click="nextStep('first', 'second'); getAllPayments();"
@@ -68,7 +67,14 @@
             :md-editable="false"
             :md-done.sync="second"
           >
-            <md-table>
+            <md-empty-state
+              md-rounded
+              md-icon="report_problem"
+              md-label="No uploaded payments!"
+              md-description="The uploaded payments will be displayed here."
+              v-if="this.payments.length == 0"
+            ></md-empty-state>
+            <md-table v-if="this.payments.length != 0">
               <md-table-row class="dark-head">
                 <md-table-head class="white-color">Bookingdate</md-table-head>
                 <md-table-head class="white-color" md-numeric>Amount</md-table-head>
@@ -94,7 +100,14 @@
             <md-button class="md-raised md-primary right" @click="nextStep('second', 'third')">Next</md-button>
           </md-step>
           <md-step id="third" md-label="Write-off" :md-editable="false" :md-done.sync="third">
-            <md-table>
+            <md-empty-state
+              md-rounded
+              md-icon="report_problem"
+              md-label="No uploaded payments!"
+              md-description="The uploaded payments will be displayed here."
+              v-if="this.payments.length == 0"
+            ></md-empty-state>
+            <md-table v-if="this.payments.length != 0">
               <md-table-row class="dark-head">
                 <md-table-head class="white-color">Bookingdate</md-table-head>
                 <md-table-head class="white-color" md-numeric>Amount</md-table-head>
@@ -119,8 +132,8 @@
             <md-button class="md-raised" @click="previousStep('third', 'second')">Back</md-button>
             <md-button
               class="md-raised md-primary right"
-              :disabled="true"
               @click="commitPayments()"
+              :disabled="this.payments.length == 0"
             >Commit</md-button>
           </md-step>
         </md-steppers>
@@ -324,7 +337,7 @@ export default Vue.extend({
         fileReader.onload = async function (fileLoadedEvent) {
             let textFromFileLoaded = fileLoadedEvent.target.result;
 
-            fetch('http://localhost:8085/iea/api/files/uploadtext', {
+            fetch('http://localhost:8080/iea/api/files/uploadtext', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "text/plain"
@@ -347,7 +360,12 @@ export default Vue.extend({
         fileReader.readAsText(fileToLoad, "UTF-8");
     },
     commitPayments() {
-      //TODO
+      fetch('http://localhost:8080/iea/api/preaccounting/commit', {
+        method: "POST"
+      }).then(function(response) {
+        console.log(response);
+        this.getAllPayments();
+      }.bind(this));
     },
     getBackgroundColor(catid) {
       return this.colors[catid];
@@ -382,14 +400,14 @@ export default Vue.extend({
       this.writeoffunit = unit;
     },
     getAllPayments() {
-      fetch('http://localhost:8085/iea/api/payments')
+      fetch('http://localhost:8080/iea/api/payments')
       .then(async function(response) {
         let tmp = await response.json();
         this.payments = tmp;
       }.bind(this));
     },
     getAllCategories() {
-      fetch('http://localhost:8085/iea/api/preaccounting/category')
+      fetch('http://localhost:8080/iea/api/preaccounting/category')
       .then(async function(response) {
         let tmp = await response.json();
         this.categories = tmp;
@@ -399,7 +417,7 @@ export default Vue.extend({
       }.bind(this));
     },
     getAllKeywords(categoryId) {
-      fetch('http://localhost:8085/iea/api/preaccounting/assignment/' + categoryId)
+      fetch('http://localhost:8080/iea/api/preaccounting/assignment/' + categoryId)
       .then(async function(response) {
         let tmp = await response.json();
         this.keywords = tmp;
@@ -454,7 +472,7 @@ export default Vue.extend({
       return returnval;
     },
     saveCategory() {
-      fetch('http://localhost:8085/iea/api/payments/changecategory/' + this.currentPayment.id, {
+      fetch('http://localhost:8080/iea/api/payments/changecategory/' + this.currentPayment.id, {
         method: 'POST',
         body: JSON.stringify({catId: this.currentPayment.category.id.toString() }), 
         headers: {'Content-Type': 'text/plain'}
@@ -465,7 +483,7 @@ export default Vue.extend({
       }.bind(this)).catch(error => alert(error));
     },
     updateKeywords() {
-      fetch('http://localhost:8085/iea/api/preaccounting/assignment/' + this.currentPayment.category.id, {
+      fetch('http://localhost:8080/iea/api/preaccounting/assignment/' + this.currentPayment.category.id, {
         method: 'POST',
         headers: {
             "Content-Type": "text/plain"
@@ -484,10 +502,10 @@ export default Vue.extend({
         var selectedItem = this.getSelectedItem();
         if (typeof selectedItem !== 'undefined' && selectedItem) {
           var parentId = this.getSelectedItem().parentId == -1 ? this.getSelectedItem().id : this.getSelectedItem().parentId;
-          url = 'http://localhost:8085/iea/api/payments/addcategory/' + parentId;
+          url = 'http://localhost:8080/iea/api/payments/addcategory/' + parentId;
         }
       } else {
-        url = 'http://localhost:8085/iea/api/payments/addcategory';
+        url = 'http://localhost:8080/iea/api/payments/addcategory';
       }
 
       if (url != '') {
@@ -512,7 +530,7 @@ export default Vue.extend({
           wnum: this.writeOffNumber
         };
 
-        fetch('http://localhost:8085/iea/api/preaccounting/writeoff/' + this.currentPayment.id, {
+        fetch('http://localhost:8080/iea/api/preaccounting/writeoff/' + this.currentPayment.id, {
           method: 'POST',
           headers: {
               "Content-Type": "text/plain"
@@ -520,6 +538,7 @@ export default Vue.extend({
           body: JSON.stringify(writeoff)
         }).then(function(response) {
           this.getAllPayments();
+          this.writeoffPopupVisible = false;
           console.log(response);
         }.bind(this));
       }

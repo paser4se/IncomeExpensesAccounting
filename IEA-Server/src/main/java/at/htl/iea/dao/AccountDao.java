@@ -12,8 +12,7 @@ public class AccountDao {
     EntityManager em;
 
     public Account getAccountByUsername(String username) {
-        return em.createNamedQuery("Account.getAccountByUsername", Account.class).setParameter(1, username)
-                .getSingleResult();
+        return em.createNamedQuery("Account.getAccountByUsername", Account.class).setParameter(1, username).getSingleResult();
     }
 
     public Account getAccountByEmail(String email){
@@ -21,8 +20,17 @@ public class AccountDao {
                 .getSingleResult();
     }
 
+    public Account getAccountById(Long id) {
+        return em.find(Account.class, id);
+    }
+
     public void persist(Account account) {
         em.persist(account);
+        em.flush();
+    }
+
+    public void merge(Account account) {
+        em.merge(account);
         em.flush();
     }
 

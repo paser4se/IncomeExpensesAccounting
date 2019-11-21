@@ -56,7 +56,7 @@ export default {
     return {
       title: this.$appInfo.title,
       username: localStorage.getItem("username"),
-      password: localStorage.getItem("password"),
+      password: "",
       rememberUser: localStorage.getItem("rememberme") == "true"
     };
   },
@@ -75,7 +75,7 @@ export default {
         password: hashedpassword
       };
 
-      fetch("http://localhost:8085/iea/api/auth/login", {
+      fetch("http://localhost:8080/iea/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"
@@ -112,11 +112,9 @@ export default {
 
       if (this.rememberUser) {
         localStorage.setItem("username", this.username);
-        localStorage.setItem("password", this.password);
         localStorage.setItem("rememberme", true);
       } else {
         localStorage.setItem("username", "");
-        localStorage.setItem("password", "");
         localStorage.setItem("rememberme", false);
       }
       e.validationGroup.reset();

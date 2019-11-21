@@ -32,6 +32,29 @@ public class PaymentDao {
         em.merge(payment);
     }
 
+    public void deletePayments() {
+        em.createQuery("DELETE FROM Payment p where p.evaluated = false");
+
+        flush();
+    }
+
+    public void savePayment(Payment payment) {
+        if (payment.getId() != null) {
+            em.merge(payment);
+        } else {
+            em.persist(payment);
+        }
+    }
+
+    public void deletePayment(Payment payment) {
+        em.createQuery("DELETE FROM Payment p where p.id = "+payment.getId()).executeUpdate();
+        flush();
+    }
+
+    public void merge(Payment payment) {
+        em.merge(payment);
+    }
+
     public void flush() {
         em.flush();
     }

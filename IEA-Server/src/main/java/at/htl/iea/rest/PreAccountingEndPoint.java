@@ -140,6 +140,63 @@ public class PreAccountingEndPoint {
         return Response.ok().build();
     }
 
+    @POST
+    @Path("/commit")
+    @Transactional
+    public Response commitPayments() {
+        List<Payment> payments = paymentDao.getAllUnevaluatedPayments();
+        paymentDao.deletePayments();
+
+        for (int i = 0; i < payments.size(); i++) {
+            Payment currentPayment = payments.get(i);
+            currentPayment.setEvaluated(true);
+
+            if (currentPayment.getWriteOffUnit() != WriteOffUnit.NONE) {
+                List<Payment> newPayments = new LinkedList<>();
+                for (int a = 0; a < currentPayment.getWriteOffNumber(); a++) {
+                    Payment tmpPayment = null;
+                    try {
+                        tmpPayment = (Payment) currentPayment.clone();
+                        tmpPayment.setId(new Payment().getId());
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+                    tmpPayment.setAmount(tmpPayment.getAmount()/currentPayment.getWriteOffNumber());
+                    if (a > 0) {
+                        switch (currentPayment.getWriteOffUnit()) {
+                            case MONTH:
+                                tmpPayment.setBookingDate(newPayments.get(a-1).getBookingDate().plusMonths(1));
+                                tmpPayment.setValueDate(newPayments.get(a-1).getValueDate().plusMonths(1));
+                                break;
+                            case QUARTER:
+                                tmpPayment.setBookingDate(newPayments.get(a-1).getBookingDate().plusMonths(3));
+                                tmpPayment.setValueDate(newPayments.get(a-1).getValueDate().plusMonths(3));
+                                break;
+                            case YEAR:
+                                tmpPayment.setBookingDate(newPayments.get(a-1).getBookingDate().plusYears(1));
+                                tmpPayment.setValueDate(newPayments.get(a-1).getValueDate().plusYears(1));
+                                break;
+                        }
+                    }
+                    newPayments.add(tmpPayment);
+                }
+                for (int j = 0; j < currentPayment.getWriteOffNumber(); j++) {
+                    paymentDao.savePayment(newPayments.get(j));
+                    if (j-1 >= 0) {
+                        newPayments.get(j).setPreviousPayment(newPayments.get(j-1));
+                        paymentDao.merge(newPayments.get(j));
+                    }
+
+                }
+                paymentDao.deletePayment(currentPayment);
+            } else {
+                paymentDao.savePayment(currentPayment);
+            }
+        }
+
+        return Response.ok().build();
+    }
+
     public Assignment getAssignment(Long id) {
         Assignment assignment = null;
         try{
