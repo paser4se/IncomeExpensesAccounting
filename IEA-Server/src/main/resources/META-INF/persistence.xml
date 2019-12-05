@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
-<<<<<<< HEAD
-    <persistence-unit name="DbPU">
-=======
     <persistence-unit name="dbPU">
->>>>>>> 056fbbd40f69a50c7a63469448465cdba5664a2e
         <jta-data-source>java:jboss/datasources/DbDS</jta-data-source>
         <properties>
             <property name="javax.persistence.schema-generation.database.action"
