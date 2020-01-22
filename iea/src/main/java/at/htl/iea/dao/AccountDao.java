@@ -1,13 +1,14 @@
 package at.htl.iea.dao;
 
 import at.htl.iea.model.Account;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless
-public class AccountDao {
+@ApplicationScoped
+public class AccountDao implements PanacheRepository<Account> {
     @PersistenceContext
     EntityManager em;
 
@@ -22,11 +23,6 @@ public class AccountDao {
 
     public Account getAccountById(Long id) {
         return em.find(Account.class, id);
-    }
-
-    public void persist(Account account) {
-        em.persist(account);
-        em.flush();
     }
 
     public void merge(Account account) {

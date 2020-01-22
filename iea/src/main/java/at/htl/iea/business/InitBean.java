@@ -2,26 +2,22 @@ package at.htl.iea.business;
 
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
+import io.quarkus.runtime.StartupEvent;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
-@Startup
-@Singleton
+@ApplicationScoped
 public class InitBean {
 
-    @PersistenceContext
+    @Inject
     EntityManager em;
 
-    public InitBean() {
-
-    }
-
-    @PostConstruct
-    private void init() {
+    @Transactional
+    void init(@Observes StartupEvent ev){
         System.out.println("********** INIT **********");
 
         Category wohnen = new Category("Wohnen");

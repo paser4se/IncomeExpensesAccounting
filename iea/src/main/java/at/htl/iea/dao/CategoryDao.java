@@ -2,14 +2,15 @@ package at.htl.iea.dao;
 
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless
-public class CategoryDao {
+@ApplicationScoped
+public class CategoryDao implements PanacheRepository<Category> {
     @PersistenceContext
     EntityManager em;
 
@@ -31,9 +32,5 @@ public class CategoryDao {
 
     public void saveAssignment(Assignment assignment) {
         em.persist(assignment);
-    }
-
-    public void flush() {
-        em.flush();
     }
 }

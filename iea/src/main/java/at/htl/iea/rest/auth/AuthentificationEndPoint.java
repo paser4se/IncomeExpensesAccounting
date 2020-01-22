@@ -4,23 +4,19 @@ import at.htl.iea.dao.AccountDao;
 import at.htl.iea.model.Account;
 import org.json.JSONObject;
 
-import javax.ejb.EJBException;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.json.JsonObject;
-import javax.json.JsonValue;
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Base64;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Cookie;
 
 @Path("auth")
-@Stateless
+@ApplicationScoped
 public class AuthentificationEndPoint {
 
     @Inject
@@ -55,6 +51,7 @@ public class AuthentificationEndPoint {
     @POST
     @Path("register")
     @Consumes(MediaType.TEXT_PLAIN)
+    @Transactional
     public Response register(String json) {
         JSONObject body = new JSONObject(json);
         try {
@@ -68,7 +65,7 @@ public class AuthentificationEndPoint {
 
             return Response.ok().build();
         } catch (Exception ex) {
-            System.err.println("[EXCEPTION]: AuthentificationEndPoint, Method: register");
+            System.err.println("[EXCEPTION]: AuthentificationEndPoint, Method: register: " + ex.getMessage());
             return Response.status(500).build();
         }
     }
@@ -155,12 +152,8 @@ public class AuthentificationEndPoint {
         try {
             Account account = accountDao.getAccountByUsername(username);
             return account.getPassword().equals(password);
-        } catch (EJBException ex) {
-            if (ex.getCausedByException() instanceof NoResultException) {
-                System.out.println("Account does not exist");
-            } else {
-                ex.printStackTrace();
-            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }

@@ -44,7 +44,7 @@ export default {
     DxList
   },
   mounted() {
-    fetch("http://localhost:8080/iea/api/auth/account", {
+    fetch("http://localhost:8080/auth/account", {
       method: "GET",
       credentials: "include"
     }).then(

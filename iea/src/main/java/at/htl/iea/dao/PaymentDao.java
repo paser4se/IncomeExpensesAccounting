@@ -1,14 +1,15 @@
 package at.htl.iea.dao;
 
 import at.htl.iea.model.Payment;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless
-public class PaymentDao {
+@ApplicationScoped
+public class PaymentDao implements PanacheRepository<Payment> {
     @PersistenceContext
     EntityManager em;
 
@@ -55,7 +56,4 @@ public class PaymentDao {
         em.merge(payment);
     }
 
-    public void flush() {
-        em.flush();
-    }
 }

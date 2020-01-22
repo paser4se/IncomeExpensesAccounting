@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     registerAccount(user) {
-      fetch("http://localhost:8080/iea/api/auth/register", {
+      fetch("http://localhost:8080/auth/register", {
       method: "POST",
       headers: {
           "Content-Type": "text/plain"
@@ -116,6 +116,7 @@ export default {
         if (response.status == 200) {
           this.$router.push("/login");
         } else {
+          console.log(response);
           this.showSnackbar = true;
         }
         }.bind(this)

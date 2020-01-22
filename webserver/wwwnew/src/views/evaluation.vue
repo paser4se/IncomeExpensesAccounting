@@ -103,7 +103,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:8080/iea/api/evaluation/expenses", {
+    fetch("http://localhost:8080/evaluation/expenses", {
       method: "GET",
       credentials: "include"
     })
@@ -114,7 +114,7 @@ export default {
         }.bind(this)
       )
       .catch(err => console.log(err.message));
-    fetch("http://localhost:8080/iea/api/evaluation/income", {
+    fetch("http://localhost:8080/evaluation/income", {
       method: "GET",
       credentials: "include"
     })
@@ -158,7 +158,7 @@ export default {
         from: this.dateToString(this.from),
         to: this.dateToString(this.to)
       };
-      fetch("http://localhost:8080/iea/api/evaluation/filterincome", {
+      fetch("http://localhost:8080/evaluation/filterincome", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"
@@ -172,7 +172,7 @@ export default {
           console.log(tmp);
         }.bind(this)
       );
-      fetch("http://localhost:8080/iea/api/evaluation/filterexpenses", {
+      fetch("http://localhost:8080/evaluation/filterexpenses", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"
@@ -199,7 +199,7 @@ export default {
     },
     resetPayments() {
       this.filterPopupVisible = false;
-      fetch("http://localhost:8080/iea/api/evaluation/expenses", {
+      fetch("http://localhost:8080/evaluation/expenses", {
         method: "GET",
         credentials: "include"
       })
@@ -210,7 +210,7 @@ export default {
           }.bind(this)
         )
         .catch(err => console.log(err.message));
-      fetch("http://localhost:8080/iea/api/evaluation/income", {
+      fetch("http://localhost:8080/evaluation/income", {
         method: "GET",
         credentials: "include"
       })
