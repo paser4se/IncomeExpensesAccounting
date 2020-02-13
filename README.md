@@ -14,7 +14,7 @@
 - [Lizenz](#closed_lock_with_key-lizenz)
 
 ## :money_with_wings: Was ist IEA?
-IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
+IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
 ## :chart_with_upwards_trend: Anwendungsfalldiagramm
 ![alt text](images/IEA_use_case_diagram.png)
