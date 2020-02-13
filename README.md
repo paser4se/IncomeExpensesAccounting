@@ -28,7 +28,9 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches ei
 Deshalb ist diese Darstellung leider derzeit veraltet; in den Semesterferien erfolgt eine Aktualisierung dieser Abbildung.
 
 ## :crystal_ball: Was haben wir vor?
-In den Semesterferien erfolgt eine Umstellung des CSV-Formats auf ein einheitliches CAMT-Format sowie die Integration von  dem Parser-Generator ANTLR.
+In den Semesterferien erfolgt eine **Umstellung** des CSV-Formats auf ein einheitliches **CAMT-Format** sowie die Integration von  dem **Parser-Generator ANTLR**.
+<br>
+Um die Transparenz des Fortschritts zu steigern wird - ebenfalls in den Semesterferien - ein **Pflichtenheft** erstellt.
 
 ## :currency_exchange: Funktionsweise
 ![alt text](webserver/wwwnew/src/assets/Homescreen.png)
