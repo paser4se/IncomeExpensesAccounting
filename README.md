@@ -21,6 +21,7 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches ei
 
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
+Zusatzinformationen: Die Applikation wurde gedockert; es wird eine postgresql Datenbank verwendet und Jakarta EE wurde auf Quarkus umgestellt.
 
 ## :currency_exchange: Funktionsweise
 ![alt text](webserver/wwwnew/src/assets/Homescreen.png)
