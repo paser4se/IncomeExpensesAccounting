@@ -3,6 +3,7 @@
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Anwendungsfalldiagramm](#chart_with_upwards_trend-anwendungsfalldiagramm)
+- [Was haben wir vor?](was-haben-wir-vor)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Projektstrukturplan](#scroll-projektstrukturplan)
 - [Funktionsweise](#currency_exchange-funktionsweise)
@@ -21,7 +22,13 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches ei
 
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
-Zusatzinformationen: Die Applikation wurde gedockert; es wird eine postgresql Datenbank verwendet und Jakarta EE wurde auf Quarkus umgestellt.
+
+<br>
+**Zusatzinformationen**: Die Applikation wurde gedockert; es wird eine postgresql Datenbank verwendet und Jakarta EE wurde auf Quarkus umgestellt.
+Deshalb ist diese Darstellung leider derzeit veraltet; in den Semesterferien erfolgt eine Aktualisierung dieser Abbildung.
+
+## Was haben wir vor?
+In den Semesterferien erfolgt eine Umstellung des CSV-Formats auf ein einheitliches CAMT-Format sowie die Integration von  dem Parser-Generator ANTLR.
 
 ## :currency_exchange: Funktionsweise
 ![alt text](webserver/wwwnew/src/assets/Homescreen.png)
