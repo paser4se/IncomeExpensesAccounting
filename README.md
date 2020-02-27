@@ -3,6 +3,7 @@
 ## :bookmark_tabs: Übersicht
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Anwendungsfalldiagramm](#chart_with_upwards_trend-anwendungsfalldiagramm)
+- [Was haben wir vor?](#crystal_ball-was-haben-wir-vor)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Projektstrukturplan](#scroll-projektstrukturplan)
 - [Funktionsweise](#currency_exchange-funktionsweise)
@@ -14,13 +15,21 @@
 - [Lizenz](#closed_lock_with_key-lizenz)
 
 ## :money_with_wings: Was ist IEA?
-IncomeExpensesAccounting (IEA) ist ein Einnahmen & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
+IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
 ## :chart_with_upwards_trend: Anwendungsfalldiagramm
 ![alt text](images/IEA_use_case_diagram.png)
 
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
+
+**Zusatzinformationen**: Die Applikation wurde gedockert; es wird eine postgresql Datenbank verwendet und Jakarta EE wurde auf Quarkus umgestellt.
+Deshalb ist diese Darstellung leider derzeit veraltet; in den Semesterferien erfolgt eine Aktualisierung dieser Abbildung.
+
+## :crystal_ball: Was haben wir vor?
+In den Semesterferien erfolgt eine **Umstellung** des CSV-Formats auf ein einheitliches **CAMT-Format** sowie die Integration von  dem **Parser-Generator ANTLR**.
+<br>
+Um die Transparenz des Fortschritts zu steigern wird - ebenfalls in den Semesterferien - ein **Pflichtenheft** erstellt.
 
 ## :currency_exchange: Funktionsweise
 ![alt text](webserver/wwwnew/src/assets/Homescreen.png)
