@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @XmlRootElement
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Payments.findAll", query = "select p from Payment p")
+        @NamedQuery(name = "TempPayments.findAll", query = "select p from TempPayment p")
 })
-public class Payment implements Cloneable {
+public class TempPayment implements Cloneable {
 
     // region Variables
     @Id
@@ -34,16 +34,16 @@ public class Payment implements Cloneable {
     private int writeOffNumber = 0;
 
     @OneToOne
-    private Payment nextPayment = null;
+    private TempPayment nextPayment = null;
     @OneToOne
-    private Payment previousPayment = null;
+    private TempPayment previousPayment = null;
 
     @OneToOne
     private Category category;
     // endregion
 
     // region Constructor
-    public Payment(){}
+    public TempPayment(){}
     // endregion
 
     // region Getter & Setter
@@ -179,19 +179,19 @@ public class Payment implements Cloneable {
         this.writeOffNumber = writeOffNumber;
     }
 
-    public Payment getNextPayment() {
+    public TempPayment getNextPayment() {
         return nextPayment;
     }
 
-    public void setNextPayment(Payment nextPayment) {
+    public void setNextPayment(TempPayment nextPayment) {
         this.nextPayment = nextPayment;
     }
 
-    public Payment getPreviousPayment() {
+    public TempPayment getPreviousPayment() {
         return previousPayment;
     }
 
-    public void setPreviousPayment(Payment previousPayment) {
+    public void setPreviousPayment(TempPayment previousPayment) {
         this.previousPayment = previousPayment;
         this.previousPayment.setNextPayment(this);
     }

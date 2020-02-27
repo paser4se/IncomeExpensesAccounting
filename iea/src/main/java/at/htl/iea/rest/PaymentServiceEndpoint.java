@@ -3,9 +3,11 @@ package at.htl.iea.rest;
 import at.htl.iea.business.Parser;
 import at.htl.iea.dao.CategoryDao;
 import at.htl.iea.dao.PaymentDao;
+import at.htl.iea.dao.TempPaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
+import at.htl.iea.model.TempPayment;
 import at.htl.iea.rest.auth.Secured;
 import org.json.JSONObject;
 
@@ -25,12 +27,23 @@ public class PaymentServiceEndpoint {
     PaymentDao paymentDao;
     @Inject
     CategoryDao categoryDao;
+    @Inject
+    TempPaymentDao tempPaymentDao;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPayments() {
-        List<Payment> payments = paymentDao.getAllUnevaluatedPayments();
+        List<Payment> payments = paymentDao.listAll();
         return Response.ok(Parser.getInstance().getAllPayments(payments), MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/temp")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response getAllTempPayments() {
+        List<TempPayment> payments = tempPaymentDao.listAll();
+        System.out.println(Parser.getInstance().getAllTempPayments(payments));
+        return Response.ok().entity(Parser.getInstance().getAllTempPayments(payments)).build();
     }
 
     @POST
@@ -41,10 +54,11 @@ public class PaymentServiceEndpoint {
         JSONObject obj = new JSONObject(catId);
         Long categoryId = Long.parseLong(obj.getString("catId"));
 
-        Payment payment = paymentDao.getPaymentById(id);
+        TempPayment payment = tempPaymentDao.findById(id);
         Category category = categoryDao.getCategoryById(categoryId);
         payment.setCategory(category);
-        paymentDao.flush();
+        tempPaymentDao.merge(payment);
+        tempPaymentDao.flush();
         categoryDao.flush();
 
         return Response.ok("Category changed").build();

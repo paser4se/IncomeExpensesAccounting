@@ -1,10 +1,15 @@
 package at.htl.iea.rest;
 
 import at.htl.iea.business.Parser;
+import at.htl.iea.dao.AssignmentDao;
+import at.htl.iea.dao.CategoryDao;
+import at.htl.iea.dao.TempPaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
+import at.htl.iea.model.TempPayment;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -18,8 +23,14 @@ import java.util.Set;
 @Path("files")
 public class  FileUploadServiceEndPoint {
 
-    @PersistenceContext
-    EntityManager em;
+    @Inject
+    CategoryDao categoryDao;
+
+    @Inject
+    TempPaymentDao tempPaymentDao;
+
+    @Inject
+    AssignmentDao assignmentDao;
 
     @GET
     public Response hello() {
@@ -32,16 +43,16 @@ public class  FileUploadServiceEndPoint {
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response uploadText(String content) {
         try {
-            List<Payment> paymentList = Parser.getInstance().persist(content);
-            for (Payment p : paymentList) {
+            List<TempPayment> paymentList = Parser.getInstance().persist(content);
+            for (TempPayment p : paymentList) {
                 System.out.println("BookingText: " + p.getBookingText());
 
                 String automaticallyAssignedCategory = getCategoryAssignedByBookingText(p.getBookingText());
 
-                p.setCategory(em.createNamedQuery("Category.getByName", Category.class).setParameter(1, automaticallyAssignedCategory).getSingleResult());
-                em.persist(p);
+                p.setCategory(categoryDao.find("name = ?1", automaticallyAssignedCategory).firstResult());
+                tempPaymentDao.savePayment(p);
             }
-            em.flush();
+            tempPaymentDao.flush();
         } catch (ParseException e) {
             System.err.println("ParseException: " + e.getMessage());
             return Response.serverError().build();
@@ -54,17 +65,15 @@ public class  FileUploadServiceEndPoint {
 
     private String getCategoryAssignedByBookingText(String bookingText) {
         String categoryText = "Sonstiges";
-        List<Category> categories = em.createNamedQuery("Category.getAll", Category.class).getResultList();
+        List<Category> categories = categoryDao.findAll().list();
 
         for (Category c : categories){
-            List<Assignment> assignmentsByCat = em.createNamedQuery("Assignment.getByCat", Assignment.class).setParameter(1, c.getId()).getResultList();
-            for (Assignment a : assignmentsByCat){
-                Set<String> keywords = a.getKeywords();
-                for (String s : keywords){
-                  if (bookingText.toLowerCase().contains(s.toLowerCase())){
-                      a.setCategoryKeyword(s);
-                      categoryText = em.createNamedQuery("Category.getByAssignmentKeyword", Category.class).setParameter(1, s).getSingleResult().getName();
-                  }
+            Assignment assignment = assignmentDao.getByCategory(c.getId());
+            Set<String> keywords = assignment.getKeywords();
+            for (String s : keywords){
+                if (bookingText.toLowerCase().contains(s.toLowerCase())){
+                    assignment.setCategoryKeyword(s);
+                    categoryText = categoryDao.getByAssignmentKeyword(s).getName();
                 }
             }
         }

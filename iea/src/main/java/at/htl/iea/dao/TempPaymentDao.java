@@ -10,11 +10,11 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @ApplicationScoped
-public class PaymentDao implements PanacheRepository<Payment> {
+public class TempPaymentDao implements PanacheRepository<TempPayment> {
     @PersistenceContext
     EntityManager em;
 
-    public void savePayment(Payment payment) {
+    public void savePayment(TempPayment payment) {
         if (payment.getId() != null) {
             em.merge(payment);
         } else {
@@ -22,13 +22,12 @@ public class PaymentDao implements PanacheRepository<Payment> {
         }
     }
 
-    public void deletePayment(Payment payment) {
-        em.createQuery("DELETE FROM Payment p where p.id = "+payment.getId()).executeUpdate();
+    public void deletePayment(TempPayment payment) {
+        em.createQuery("DELETE FROM TempPayment p where p.id = "+payment.getId()).executeUpdate();
         flush();
     }
 
-    public void merge(Payment payment) {
+    public void merge(TempPayment payment) {
         em.merge(payment);
     }
-
 }

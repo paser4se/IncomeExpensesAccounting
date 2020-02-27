@@ -72,7 +72,7 @@ public class EvaluationEndpoint {
     private List<Evaluation> getEvaluations(String mode, LocalDateTime from, LocalDateTime to) {
         List<Evaluation> evaluationIncome = new LinkedList<>();
         List<Evaluation> evaluationExpenses = new LinkedList<>();
-        List<Payment> payments = paymentDao.getAllEvaluatedPayments();
+        List<Payment> payments = paymentDao.listAll();
 
         for (int i = 0; i < payments.size(); i++){
             if ((from == LocalDateTime.MIN || payments.get(i).getBookingDate().compareTo(from) >= 0)

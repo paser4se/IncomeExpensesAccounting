@@ -22,8 +22,8 @@ public class CategoryDao implements PanacheRepository<Category> {
         return em.createNamedQuery("Category.getSortedCategories", Category.class).getResultList();
     }
 
-    public Assignment getAssignmentByCategory(Long id) {
-        return em.createNamedQuery("Assignment.getByCat", Assignment.class).setParameter(1, id).getSingleResult();
+    public Category getByAssignmentKeyword(String keyword) {
+        return em.createNamedQuery("Category.getByAssignmentKeyword", Category.class).setParameter(1, keyword).getSingleResult();
     }
 
     public void saveCategory(Category category) {

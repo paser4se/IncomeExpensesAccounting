@@ -58,7 +58,7 @@
             </div>
             <md-button
               class="md-raised md-primary right"
-              @click="nextStep('first', 'second'); getAllPayments();"
+              @click="nextStep('first', 'second'); getAllTempPayments();"
             >Next</md-button>
           </md-step>
           <md-step
@@ -364,7 +364,7 @@ export default Vue.extend({
         method: "POST"
       }).then(function(response) {
         console.log(response);
-        this.getAllPayments();
+        this.getAllTempPayments();
       }.bind(this));
     },
     getBackgroundColor(catid) {
@@ -404,6 +404,15 @@ export default Vue.extend({
       .then(async function(response) {
         let tmp = await response.json();
         this.payments = tmp;
+      }.bind(this));
+    },
+    getAllTempPayments() {
+      fetch('http://localhost:8080/payments/temp')
+      .then(async function(response) {
+        let tmp = await response.json();
+        console.log(response);
+        this.payments = tmp;
+        console.log(this.payments);
       }.bind(this));
     },
     getAllCategories() {

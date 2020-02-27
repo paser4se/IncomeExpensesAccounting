@@ -1,10 +1,13 @@
 package at.htl.iea.rest;
 
+import at.htl.iea.dao.AssignmentDao;
 import at.htl.iea.dao.CategoryDao;
 import at.htl.iea.dao.PaymentDao;
+import at.htl.iea.dao.TempPaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
+import at.htl.iea.model.TempPayment;
 import at.htl.iea.model.enums.WriteOffUnit;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,10 +34,14 @@ public class PreAccountingEndPoint {
     CategoryDao categoryDao;
     @Inject
     PaymentDao paymentDao;
+    @Inject
+    TempPaymentDao tempPaymentDao;
+    @Inject
+    AssignmentDao assignmentDao;
 
     @GET
     @Path("/category")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getAllCategories() {
         List<Category> categories = categoryDao.getSortedCategories();
         JsonArrayBuilder cats = Json.createArrayBuilder();
@@ -62,7 +69,7 @@ public class PreAccountingEndPoint {
 
             cats.add(cat);
         }
-        return Response.ok(cats.build(), MediaType.APPLICATION_JSON).build();
+        return Response.ok().entity(cats.build()).build();
     }
 
     @GET
@@ -101,8 +108,9 @@ public class PreAccountingEndPoint {
     @Consumes(MediaType.TEXT_PLAIN)
     public Response addKeyword(@PathParam("id") Long id, String keyword) {
         try {
-            Assignment assignment = categoryDao.getAssignmentByCategory(id);
+            Assignment assignment = assignmentDao.getByCategory(id);
             assignment.addKeyword(keyword);
+            assignmentDao.merge(assignment);
             categoryDao.flush();
         } catch (Exception ex) {
             return Response.noContent().build();
@@ -119,7 +127,7 @@ public class PreAccountingEndPoint {
         JSONObject infoObject = new JSONObject(infos);
         String unit = infoObject.get("wunit").toString();
         int writeOffNumber = Integer.parseInt(infoObject.get("wnum").toString());
-        Payment payment = paymentDao.getPaymentById(id);
+        TempPayment payment = tempPaymentDao.findById(id);
         WriteOffUnit writeOffUnit = WriteOffUnit.NONE;
         switch (unit) {
             case "Month":
@@ -135,7 +143,7 @@ public class PreAccountingEndPoint {
 
         payment.setWriteOffUnit(writeOffUnit);
         payment.setWriteOffNumber(writeOffNumber);
-        paymentDao.updatePayment(payment);
+        tempPaymentDao.merge(payment);
 
         return Response.ok().build();
     }
@@ -144,12 +152,10 @@ public class PreAccountingEndPoint {
     @Path("/commit")
     @Transactional
     public Response commitPayments() {
-        List<Payment> payments = paymentDao.getAllUnevaluatedPayments();
-        paymentDao.deletePayments();
+        List<TempPayment> payments = tempPaymentDao.listAll();
 
         for (int i = 0; i < payments.size(); i++) {
-            Payment currentPayment = payments.get(i);
-            currentPayment.setEvaluated(true);
+            Payment currentPayment = convertToPayment(payments.get(i));
 
             if (currentPayment.getWriteOffUnit() != WriteOffUnit.NONE) {
                 List<Payment> newPayments = new LinkedList<>();
@@ -188,19 +194,41 @@ public class PreAccountingEndPoint {
                     }
 
                 }
-                paymentDao.deletePayment(currentPayment);
             } else {
                 paymentDao.savePayment(currentPayment);
             }
         }
+        tempPaymentDao.deleteAll();
 
         return Response.ok().build();
+    }
+
+    private Payment convertToPayment(TempPayment tempPayment) {
+        Payment payment = new Payment();
+
+        payment.setAmount(tempPayment.getAmount());
+        payment.setBookingDate(tempPayment.getBookingDate());
+        payment.setBookingText(tempPayment.getBookingText());
+        payment.setCategory(tempPayment.getCategory());
+        payment.setCurrency(tempPayment.getCurrency());
+        payment.setInitialRecognitionReference(tempPayment.getInitialRecognitionReference());
+        payment.setNote(tempPayment.getNote());
+        payment.setPartnerAccountNumber(tempPayment.getPartnerAccountNumber());
+        payment.setPartnerBankCode(tempPayment.getPartnerBankCode());
+        payment.setPartnerBic(tempPayment.getPartnerBic());
+        payment.setPartnerIban(tempPayment.getPartnerIban());
+        payment.setPartnerName(tempPayment.getPartnerName());
+        payment.setValueDate(tempPayment.getValueDate());
+        payment.setWriteOffNumber(tempPayment.getWriteOffNumber());
+        payment.setWriteOffUnit(tempPayment.getWriteOffUnit());
+
+        return payment;
     }
 
     public Assignment getAssignment(Long id) {
         Assignment assignment = null;
         try{
-            assignment = categoryDao.getAssignmentByCategory(id);
+            assignment = assignmentDao.getByCategory(id);
         }
         catch (NoResultException nre){
         }

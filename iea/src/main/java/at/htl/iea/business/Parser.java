@@ -1,5 +1,6 @@
 package at.htl.iea.business;
 
+import at.htl.iea.model.TempPayment;
 import at.htl.iea.model.enums.OnlineBankingSystem;
 import at.htl.iea.model.Payment;
 
@@ -32,8 +33,8 @@ public class Parser {
         return Parser.instance;
     }
 
-    public List<Payment> persist(String fileContent) throws NoSuchFieldException, ParseException {
-        List<Payment> payments = new ArrayList<>();
+    public List<TempPayment> persist(String fileContent) throws NoSuchFieldException, ParseException {
+        List<TempPayment> payments = new ArrayList<>();
         String[] lines = fileContent.split("\n");
         List<String> header = Arrays.asList(lines[0].split(";")).stream()
                 .map(p -> p.replaceAll("\"", "").replaceAll("\r", ""))
@@ -61,9 +62,9 @@ public class Parser {
         return payments;
     }
 
-    private static Payment getPayment(@NotNull List<String> header, @NotNull String[] lineElements, @NotNull OnlineBankingSystem bankingSystem) throws ParseException {
+    private static TempPayment getPayment(@NotNull List<String> header, @NotNull String[] lineElements, @NotNull OnlineBankingSystem bankingSystem) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Payment payment = new Payment();
+        TempPayment payment = new TempPayment();
 
         for (int i = 0; i < lineElements.length; i++) {
             if (bankingSystem.equals(OnlineBankingSystem.GEORGE)) {
@@ -151,6 +152,31 @@ public class Parser {
     }
 
     public JsonArray getAllPayments(List<Payment> paymentList){
+        DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DecimalFormat doubleFormatter = new DecimalFormat("#0.00");
+        JsonArrayBuilder payments = Json.createArrayBuilder();
+
+        for (int i = 0; i < paymentList.size(); i++) {
+            JsonObjectBuilder tmpPayment = Json.createObjectBuilder();
+            tmpPayment.add("id", paymentList.get(i).getId());
+            tmpPayment.add("bookingDate", paymentList.get(i).getBookingDate().format(dt));
+            tmpPayment.add("amount", doubleFormatter.format(paymentList.get(i).getAmount()));
+            tmpPayment.add("currency", paymentList.get(i).getCurrency());
+            tmpPayment.add("bookingText", paymentList.get(i).getBookingText());
+            tmpPayment.add("writeOffUnit", paymentList.get(i).getWriteOffUnit().ordinal());
+            tmpPayment.add("writeOffNumber", paymentList.get(i).getWriteOffNumber());
+            JsonObjectBuilder cat = Json.createObjectBuilder();
+            cat.add("id", paymentList.get(i).getCategory().getId());
+            cat.add("name", paymentList.get(i).getCategory().getName());
+            tmpPayment.add("category", cat.build());
+
+            payments.add(tmpPayment);
+        }
+
+        return payments.build();
+    }
+
+    public JsonArray getAllTempPayments(List<TempPayment> paymentList){
         DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         DecimalFormat doubleFormatter = new DecimalFormat("#0.00");
         JsonArrayBuilder payments = Json.createArrayBuilder();
