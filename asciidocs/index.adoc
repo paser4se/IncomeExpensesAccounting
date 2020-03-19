@@ -1,6 +1,6 @@
-= My Project
-firstname lastname
-1.0.1, yyyy-mm-dd
+= Income Expenses Accounting
+Michael Frech & Julian Nobis
+1.0.0, 2020-03-19
 :sourcedir: ../src/main/java
 :icons: font
 :toc: left
