@@ -314,5 +314,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-db/
 # End of https://www.gitignore.io/api/node,java,linux,maven,windows,intellij,intellij+all,visualstudiocode
+
+db/
+
+build-docs-pdf/
+build-docs-revealjs/
+asciidocs/revealjs/
