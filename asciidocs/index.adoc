@@ -53,7 +53,41 @@ image::images/systemarchitektur.png[Systemarchitektur]
 === Anwendungsfalldiagramm
 image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
-image::images/erm.png[Entity-Relationship-Modell]
+[plantuml]
+----
+@startuml
+entity Payment {
+  * id : number
+  --
+  * bookingDate : string
+  * amount : string
+  * currency : string
+  * bookingText : string
+  * writeOffUnit : number
+  * writeOffNumber : number
+  * category : Category 
+}
+
+entity Category {
+  * id : number
+  --
+  * name : string
+}
+
+entity CategoryTree {
+  * id : number
+  --
+  * text : string
+  * expanded : boolean
+  * isSelected : boolean
+  * items : CategoryTree[]
+  * parentId : number
+}
+
+Payment ||-- Category
+
+@enduml
+----
 === Funktionsweise
 image::images/function.png[Funktionsweise]
 
