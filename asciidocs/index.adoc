@@ -37,11 +37,14 @@ Superclass:  | { "java.lang.Object " | [Browse...] }
 === Ziele
 === Mengengerüst
 === Rahmenbedingungen
-zB Vorgaben vom Auftraggeber
+=== Bedienbarkeit
+=== Ressourcenschonung
 
 == Entwurf "Wie mache ich es?"
 === Systemarchitektur
-=== ...
+=== Anwendungsfalldiagramm
+=== Entity-Relationship-Modell
+=== Funktionsweise
 
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
