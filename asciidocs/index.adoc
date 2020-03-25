@@ -42,6 +42,7 @@ Superclass:  | { "java.lang.Object " | [Browse...] }
 
 == Entwurf "Wie mache ich es?"
 === Systemarchitektur
+image::images/systemarchitektur.png[Systemarchitektur]
 === Anwendungsfalldiagramm
 image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
