@@ -45,6 +45,7 @@ Superclass:  | { "java.lang.Object " | [Browse...] }
 === Anwendungsfalldiagramm
 === Entity-Relationship-Modell
 === Funktionsweise
+image::images/function.png[Funktionsweise]
 
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
@@ -66,4 +67,3 @@ mit User-Stories (definiert in YouTrack)
 
 
 link:demo.html[Demo]
-
