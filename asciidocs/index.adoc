@@ -37,7 +37,7 @@ Gestartet wurde das Projekt mit im November 2018, die Fertigstellung erfolgt mit
 Beide Entwickler besitzen ausreichend fundiertes Rechnungswesen Know-How.
 
 ===== Robustheit und Ausfallsicherheit
-Das Projekt läuft in einem Docker-Netzwerk, wie die Abbildung in Kapitel <<Systemarchitektur>> verdeutlicht. Deshalb kann das Projekt einmal gestartet werden und läuft so lange, bis es terminiert wird.
+Das Projekt läuft in einem Docker-Netzwerk, wie die Abbildung in Kapitel *<<Systemarchitektur>>* verdeutlicht. Deshalb kann das Projekt einmal gestartet werden und läuft so lange, bis es terminiert wird.
 
 === Ziele
 Eine sachliche sowie zeitliche Abgrenzung der Zahlungen im CAMT 053 Format, welche bei Bedarf manuell umgebucht werden können. Anschließend erfolgt eine Visualisierung der Zahlungen.
@@ -53,6 +53,7 @@ image::images/systemarchitektur.png[Systemarchitektur]
 === Anwendungsfalldiagramm
 image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
+image::images/erm.png[Entity-Relationship-Modell]
 === Funktionsweise
 image::images/function.png[Funktionsweise]
 
