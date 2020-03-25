@@ -483,9 +483,6 @@ h4 {
 <li><a href="#_aufgabenstellung">1.4. Aufgabenstellung</a></li>
 <li><a href="#_ziele">1.5. Ziele</a></li>
 <li><a href="#_mengengerüst">1.6. Mengengerüst</a></li>
-<li><a href="#_rahmenbedingungen">1.7. Rahmenbedingungen</a></li>
-<li><a href="#_bedienbarkeit">1.8. Bedienbarkeit</a></li>
-<li><a href="#_ressourcenschonung">1.9. Ressourcenschonung</a></li>
 </ul>
 </li>
 <li><a href="#_entwurf_wie_mache_ich_es">2. Entwurf "Wie mache ich es?"</a>
@@ -531,36 +528,61 @@ PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitr
 <h3 id="_aufgabenstellung"><a class="anchor" href="#_aufgabenstellung"></a>1.4. Aufgabenstellung</h3>
 <div class="sect3">
 <h4 id="_funktionale_anforderungen"><a class="anchor" href="#_funktionale_anforderungen"></a>1.4.1. Funktionale Anforderungen</h4>
-<div class="imageblock">
-<div class="content">
-<img src="images/wireframe.png" alt="wireframe" width="376" height="84">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Einnahmen und Ausgaben ansehen</strong></p>
+</li>
+<li>
+<p><strong>Manuelle Buchungen durchführen</strong></p>
+</li>
+<li>
+<p><strong>Kontrolle der vorkontierten Buchungen</strong></p>
+</li>
+<li>
+<p><strong>Strukturierung der Einnahmen und Ausgaben</strong></p>
+</li>
+</ul>
 </div>
+<div class="paragraph">
+<p>Im Kapitel <strong><a href="#_anwendungsfalldiagramm">Anwendungsfalldiagramm</a></strong> werden die funktionalen Anforderungen ebenfalls verdeutlicht.</p>
+</div>
+<div class="paragraph">
+<p><em>Da sich das Entwickler-Team (Micheal Frech, Julian Nobis) nicht sicher war (siehe E-Mail), wurden die funktionalen Anforderungen hier aufgezählt und beim <a href="#_anwendungsfalldiagramm">Anwendungsfalldiagramm</a> grafisch dargestellt.</em></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_nichtfunktionale_anforderungen_nfa"><a class="anchor" href="#_nichtfunktionale_anforderungen_nfa"></a>1.4.2. Nichtfunktionale Anforderungen (NFA)</h4>
-
+<div class="sect4">
+<h5 id="_rahmenbedingungen"><a class="anchor" href="#_rahmenbedingungen"></a>Rahmenbedingungen</h5>
+<div class="paragraph">
+<p>Das Entwickler-Team besteht aus den zwei oben genannten Personen.
+Gestartet wurde das Projekt mit im November 2018, die Fertigstellung erfolgt mit Schulende - voraussichtlich 30. April 2020.
+Beide Entwickler besitzen ausreichend fundiertes Rechnungswesen Know-How.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_robustheit_und_ausfallsicherheit"><a class="anchor" href="#_robustheit_und_ausfallsicherheit"></a>Robustheit und Ausfallsicherheit</h5>
+<div class="paragraph">
+<p>Das Projekt läuft in einem Docker-Netzwerk, wie die Abbildung in Kapitel <strong><a href="#_systemarchitektur">Systemarchitektur</a></strong> verdeutlicht. Deshalb kann das Projekt einmal gestartet werden und läuft so lange, bis es terminiert wird.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_ziele"><a class="anchor" href="#_ziele"></a>1.5. Ziele</h3>
-
+<div class="paragraph">
+<p>Eine sachliche sowie zeitliche Abgrenzung der Zahlungen im CAMT 053 Format, welche bei Bedarf manuell umgebucht werden können. Anschließend erfolgt eine Visualisierung der Zahlungen.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_mengengerüst"><a class="anchor" href="#_mengengerüst"></a>1.6. Mengengerüst</h3>
-
+<div class="paragraph">
+<p>Zu Beginn wird eine Datei im CAMT 053 Format vom System eingelesen, analysiert und anschließend in einer PostgreSQL Datenbank persistiert. Die Datenmenge, mit der das System <em>arbeitet</em>, stellt für die Datenbank kein Problem dar, da eine PostgreSQL Datenbank in der Praxis für Onlinebanking-Systeme eingesetzt wird. <em>Quelle: <a href="https://www.ionos.at/digitalguide/server/knowhow/postgresql/" class="bare">https://www.ionos.at/digitalguide/server/knowhow/postgresql/</a></em></p>
 </div>
-<div class="sect2">
-<h3 id="_rahmenbedingungen"><a class="anchor" href="#_rahmenbedingungen"></a>1.7. Rahmenbedingungen</h3>
-
+<div class="paragraph">
+<p>Außerdem kann davon ausgegangen werden, dass die Datei Zahlungen in einem monatlichen bzw. jährlichen Zeitraum enthält.</p>
 </div>
-<div class="sect2">
-<h3 id="_bedienbarkeit"><a class="anchor" href="#_bedienbarkeit"></a>1.8. Bedienbarkeit</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_ressourcenschonung"><a class="anchor" href="#_ressourcenschonung"></a>1.9. Ressourcenschonung</h3>
-
 </div>
 </div>
 </div>
@@ -569,19 +591,35 @@ PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitr
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_systemarchitektur"><a class="anchor" href="#_systemarchitektur"></a>2.1. Systemarchitektur</h3>
-
+<div class="imageblock">
+<div class="content">
+<img src="images/images/systemarchitektur.png" alt="Systemarchitektur">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_anwendungsfalldiagramm"><a class="anchor" href="#_anwendungsfalldiagramm"></a>2.2. Anwendungsfalldiagramm</h3>
-
+<div class="imageblock">
+<div class="content">
+<img src="images/images/IEA_use_case_diagram.png" alt="Anwendungsfalldiagramm">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_entity_relationship_modell"><a class="anchor" href="#_entity_relationship_modell"></a>2.3. Entity-Relationship-Modell</h3>
-
+<div class="imageblock">
+<div class="content">
+<img src="images/diag-acb142daf7e7e14dee21fb64ae178249.png" alt="diag acb142daf7e7e14dee21fb64ae178249" width="378" height="301">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_funktionsweise"><a class="anchor" href="#_funktionsweise"></a>2.4. Funktionsweise</h3>
-
+<div class="imageblock">
+<div class="content">
+<img src="images/images/function.png" alt="Funktionsweise">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -608,7 +646,7 @@ PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitr
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2020-03-25 13:47:45 UTC
+Last updated 2020-03-25 18:49:49 UTC
 </div>
 </div>
 </body>
