@@ -20,10 +20,11 @@ PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitr
 
 === Aufgabenstellung
 ==== Funktionale Anforderungen
-===== Einnahmen und Ausgaben ansehen
-===== Manuelle Buchungen durchführen
-===== Kontrolle der vorkontierten Buchungen
-===== Strukturierung der Einnahmen und Ausgaben
+
+* *Einnahmen und Ausgaben ansehen*
+* *Manuelle Buchungen durchführen*
+* *Kontrolle der vorkontierten Buchungen*
+* *Strukturierung der Einnahmen und Ausgaben*
 
 Im Kapitel *<<Anwendungsfalldiagramm>>* werden die funktionalen Anforderungen ebenfalls verdeutlicht.
 
@@ -43,6 +44,7 @@ Eine sachliche sowie zeitliche Abgrenzung der Zahlungen im CAMT 053 Format, welc
 
 === Mengengerüst
 Zu Beginn wird eine Datei im CAMT 053 Format vom System eingelesen, analysiert und anschließend in einer PostgreSQL Datenbank persistiert. Die Datenmenge, mit der das System _arbeitet_, stellt für die Datenbank kein Problem dar, da eine PostgreSQL Datenbank in der Praxis für Onlinebanking-Systeme eingesetzt wird. _Quelle: https://www.ionos.at/digitalguide/server/knowhow/postgresql/_ 
+
 Außerdem kann davon ausgegangen werden, dass die Datei Zahlungen in einem monatlichen bzw. jährlichen Zeitraum enthält.
 
 == Entwurf "Wie mache ich es?"
