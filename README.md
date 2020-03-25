@@ -24,10 +24,10 @@ IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches ei
 ![alt text](images/systemarchitektur.png)
 
 **Zusatzinformationen**: Die Applikation wurde gedockert; es wird eine postgresql Datenbank verwendet und Jakarta EE wurde auf Quarkus umgestellt.
-Deshalb ist diese Darstellung leider derzeit veraltet; in den Semesterferien erfolgt eine Aktualisierung dieser Abbildung.
+Deshalb ist diese Darstellung leider derzeit veraltet; es erfolgt eine Aktualisierung dieser Abbildung.
 
 ## :crystal_ball: Was haben wir vor?
-In den Semesterferien erfolgt eine **Umstellung** des CSV-Formats auf ein einheitliches **CAMT-Format**.
+Des Weiteren erfolgt eine **Umstellung** des CSV-Formats auf ein einheitliches **CAMT-Format**, welche in naher Zukunft vollständig abgeschlossen sein wird.
 <br>
 Um die **Transparenz des Fortschritts** zu gewährleisten, wurde eine [**GitHub-Pages Website**](https://michifrech.github.io/IncomeExpensesAccounting/) erstellt.
 
@@ -35,7 +35,7 @@ Um die **Transparenz des Fortschritts** zu gewährleisten, wurde eine [**GitHub-
 ![alt text](webserver/wwwnew/src/assets/Homescreen.png)
 
 ### :newspaper: Erklärung
-Die Zahlungen werden von der Bank als csv-File zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
+Die Zahlungen werden von der Bank als CAMT 053 Format zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
 Fall A: Eine Zahlung kann automatisiert (ev. auch manuell) auf ein Konto gebucht werden (sachliche Abgrenzung), sowie dem richtigen Jahr zugeordnet werden.  
 Fall B: Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern werden über mehrere Jahre hinweg abgeschrieben: PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitraum abgeschrieben, d.h. es entsteht ein Aufwand von 10.000 EUR pro Jahr. 
 Damit eine solche Abschreibung möglich ist gibt es Kontenarten wie Aufwands- und Ertragskonten. In die Aufwandskonten werden die negativen Beträge gebucht, die positiven Beträge werden ins Ertragskonto gebucht.
