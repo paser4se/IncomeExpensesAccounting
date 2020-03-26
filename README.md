@@ -38,7 +38,7 @@ Fall B: Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern 
 Damit eine solche Abschreibung möglich ist gibt es Kontenarten wie Aufwands- und Ertragskonten. In die Aufwandskonten werden die negativen Beträge gebucht, die positiven Beträge werden ins Ertragskonto gebucht.
 Bestandskonten werden wir in weiterer Folge auch noch brauchen um die Anschaffungskosten der Investitionsgüter zu verbuchen, diese sind jedoch momentan noch unwichtig.
 
-## :wrench: Konfiguration
+## :wrench: Installation
 
 ### :floppy_disk: JEE- und Webserver dockern
 - Dem Script "startup.sh" Rechte erteilen
