@@ -40,21 +40,21 @@ Bei den bereits bestehenden Lösungen fehlt eine zeitliche Abgrenzung, deshalb h
 Zum Veranschaulichen einer zeitlichen Abgrenzung dient folgendes Beispiel:
 PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitraum abgeschrieben, d.h. es entsteht ein Aufwand von 10.000 EUR pro Jahr.
 
-=== Aufgabenstellung
-==== Funktionale Anforderungen
-===== Anwendungsfalldiagramm
+=== Funktionale Anforderungen
+==== Anwendungsfalldiagramm
 image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 
-===== Funktionsweise
-image::images/function.png[Funktionsweise]
+==== Funktionsweise
+image::images/function.png[Funktionsweise,width=60%]
+TODO: Funktionsweise beschreiben
 
-==== Nichtfunktionale Anforderungen (NFA)
-===== Rahmenbedingungen
+=== Nichtfunktionale Anforderungen (NFA)
+==== Rahmenbedingungen
 Das Entwickler-Team besteht aus den zwei oben genannten Personen. 
 Gestartet wurde das Projekt mit im November 2018, die Fertigstellung erfolgt mit Schulende - voraussichtlich 30. April 2020.
 Beide Entwickler besitzen ausreichend fundiertes Rechnungswesen Know-How.
 
-===== Robustheit und Ausfallsicherheit
+==== Robustheit und Ausfallsicherheit
 Das Projekt läuft in einem Docker-Netzwerk, wie die Abbildung in Kapitel *<<Systemarchitektur>>* verdeutlicht. Deshalb kann das Projekt einmal gestartet werden und läuft so lange, bis es terminiert wird.
 
 === Ziele
