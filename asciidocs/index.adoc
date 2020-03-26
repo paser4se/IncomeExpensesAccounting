@@ -108,20 +108,4 @@ image::images/function.png[Funktionsweise]
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
 === GANTT-Diagramm
-
-mit User-Stories (definiert in YouTrack)
-
-[plantuml,gantt-protoype,png]
-----
-@startuml
-[Test prototype] lasts 10 days
-[Prototype completed] happens at [Test prototype]'s end
-[Setup assembly line] lasts 12 days
-[Setup assembly line] starts at [Test prototype]'s end
-[Test prototype 2] lasts 3 days
-[Test prototype 2] starts at [Prototype completed]'s end
-@enduml
-----
-
-
-link:demo.html[Demo]
+Da eine Planung für ein beinahe abgeschlossenes Projekt nicht zielführend ist, wurde nach Rücksprache mit Herrn Prof. Stütz am 26.03.2020 um 12:20 Uhr entschieden, auf ein GANTT-Diagramm zu verzichten.
