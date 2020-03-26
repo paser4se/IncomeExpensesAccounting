@@ -42,15 +42,11 @@ PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitr
 
 === Aufgabenstellung
 ==== Funktionale Anforderungen
+===== Anwendungsfalldiagramm
+image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 
-* *Einnahmen und Ausgaben ansehen*
-* *Manuelle Buchungen durchführen*
-* *Kontrolle der vorkontierten Buchungen*
-* *Strukturierung der Einnahmen und Ausgaben*
-
-Im Kapitel *<<Anwendungsfalldiagramm>>* werden die funktionalen Anforderungen ebenfalls verdeutlicht.
-
-_Da sich das Entwickler-Team (Micheal Frech, Julian Nobis) nicht sicher war (siehe E-Mail), wurden die funktionalen Anforderungen hier aufgezählt und beim <<Anwendungsfalldiagramm>> grafisch dargestellt._
+===== Funktionsweise
+image::images/function.png[Funktionsweise]
 
 ==== Nichtfunktionale Anforderungen (NFA)
 ===== Rahmenbedingungen
@@ -72,8 +68,6 @@ Außerdem kann davon ausgegangen werden, dass die Datei Zahlungen in einem monat
 == Entwurf "Wie mache ich es?"
 === Systemarchitektur
 image::images/systemarchitektur.png[Systemarchitektur]
-=== Anwendungsfalldiagramm
-image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
 [plantuml]
 ----
@@ -114,9 +108,6 @@ Payment ||-- Category
 * Eine Zahlung stellt ein _Payment_ dar. 
 * Jeder Zahlung wird eine _Category_, z.B. "Kleidung", zugeordnet.
 * _CategoryTree_ ist die Struktur für die Auswahl der Kategorien (Baumstruktur).
-
-=== Funktionsweise
-image::images/function.png[Funktionsweise]
 
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
