@@ -29,7 +29,7 @@ Des Weiteren erfolgt eine **Umstellung** des CSV-Formats auf ein einheitliches *
 Um die **Transparenz des Fortschritts** zu gewährleisten, wurde eine [**GitHub-Pages Website**](https://michifrech.github.io/IncomeExpensesAccounting/) erstellt.
 
 ## :currency_exchange: Funktionsweise
-![alt text](webserver/wwwnew/src/assets/Homescreen.png)
+<img src="images/function.png" width="60%"/>
 
 ### :newspaper: Erklärung
 Die Zahlungen werden von der Bank als CAMT 053 Format zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
