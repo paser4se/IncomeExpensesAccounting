@@ -14,13 +14,16 @@ Beim Einlesen der Zahlungen: Umstellung des CSV-Formats auf ein einheitliches CA
 == Pflichtenheft "Was mache ich?"
 
 === Ausgangssituation
-Mit einem Einnahmen- & Ausgabenprogramm erhält man einen Überblick über die eigenen Finanzen. 
+Haushalte haben zahlreiche Einnahmen und Ausgaben, deshalb kann der Überblick über die eigenen Finanzen verloren gehen. 
 
 === Istzustand
-Die Zahlungen werden von der Bank zur Verfügung gestellt und nach dem Einlesen im Programm automatisch verbucht.
+Eine Aufzeichnung der erfolgten Ein- & Auszahlungen werden vom jeweiligen Bankinstitut zur Verfügung gestellt.
+Es gibt bereits Produkte, welche diese Zahlungsaufzeichnungen verarbeiten können.
 
 === Problemstellung
 Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern werden über mehrere Jahre hinweg abgeschrieben. 
+Bei den bereits bestehenden Lösungen fehlt eine zeitliche Abgrenzung, deshalb haben wir uns dazu entschlossen, eine eigene Software zu entwickeln. 
+Zum Veranschaulichen einer zeitlichen Abgrenzung dient folgendes Beispiel:
 PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitraum abgeschrieben, d.h. es entsteht ein Aufwand von 10.000 EUR pro Jahr.
 
 === Aufgabenstellung
