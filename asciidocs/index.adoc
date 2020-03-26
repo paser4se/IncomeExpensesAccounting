@@ -8,6 +8,19 @@ Michael Frech & Julian Nobis
 == Überblick
 IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
+[plantuml]
+----
+@startuml
+
+file "\n\n Kontoauszug \n\n" as kontolog
+agent "\n\n IncomeExpensesAccounting \n\n" as einaus
+file auswertung
+kontolog -right-> einaus
+einaus -right-> auswertung
+
+@enduml
+----
+
 == Was haben wir vor?
 Beim Einlesen der Zahlungen: Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
 
