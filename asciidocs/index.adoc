@@ -8,7 +8,6 @@ Michael Frech & Julian Nobis
 
 == Pflichtenheft "Was mache ich?"
 
-
 === Ausgangssituation
 Mit einem Einnahmen- & Ausgabenprogramm erhält man einen Überblick über die eigenen Finanzen. 
 
@@ -22,23 +21,31 @@ PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitr
 === Aufgabenstellung
 ==== Funktionale Anforderungen
 
-[plantuml,wireframe,png]
-----
-@startsalt
-{
-Name         | "                 "
-Modifiers:   | { (X) public | () default | () private | () protected
-	            [] abstract | [] final   | [] static }
-Superclass:  | { "java.lang.Object " | [Browse...] }
-}
-@endsalt
-----
+* *Einnahmen und Ausgaben ansehen*
+* *Manuelle Buchungen durchführen*
+* *Kontrolle der vorkontierten Buchungen*
+* *Strukturierung der Einnahmen und Ausgaben*
+
+Im Kapitel *<<Anwendungsfalldiagramm>>* werden die funktionalen Anforderungen ebenfalls verdeutlicht.
+
+_Da sich das Entwickler-Team (Micheal Frech, Julian Nobis) nicht sicher war (siehe E-Mail), wurden die funktionalen Anforderungen hier aufgezählt und beim <<Anwendungsfalldiagramm>> grafisch dargestellt._
+
 ==== Nichtfunktionale Anforderungen (NFA)
+===== Rahmenbedingungen
+Das Entwickler-Team besteht aus den zwei oben genannten Personen. 
+Gestartet wurde das Projekt mit im November 2018, die Fertigstellung erfolgt mit Schulende - voraussichtlich 30. April 2020.
+Beide Entwickler besitzen ausreichend fundiertes Rechnungswesen Know-How.
+
+===== Robustheit und Ausfallsicherheit
+Das Projekt läuft in einem Docker-Netzwerk, wie die Abbildung in Kapitel *<<Systemarchitektur>>* verdeutlicht. Deshalb kann das Projekt einmal gestartet werden und läuft so lange, bis es terminiert wird.
+
 === Ziele
+Eine sachliche sowie zeitliche Abgrenzung der Zahlungen im CAMT 053 Format, welche bei Bedarf manuell umgebucht werden können. Anschließend erfolgt eine Visualisierung der Zahlungen.
+
 === Mengengerüst
-=== Rahmenbedingungen
-=== Bedienbarkeit
-=== Ressourcenschonung
+Zu Beginn wird eine Datei im CAMT 053 Format vom System eingelesen, analysiert und anschließend in einer PostgreSQL Datenbank persistiert. Die Datenmenge, mit der das System _arbeitet_, stellt für die Datenbank kein Problem dar, da eine PostgreSQL Datenbank in der Praxis für Onlinebanking-Systeme eingesetzt wird. _Quelle: https://www.ionos.at/digitalguide/server/knowhow/postgresql/_ 
+
+Außerdem kann davon ausgegangen werden, dass die Datei Zahlungen in einem monatlichen bzw. jährlichen Zeitraum enthält.
 
 == Entwurf "Wie mache ich es?"
 === Systemarchitektur
@@ -46,6 +53,41 @@ image::images/systemarchitektur.png[Systemarchitektur]
 === Anwendungsfalldiagramm
 image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
+[plantuml]
+----
+@startuml
+entity Payment {
+  * id : number
+  --
+  * bookingDate : string
+  * amount : string
+  * currency : string
+  * bookingText : string
+  * writeOffUnit : number
+  * writeOffNumber : number
+  * category : Category 
+}
+
+entity Category {
+  * id : number
+  --
+  * name : string
+}
+
+entity CategoryTree {
+  * id : number
+  --
+  * text : string
+  * expanded : boolean
+  * isSelected : boolean
+  * items : CategoryTree[]
+  * parentId : number
+}
+
+Payment ||-- Category
+
+@enduml
+----
 === Funktionsweise
 image::images/function.png[Funktionsweise]
 
