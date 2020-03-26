@@ -5,6 +5,9 @@ Michael Frech & Julian Nobis
 :icons: font
 :toc: left
 
+== Überblick
+IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
+
 
 == Pflichtenheft "Was mache ich?"
 
