@@ -88,6 +88,11 @@ Payment ||-- Category
 
 @enduml
 ----
+
+* Eine Zahlung stellt ein _Payment_ dar. 
+* Jeder Zahlung wird eine _Category_, z.B. "Kleidung", zugeordnet.
+* _CategoryTree_ ist die Struktur für die Auswahl der Kategorien (Baumstruktur).
+
 === Funktionsweise
 image::images/function.png[Funktionsweise]
 
