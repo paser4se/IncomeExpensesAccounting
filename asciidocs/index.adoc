@@ -12,7 +12,7 @@ Michael Frech & Julian Nobis
 Mit einem Einnahmen- & Ausgabenprogramm erhält man einen Überblick über die eigenen Finanzen. 
 
 === Istzustand
-Die Zahlungen werden von der Bank zur Verfügung gestellt und automatisch verbucht.
+Die Zahlungen werden von der Bank zur Verfügung gestellt und nach dem Einfügen in das Programm automatisch verbucht.
 
 === Problemstellung
 Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern werden über mehrere Jahre hinweg abgeschrieben. 
