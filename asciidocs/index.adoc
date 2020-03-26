@@ -8,6 +8,8 @@ Michael Frech & Julian Nobis
 == Überblick
 IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 
+== Was haben wir vor?
+Beim Einlesen der Zahlungen: Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
 
 == Pflichtenheft "Was mache ich?"
 
@@ -98,9 +100,6 @@ Payment ||-- Category
 
 === Funktionsweise
 image::images/function.png[Funktionsweise]
-
-=== Was haben wir vor?
-Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
 
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
