@@ -22,7 +22,7 @@ Es gibt bereits Produkte, welche diese Zahlungsaufzeichnungen verarbeiten könne
 
 === Problemstellung
 Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern werden über mehrere Jahre hinweg abgeschrieben. 
-Bei den bereits bestehenden Lösungen fehlt eine zeitliche Abgrenzung, deshalb haben wir uns dazu entschlossen, eine eigene Software zu entwickeln. 
+Bei den bereits bestehenden Lösungen fehlt eine zeitliche Abgrenzung, deshalb haben wir uns dazu entschlossen, eine eigene Software zu entwickeln. Des Weiteren liegt dann keine Abhängigkeit von Cloud Anbietern bzw. anderen Anbietern vor.
 
 Zum Veranschaulichen einer zeitlichen Abgrenzung dient folgendes Beispiel:
 PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitraum abgeschrieben, d.h. es entsteht ein Aufwand von 10.000 EUR pro Jahr.
