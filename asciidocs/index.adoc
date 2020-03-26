@@ -99,6 +99,9 @@ Payment ||-- Category
 === Funktionsweise
 image::images/function.png[Funktionsweise]
 
+=== Was haben wir vor?
+Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
+
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
 === GANTT-Diagramm
