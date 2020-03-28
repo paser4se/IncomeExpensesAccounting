@@ -1,6 +1,7 @@
 # IncomeExpensesAccounting - IEA <img src="images/Logo.png" width="40" height="40">
 
 ## :bookmark_tabs: Übersicht
+- [Wichtige Information](#exclamation-wichtige-information)
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Anwendungsfalldiagramm](#chart_with_upwards_trend-anwendungsfalldiagramm)
 - [Was haben wir vor?](#crystal_ball-was-haben-wir-vor)
@@ -14,22 +15,20 @@
 - [Das Team](#surfer-das-team)
 - [Lizenz](#closed_lock_with_key-lizenz)
 
+## :exclamation: Wichtige Information
+Eine vollständige Dokumentation befindet sich auf der [**GitHub-Pages Website**](https://michifrech.github.io/IncomeExpensesAccounting/)!
+
+Der Fokus dieser Dokumentation liegt hauptsächlich auf der Installation. Grundlegende Informationen zum Projekt werden auch angeführt.
+
 ## :money_with_wings: Was ist IEA?
 IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
+![alt text](images/ueberblick.png)
 
 ## :chart_with_upwards_trend: Anwendungsfalldiagramm
 ![alt text](images/IEA_use_case_diagram.png)
 
 ## :statue_of_liberty: Systemarchitektur
 ![alt text](images/systemarchitektur.png)
-
-## :crystal_ball: Was haben wir vor?
-Des Weiteren erfolgt eine **Umstellung** des CSV-Formats auf ein einheitliches **CAMT-Format**, welche in naher Zukunft vollständig abgeschlossen sein wird.
-<br>
-Um die **Transparenz des Fortschritts** zu gewährleisten, wurde eine [**GitHub-Pages Website**](https://michifrech.github.io/IncomeExpensesAccounting/) erstellt.
-
-## :currency_exchange: Funktionsweise
-<img src="images/function.png" width="60%"/>
 
 ### :newspaper: Erklärung
 Die Zahlungen werden von der Bank als CAMT 053 Format zur Verfügung gestellt und müssen auf Buchungen aufgeteilt werden. Dabei werden zwei Fälle unterschieden: 
