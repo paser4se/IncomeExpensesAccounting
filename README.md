@@ -22,6 +22,7 @@ Der Fokus dieser Dokumentation liegt hauptsächlich auf der Installation. Grundl
 
 ## :money_with_wings: Was ist IEA?
 IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
+
 ![alt text](images/ueberblick.png)
 
 ## :chart_with_upwards_trend: Anwendungsfalldiagramm
