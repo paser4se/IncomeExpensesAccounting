@@ -47,18 +47,18 @@ image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 ==== Funktionsweise
 image::images/function.png[Funktionsweise,width=60%]
 
-. Hochladen der vom Bankinstitut zur Verfügung gestellten Zahlungsaufzeichnungen
+. *Hochladen der vom Bankinstitut zur Verfügung gestellten Zahlungsaufzeichnungen*
  * Die Datei mit den Zahlungsaufzeichnungen muss im CAMT 053 Format, ein einheitliches XML-Datenübertragungsformat für den Austausch zwischen Banken und Kunden, sein.
-. Zuweisung von Kategorien zu jeder Zahlung
+. *Zuweisung von Kategorien zu jeder Zahlung*
  * Im System sind Keywords vordefiniert. Aufgrund dieser Keywords erfolgt eine automatische Zuweisung der Kategorien zu jeder Zahlung.
- * Passt kein Keyword, wird der Zahlung die Kategorie **Sonstiges** zugewiesen.
+ * Passt kein Keyword, wird der Zahlung die Kategorie _Sonstiges_ zugewiesen.
  * Nach der automatischen Zuweisung kann der Benutzer manuell die Kategorien und Keywords verwalten.
   * Neue Kategorien und Keywords hinzufügen, löschen sowie bearbeiten.
  * Beispiele Kategorie: Bank, Auto, Kleidung, Lebensmittel, Gehalt, Versicherung, Sonstiges, etc.
  * Beispiele Keywords: BILLA DANKT, SB-Eigenerlag, EUROSPAR, clever fit, Lieferservice, Avanti, etc.
-. Zahlungen auf einen gewissen Zeitraum abschreiben
+. *Zahlungen auf einen gewissen Zeitraum abschreiben*
  * Eine Zahlung kann somit auf einen vom Benutzer definierten Zeitraum X abgeschrieben werden.
-. Grafische Darstellung der Einnahmen und Ausgaben 
+. *Grafische Darstellung der Einnahmen und Ausgaben* 
  * In einem Kreisdiagramm werden die Einnahmen und Ausgaben grafisch dargestellt.
  * Weiters ist es möglich, nur die Einnahmen sowie nur die Ausgaben anzeigen zu lassen.
 
