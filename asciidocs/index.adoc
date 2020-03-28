@@ -1,6 +1,6 @@
 = Income Expenses Accounting
 Michael Frech & Julian Nobis
-1.0.0, 2020-03-19
+1.0.1, 2020-03-28
 :sourcedir: ../src/main/java
 :icons: font
 :toc: left
@@ -9,40 +9,67 @@ Michael Frech & Julian Nobis
 IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
 https://github.com/MichiFrech/IncomeExpensesAccounting[Github]
 
+[plantuml]
+----
+@startuml
+
+file "\n\n Kontoauszug \n\n" as kontolog
+agent "\n\n IncomeExpensesAccounting \n\n" as einaus
+file  "\n\n Auswertung \n\n" as auswertung
+kontolog -right-> einaus
+einaus -right-> auswertung
+
+@enduml
+----
+
 == Was haben wir vor?
 Beim Einlesen der Zahlungen: Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
 
 == Pflichtenheft "Was mache ich?"
 
 === Ausgangssituation
-Mit einem Einnahmen- & Ausgabenprogramm erhält man einen Überblick über die eigenen Finanzen. 
+Haushalte haben zahlreiche Einnahmen und Ausgaben, deshalb kann der Überblick über die eigenen Finanzen verloren gehen. 
 
 === Istzustand
-Die Zahlungen werden von der Bank zur Verfügung gestellt und nach dem Einlesen im Programm automatisch verbucht.
+Eine Aufzeichnung der erfolgten Ein- & Auszahlungen werden vom jeweiligen Bankinstitut zur Verfügung gestellt.
+Es gibt bereits Produkte, welche diese Zahlungsaufzeichnungen verarbeiten können.
 
 === Problemstellung
 Manche Zahlungen betreffen aber nicht nur das Jahr der Zahlung, sondern werden über mehrere Jahre hinweg abgeschrieben. 
+Bei den bereits bestehenden Lösungen fehlt eine zeitliche Abgrenzung, deshalb haben wir uns dazu entschlossen, eine eigene Software zu entwickeln. Des Weiteren liegt dann keine Abhängigkeit von Cloud Anbietern bzw. anderen Anbietern vor.
+
+Zum Veranschaulichen einer zeitlichen Abgrenzung dient folgendes Beispiel:
 PCs im Wert von 30.000 EUR werden bspw. drei Jahre genutzt und für diesen Zeitraum abgeschrieben, d.h. es entsteht ein Aufwand von 10.000 EUR pro Jahr.
 
-=== Aufgabenstellung
-==== Funktionale Anforderungen
+=== Funktionale Anforderungen
+==== Anwendungsfalldiagramm
+image::IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 
-* *Einnahmen und Ausgaben ansehen*
-* *Manuelle Buchungen durchführen*
-* *Kontrolle der vorkontierten Buchungen*
-* *Strukturierung der Einnahmen und Ausgaben*
+==== Funktionsweise
+image::function.png[Funktionsweise,width=60%]
 
-Im Kapitel *<<Anwendungsfalldiagramm>>* werden die funktionalen Anforderungen ebenfalls verdeutlicht.
+. *Hochladen der vom Bankinstitut zur Verfügung gestellten Zahlungsaufzeichnungen*
+ * Die Datei mit den Zahlungsaufzeichnungen muss im CAMT 053 Format, ein einheitliches XML-Datenübertragungsformat für den Austausch zwischen Banken und Kunden, sein.
+. *Zuweisung von Kategorien zu jeder Zahlung*
+ * Im System sind Keywords vordefiniert. Aufgrund dieser Keywords erfolgt eine automatische Zuweisung der Kategorien zu jeder Zahlung.
+ * Passt kein Keyword, wird der Zahlung die Kategorie _Sonstiges_ zugewiesen.
+ * Nach der automatischen Zuweisung kann der Benutzer manuell die Kategorien und Keywords verwalten.
+  * Neue Kategorien und Keywords hinzufügen, löschen sowie bearbeiten.
+ * Beispiele Kategorie: Bank, Auto, Kleidung, Lebensmittel, Gehalt, Versicherung, Sonstiges, etc.
+ * Beispiele Keywords: BILLA DANKT, SB-Eigenerlag, EUROSPAR, clever fit, Lieferservice, Avanti, etc.
+. *Zahlungen auf einen gewissen Zeitraum abschreiben*
+ * Eine Zahlung kann somit auf einen vom Benutzer definierten Zeitraum X abgeschrieben werden.
+. *Grafische Darstellung der Einnahmen und Ausgaben* 
+ * In einem Kreisdiagramm werden die Einnahmen und Ausgaben grafisch dargestellt.
+ * Weiters ist es möglich, nur die Einnahmen sowie nur die Ausgaben anzeigen zu lassen.
 
-_Da sich das Entwickler-Team (Micheal Frech, Julian Nobis) nicht sicher war (siehe E-Mail), wurden die funktionalen Anforderungen hier aufgezählt und beim <<Anwendungsfalldiagramm>> grafisch dargestellt._
-
-==== Nichtfunktionale Anforderungen (NFA)
-===== Rahmenbedingungen
+=== Nichtfunktionale Anforderungen (NFA)
+==== Rahmenbedingungen
 Das Entwickler-Team besteht aus den zwei oben genannten Personen. 
 Gestartet wurde das Projekt mit im November 2018, die Fertigstellung erfolgt mit Schulende - voraussichtlich 30. April 2020.
 Beide Entwickler besitzen ausreichend fundiertes Rechnungswesen Know-How.
 
-===== Robustheit und Ausfallsicherheit
+==== Robustheit und Ausfallsicherheit
 Das Projekt läuft in einem Docker-Netzwerk, wie die Abbildung in Kapitel *<<Systemarchitektur>>* verdeutlicht. Deshalb kann das Projekt einmal gestartet werden und läuft so lange, bis es terminiert wird.
 
 === Ziele
@@ -56,8 +83,6 @@ Außerdem kann davon ausgegangen werden, dass die Datei Zahlungen in einem monat
 == Entwurf "Wie mache ich es?"
 === Systemarchitektur
 image::systemarchitektur.png[Systemarchitektur]
-=== Anwendungsfalldiagramm
-image::IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
 [plantuml]
 ----
@@ -99,13 +124,7 @@ Payment ||-- Category
 * Jeder Zahlung wird eine _Category_, z.B. "Kleidung", zugeordnet.
 * _CategoryTree_ ist die Struktur für die Auswahl der Kategorien (Baumstruktur).
 
-=== Funktionsweise
-image::function.png[Funktionsweise]
-
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
 === GANTT-Diagramm
-
-Aufgrund von Unklarheiten bisher nur ein Link zum Youtrack Dashboard.
-
-https://vm81.htl-leonding.ac.at/dashboard?id=0d73eb57-0918-49fe-8894-795347c81941[Youtrack Dashboard]
+Da eine Planung für ein beinahe abgeschlossenes Projekt nicht zielführend ist, wurde nach Rücksprache mit Herrn Prof. Stütz am 26.03.2020 um 12:20 Uhr entschieden, auf ein GANTT-Diagramm zu verzichten.
