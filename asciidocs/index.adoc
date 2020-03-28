@@ -7,6 +7,7 @@ Michael Frech & Julian Nobis
 
 == Überblick
 IncomeExpensesAccounting (IEA) ist ein Einnahmen- & Ausgabenprogramm, welches einen Überblick über die gesamten Finanzen schafft.
+https://github.com/MichiFrech/IncomeExpensesAccounting[Github]
 
 == Was haben wir vor?
 Beim Einlesen der Zahlungen: Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
@@ -54,9 +55,9 @@ Außerdem kann davon ausgegangen werden, dass die Datei Zahlungen in einem monat
 
 == Entwurf "Wie mache ich es?"
 === Systemarchitektur
-image::images/systemarchitektur.png[Systemarchitektur]
+image::systemarchitektur.png[Systemarchitektur]
 === Anwendungsfalldiagramm
-image::images/IEA_use_case_diagram.png[Anwendungsfalldiagramm]
+image::IEA_use_case_diagram.png[Anwendungsfalldiagramm]
 === Entity-Relationship-Modell
 [plantuml]
 ----
@@ -99,25 +100,12 @@ Payment ||-- Category
 * _CategoryTree_ ist die Struktur für die Auswahl der Kategorien (Baumstruktur).
 
 === Funktionsweise
-image::images/function.png[Funktionsweise]
+image::function.png[Funktionsweise]
 
 == Projekthandbuch "Organisatorische Rahmenbedingungen"
 
 === GANTT-Diagramm
 
-mit User-Stories (definiert in YouTrack)
+Aufgrund von Unklarheiten bisher nur ein Link zum Youtrack Dashboard.
 
-[plantuml,gantt-protoype,png]
-----
-@startuml
-[Test prototype] lasts 10 days
-[Prototype completed] happens at [Test prototype]'s end
-[Setup assembly line] lasts 12 days
-[Setup assembly line] starts at [Test prototype]'s end
-[Test prototype 2] lasts 3 days
-[Test prototype 2] starts at [Prototype completed]'s end
-@enduml
-----
-
-
-link:demo.html[Demo]
+https://vm81.htl-leonding.ac.at/dashboard?id=0d73eb57-0918-49fe-8894-795347c81941[Youtrack Dashboard]
