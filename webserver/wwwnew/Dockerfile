@@ -1,28 +1,14 @@
-FROM node:8
+FROM node:10
 
-RUN npm init --y
-RUN npm install @vue/cli
-RUN npm install devextreme-cli
+COPY package.json .
 
-# install simple http server for serving static content
-RUN npm install http-server
-
-# make the 'app' folder the current working directory
-WORKDIR /app
-
-# copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
-
-# install project dependencies
 RUN npm install --unsafe-perm
-RUN npm rebuild node-sass
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-# COPY . .
+COPY . .
 
-# build app for production with minification
-# RUN npm run build
+RUN cp -avr node_modules/devextreme/dist/css/icons/ src/themes/generated && sed -i 's/#FF5722/#288B9E/g' src/themes/generated/variables.base.scss && sed -i 's/#be2d00/#206f7e/g' src/themes/generated/variables.base.scss && sed -i 's/#FF5722/#288B9E/g' src/themes/generated/variables.additional.scss && sed -i 's/#ff5722/#288B9E/g' src/themes/generated/theme.base.css && sed -i 's/#f63b00/#206f7e/g' src/themes/generated/theme.base.css && sed -i 's/#be2d00/#206f7e/g' src/themes/generated/theme.base.css && sed -i 's/#ff5722/#288B9E/g' src/themes/generated/theme.additional.css && sed -i 's/#f63b00/#206f7e/g' src/themes/generated/theme.additional.css && sed -i 's/#be2d00/#206f7e/g' src/themes/generated/theme.additional.css
 
 EXPOSE 8080
-VOLUME /app
+
 CMD [ "npm", "run", "serve" ]
+# CMD tail -f /dev/null
