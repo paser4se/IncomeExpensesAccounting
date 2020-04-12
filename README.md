@@ -53,7 +53,7 @@ chmod +x startup.sh
 
 
 ## :microscope: Technologien
-- Jakarta EE
+- Quarkus
 - Docker
 - Vuejs
 - HTML5
