@@ -42,7 +42,6 @@ public class PaymentServiceEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public Response getAllTempPayments() {
         List<TempPayment> payments = tempPaymentDao.listAll();
-        System.out.println(Parser.getInstance().getAllTempPayments(payments));
         return Response.ok().entity(Parser.getInstance().getAllTempPayments(payments)).build();
     }
 

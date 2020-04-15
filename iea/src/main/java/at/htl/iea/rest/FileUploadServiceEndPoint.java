@@ -45,8 +45,6 @@ public class  FileUploadServiceEndPoint {
         try {
             List<TempPayment> paymentList = Parser.getInstance().persist(content);
             for (TempPayment p : paymentList) {
-                System.out.println("BookingText: " + p.getBookingText());
-
                 String automaticallyAssignedCategory = getCategoryAssignedByBookingText(p.getBookingText());
 
                 p.setCategory(categoryDao.find("name = ?1", automaticallyAssignedCategory).firstResult());

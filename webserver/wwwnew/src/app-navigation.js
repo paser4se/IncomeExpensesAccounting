@@ -13,5 +13,9 @@ export default [
     text: 'Evaluation',
     path: '/evaluation',
     icon: 'chart'
-  }
-];
+  },
+  {
+    text: 'Settings',
+    path: '/settings',
+    icon: 'preferences'
+  }];

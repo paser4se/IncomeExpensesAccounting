@@ -1,3 +1,4 @@
+import Settings from './views/settings';
 import Evaluation from './views/evaluation';
 import Payments from './views/payments';
 import Vue from "vue";
@@ -80,6 +81,14 @@ const router = new Router({
       components: {
         layout: defaultLayout,
         content: Evaluation
+      }
+    }, {
+      path: "/settings",
+      name: "settings",
+      meta: { requiresAuth: true },
+      components: {
+        layout: defaultLayout,
+        content: Settings
       }
     }]
 });

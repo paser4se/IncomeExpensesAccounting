@@ -142,12 +142,12 @@
           :drag-enabled="false"
           :close-on-outside-click="true"
           :show-title="true"
-          :width="700"
+          :width="265"
           :height="500"
-          v-bind:title="getCurrentCategoryName()"
+          v-bind:title="changeCategoryHeader"
         >
           <div class="md-layout md-gutter fullheight">
-            <div class="md-layout-item fullheight md-size-30">
+            <div class="md-layout-item fullheight">
               <dx-scroll-view>
                 <div>
                   <dx-tree-view
@@ -162,26 +162,6 @@
                   />
                 </div>
               </dx-scroll-view>
-            </div>
-            <div class="md-layout-item fullheight" style="position: relative">
-              <md-chips
-                v-model="keywords"
-                md-placeholder="New keyword"
-                @md-insert="updateKeywords()"
-                @md-delete="updateKeywords()"
-              ></md-chips>
-
-              <div class="add-div">
-                <md-field>
-                  <md-input class="add-input" placeholder="New category" v-model="newCategoryName"></md-input>
-                </md-field>
-                <dx-check-box
-                  style="line-height: 3"
-                  v-model="addAsSubcategory"
-                  text="Add as Subcategory"
-                ></dx-check-box>
-                <md-button class="md-raised md-primary add-btn right" @click="addCategory()">Add</md-button>
-              </div>
             </div>
           </div>
         </dx-popup>
@@ -259,16 +239,14 @@ export default Vue.extend({
       ],
       currentPayment: null,
       categories: new Array(),
-      keywords: [],
       active: 'first',
       first: false,
       second: false,
       third: false,
-      newCategoryName: '',
-      addAsSubcategory: false,
       writeOffNumber: 2,
       writeoffunit: 'None',
-      units: ['None', 'Month', 'Quarter', 'Year']
+      units: ['None', 'Month', 'Quarter', 'Year'],
+      changeCategoryHeader: 'Change Category'
     };
   },
   components: {
@@ -363,7 +341,6 @@ export default Vue.extend({
       fetch('http://localhost:8080/preaccounting/commit', {
         method: "POST"
       }).then(function(response) {
-        console.log(response);
         this.getAllTempPayments();
       }.bind(this));
     },
@@ -422,18 +399,7 @@ export default Vue.extend({
         this.categories = tmp;
 
         this.getSelectedItem().selected = true;
-        this.getAllKeywords(this.getSelectedItem().id);
       }.bind(this));
-    },
-    getAllKeywords(categoryId) {
-      fetch('http://localhost:8080/preaccounting/assignment/' + categoryId)
-      .then(async function(response) {
-        let tmp = await response.json();
-        this.keywords = tmp;
-      }.bind(this));
-    },
-    getCurrentCategoryName() {
-      return this.currentPayment ? "Change Category (" + this.currentPayment.category.name + ")" : "";
     },
     selectItem(args) {
       if (this.currentPayment.category.id != args.itemData.id) {
@@ -442,25 +408,6 @@ export default Vue.extend({
 
         this.saveCategory();
       }
-    },
-    changeSelectedItem(categories) {
-      categories.forEach(item => {
-        if (item.id == this.currentPayment.category.id) {
-          item.isSelected = true;
-        } else {
-          item.isSelected = false;
-          if (item.items) {
-            item.items.forEach(i => {
-              if (i.id == this.currentPayment.category.id) {
-                i.isSelected = true;
-              } else {
-                i.isSelected = false;
-              }
-            });
-          }
-        }
-      });
-      return categories;
     },
     getSelectedItem() {
       var id = this.currentPayment.category.id;
@@ -487,23 +434,7 @@ export default Vue.extend({
         headers: {'Content-Type': 'text/plain'}
       })
       .then(function(response) {
-        console.log(response);
-        this.getAllKeywords(this.currentPayment.category.id);
       }.bind(this)).catch(error => alert(error));
-    },
-    updateKeywords() {
-      fetch('http://localhost:8080/preaccounting/assignment/' + this.currentPayment.category.id, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(this.keywords)
-      })
-      .then((response) => {
-        console.log(response);
-      }).catch(error => {
-        console.error(error);
-      });
     },
     addCategory() {
       var url = '';

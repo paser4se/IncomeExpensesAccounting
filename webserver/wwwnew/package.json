@@ -7,7 +7,7 @@
     "build": "npx vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build-themes": "devextreme build",
-    "postinstall": "devextreme build-theme --base-theme='material.orange.light' --output-color-scheme='base' --assetsBasePath='../../../node_modules/devextreme/dist/css/' --base --output-file src/themes/generated/theme.base.css && devextreme build-theme --base-theme='material.orange.dark' --output-color-scheme='additional' --assetsBasePath='../../../node_modules/devextreme/dist/css/' --base --make-swatch --output-file src/themes/generated/theme.additional.css && devextreme export-theme-vars --base-theme='material.orange.light' --output-file src/themes/generated/variables.base.scss && devextreme export-theme-vars --base-theme='material.orange.dark' --output-file src/themes/generated/variables.additional.scss" 
+    "postinstall": "devextreme build-theme --base-theme='material.orange.light' --output-color-scheme='base' --assetsBasePath='../../../node_modules/devextreme/dist/css/' --base --output-file src/themes/generated/theme.base.css && devextreme build-theme --base-theme='material.orange.dark' --output-color-scheme='additional' --assetsBasePath='../../../node_modules/devextreme/dist/css/' --base --make-swatch --output-file src/themes/generated/theme.additional.css && devextreme export-theme-vars --base-theme='material.orange.light' --output-file src/themes/generated/variables.base.scss && devextreme export-theme-vars --base-theme='material.orange.dark' --output-file src/themes/generated/variables.additional.scss"
   },
   "dependencies": {
     "@syncfusion/ej2-charts": "^17.1.47",
