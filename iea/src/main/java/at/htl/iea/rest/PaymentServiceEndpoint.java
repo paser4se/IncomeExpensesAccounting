@@ -1,6 +1,6 @@
 package at.htl.iea.rest;
 
-import at.htl.iea.business.Parser;
+import at.htl.iea.business.PaymentUtils;
 import at.htl.iea.dao.CategoryDao;
 import at.htl.iea.dao.PaymentDao;
 import at.htl.iea.dao.TempPaymentDao;
@@ -8,13 +8,9 @@ import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
 import at.htl.iea.model.Payment;
 import at.htl.iea.model.TempPayment;
-import at.htl.iea.rest.auth.Secured;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
-import javax.json.JsonObject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -34,7 +30,7 @@ public class PaymentServiceEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPayments() {
         List<Payment> payments = paymentDao.listAll();
-        return Response.ok(Parser.getInstance().getAllPayments(payments), MediaType.APPLICATION_JSON).build();
+        return Response.ok(PaymentUtils.getInstance().getAllPayments(payments), MediaType.APPLICATION_JSON).build();
     }
 
     @GET
@@ -42,7 +38,7 @@ public class PaymentServiceEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public Response getAllTempPayments() {
         List<TempPayment> payments = tempPaymentDao.listAll();
-        return Response.ok().entity(Parser.getInstance().getAllTempPayments(payments)).build();
+        return Response.ok().entity(PaymentUtils.getInstance().getAllTempPayments(payments)).build();
     }
 
     @POST

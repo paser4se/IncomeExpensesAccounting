@@ -1,22 +1,21 @@
 package at.htl.iea.rest;
 
-import at.htl.iea.business.Parser;
+import at.htl.iea.business.PaymentUtils;
+import at.htl.iea.business.parser.Camt053Parser;
+import at.htl.iea.business.parser.model.*;
 import at.htl.iea.dao.AssignmentDao;
 import at.htl.iea.dao.CategoryDao;
 import at.htl.iea.dao.TempPaymentDao;
 import at.htl.iea.model.Assignment;
 import at.htl.iea.model.Category;
-import at.htl.iea.model.Payment;
 import at.htl.iea.model.TempPayment;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.text.ParseException;
+import javax.xml.bind.JAXBException;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +42,9 @@ public class  FileUploadServiceEndPoint {
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response uploadText(String content) {
         try {
-            List<TempPayment> paymentList = Parser.getInstance().persist(content);
+            Camt053Parser camt053Parser = new Camt053Parser();
+
+            List<TempPayment> paymentList = PaymentUtils.getInstance().documentToPayment(camt053Parser.parse(content));
             for (TempPayment p : paymentList) {
                 String automaticallyAssignedCategory = getCategoryAssignedByBookingText(p.getBookingText());
 
@@ -51,12 +52,8 @@ public class  FileUploadServiceEndPoint {
                 tempPaymentDao.savePayment(p);
             }
             tempPaymentDao.flush();
-        } catch (ParseException e) {
-            System.err.println("ParseException: " + e.getMessage());
-            return Response.serverError().build();
-        } catch (NoSuchFieldException e) {
-            System.err.println("NoSuchFieldException: " + e.getMessage());
-            return Response.serverError().build();
+        } catch (JAXBException e) {
+            System.err.println("Parse Exception: " + e.getMessage());
         }
         return Response.ok("content recveived").build();
     }
@@ -79,4 +76,5 @@ public class  FileUploadServiceEndPoint {
         return categoryText;
 
     }
+
 }

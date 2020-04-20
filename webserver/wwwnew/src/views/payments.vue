@@ -30,7 +30,7 @@
                     v-on:change="this.handleChange"
                     id="file-select"
                     name="csv[]"
-                    accept=".csv"
+                    accept=".xml"
                     multiple
                     style="display: none;"
                   >
