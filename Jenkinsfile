@@ -17,7 +17,6 @@ pipeline {
             }
             steps {
                 sh 'cd iea/'
-                sh 'cp ./src/main/docker/Dockerfile.jvm ./Dockerfile'
                 sh 'mvn clean package'
             }
         }
