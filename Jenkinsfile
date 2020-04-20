@@ -17,7 +17,8 @@ pipeline {
             }
             steps {
                 sh 'cd iea/'
-                sh 'mvn clean package'
+                sh 'ls -l'
+                sh 'mvn clean install'
             }
         }
         stage("Build Images") {
