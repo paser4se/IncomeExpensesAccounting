@@ -2,7 +2,7 @@
 
 cd ./iea/
 cp ./src/main/docker/Dockerfile.jvm ./Dockerfile
-mvn clean install
+mvn clean package
 cd ../
 
 docker-compose build --parallel

@@ -16,8 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd iea/ && ls -l'
-                sh 'cd iea/ && mvn clean install'
+                sh 'cd iea/ && cp ./src/main/docker/Dockerfile.jvm ./Dockerfile && mvn clean package'
             }
         }
         stage("Build Images") {
