@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd iea/'
+                sh 'cd iea/iea/'
                 sh 'ls -l'
                 sh 'mvn clean install'
             }
