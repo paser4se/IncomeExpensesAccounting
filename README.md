@@ -4,7 +4,6 @@
 - [Wichtige Information](#exclamation-wichtige-information)
 - [Was ist IEA?](#money_with_wings-was-ist-iea)
 - [Anwendungsfalldiagramm](#chart_with_upwards_trend-anwendungsfalldiagramm)
-- [Was haben wir vor?](#crystal_ball-was-haben-wir-vor)
 - [Systemarchitektur](#statue_of_liberty-systemarchitektur)
 - [Projektstrukturplan](#scroll-projektstrukturplan)
 - [Funktionsweise](#currency_exchange-funktionsweise)
