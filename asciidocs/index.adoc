@@ -22,9 +22,6 @@ einaus -right-> auswertung
 @enduml
 ----
 
-== Was haben wir vor?
-Beim Einlesen der Zahlungen: Umstellung des CSV-Formats auf ein einheitliches CAMT 053 Format.
-
 == Pflichtenheft "Was mache ich?"
 
 === Ausgangssituation
