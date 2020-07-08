@@ -139,6 +139,11 @@ public class PreAccountingEndPoint {
             case "Year":
                 writeOffUnit = WriteOffUnit.YEAR;
                 break;
+            //missing default case
+            default:
+                // add default case
+                break;
+
         }
 
         payment.setWriteOffUnit(writeOffUnit);
@@ -182,6 +187,11 @@ public class PreAccountingEndPoint {
                                 tmpPayment.setBookingDate(newPayments.get(a-1).getBookingDate().plusYears(1));
                                 tmpPayment.setValueDate(newPayments.get(a-1).getValueDate().plusYears(1));
                                 break;
+                            //missing default case
+                            default:
+                                // add default case
+                                break;
+
                         }
                     }
                     newPayments.add(tmpPayment);
